@@ -350,11 +350,13 @@ loadDatalab2 <- function(
 
 #### End #### 
 
-#### Write function to identify retrieval code, sectorRowVal, dataStart, and dataEnd from files: SECTOR3 subtables ####
+#### Write function to identify retrieval code, sectorRowVal, dataStart, and dataEnd from files ####
 
-fileScan1 <- function(fileName, folderName){
+fileScan <- function(fileName, folderName, subtableSelect){
   
   returnDF <- data.frame(
+    `folder` = character(), 
+    `subtable` = character(), 
     `retrievalCode` = character(), 
     `sectorRowVal` = numeric(), 
     `dataStart` = numeric(), 
@@ -379,10 +381,21 @@ fileScan1 <- function(fileName, folderName){
   )
   backstopLine <- min(backstopLine$`Original row number`, na.rm=TRUE)
   
+  if(subtableSelect=="SECTOR3"){
+    searchTerm <- "NPSAS institution sector"
+  }else{
+    if(subtableSelect=="INSTSTAT"){
+      searchTerm <- "NPSAS institution state"
+    }else{
+      stop("Improper subtable selection")
+    }
+  }
+  
   sectorLabels <- tempDF %>% filter(
-    grepl("NPSAS institution sector", `V1`)==TRUE, 
+    grepl(searchTerm, `V1`)==TRUE, 
     grepl("Filtered by", `V1`)==FALSE
   )
+  rm(searchTerm)
   sectorLabels <- sectorLabels$`Original row number`
 
   intervalLabels <- tempDF %>% filter(
@@ -402,6 +415,8 @@ fileScan1 <- function(fileName, folderName){
       }
       if(tempDF$V1[endOfSet - 1]==""){endOfSet <- endOfSet - 1}
       returnDF <- returnDF %>% add_row(
+        `folder` = folderName,
+        `subtable` = subtableSelect,
         `retrievalCode` = retrievalCodeLine, 
         `sectorRowVal` = sectorLabels[i], 
         `dataStart` = startOfSet + 1, 
@@ -418,30 +433,127 @@ fileScan1 <- function(fileName, folderName){
 
 #### End #### 
 
+#### Write function to identify key info from all files in a folder ####
+
+folderScan <- function(folderName0, subtableSelect0){
+  
+  workingDir <- paste("/Users/peter_granville/Net Price Equity/NPSAS Data/", folderName0, sep="")
+  setwd(workingDir)
+  rm(workingDir)
+  
+  fileList <- list.files(getwd())
+  
+  for(i in (1:length(fileList))){
+    
+    tempDF <- fileScan(fileName=fileList[i], folderName=folderName0, subtableSelect=subtableSelect0)
+    if(i==1){
+      returnDF <- tempDF
+    }else{
+      returnDF <- rbind(returnDF, tempDF)
+    }
+    rm(tempDF)
+    
+  }
+  rm(i)
+  
+  return(returnDF)
+  rm(fileList)
+}
+
+#### End #### 
+
 ################################################
 #### Disaggregated by SECTOR3               ####
 ################################################
 
-test <- loadDatalab1(
-    sectionName = "A5 Averages", 
-    retrievalCode = "nyoejt", 
-    sectorValRow = 57, 
-    dataStart = 97, 
-    dataEnd = 106 
+#### Averages, Medians, Percents (loadDatalab1) ####
+
+foldersForProcessing <- c(
+  "A1 Averages", 
+  "A1 Percentages", 
+  "A2 Averages", 
+  "A2 Percentages", 
+  "A3 Averages",    
+  "A3 Percentages", 
+  "A4 Averages", 
+  "A4 Percentages", 
+  "A5 Averages", 
+  "A5 Percentages", 
+  "A6 Averages", 
+  "A6 Percentages", 
+  "A7 Averages", 
+  "A7 Percentages", 
+  "A8 Averages",     
+  "A8 Percentages", 
+  "A9 Averages", 
+  "A9 Percentages", 
+  "A10 Averages", 
+  "A10 Percentages", 
+  "A11 Averages", 
+  "A11 Percentages", 
+  "B1 Averages", 
+  "C1 Averages", 
+  "C1 Percentages", 
+  "C2 Averages", 
+  "C2 Medians", 
+  "C3 Averages",     
+  "C3 Medians", 
+  "C3 Percentages", 
+  "C4 Medians", 
+  "C5 Medians", 
+  "C5 Percentages", 
+  "C6 Medians", 
+  "C7 Medians" 
 )
 
-test <- fileScan1("PowerStats_AveragesMediansPercents_20250209_164939.csv", "A10 Averages")
-test <- fileScan1("PowerStats_PercentageDistribution_20250203_181346.csv", "D4 Percentages")
-
-#### Section A (loadDatalab1) ####
+for(i in (1:length(foldersForProcessing))){
+  
+  print(paste("Running folder ", foldersForProcessing[i], ".", sep=""))
+  runThese <- folderScan(folderName0=foldersForProcessing[i], subtableSelect0="SECTOR3")
+  for(j in (1:nrow(runThese))){
+    
+    innerEnvelope <- loadDatalab1(
+      sectionName = runThese$folder[j], 
+      retrievalCode = runThese$retrievalCode[j], 
+      sectorValRow = runThese$sectorRowVal[j], 
+      dataStart = runThese$dataStart[j], 
+      dataEnd = runThese$dataEnd[j]
+    )
+    if(j==1){
+      middleEnvelope <- innerEnvelope
+    }else{
+      middleEnvelope <- rbind(middleEnvelope, innerEnvelope)
+    }
+    rm(innerEnvelope)
+  }
+  rm(j)
+  
+  if(i==1){
+    outerEnvelope <- middleEnvelope
+  }else{
+    outerEnvelope <- rbind(outerEnvelope, middleEnvelope)
+  }
+  rm(middleEnvelope)
+}
+rm(i)
 
 #### End #### 
 
-#### Section B1 (loadDatalab1) ####
+#### Distributions (loadDatalab2) ####
 
-#### End #### 
-
-#### Section B2 (loadDatalab2) ####
+foldersForProcessing <- c(
+  "B2 Percentages",  
+  "D1 Percentages", 
+  "D2 Percentages", 
+  "D3 Percentages", 
+  "D4 Percentages", 
+  "D5 Percentages", 
+  "D6 Percentages", 
+  "D7 Percentages", 
+  "D8 Percentages", 
+  "D9 Percentages", 
+  "D10 Percentages"
+)
 
 #### End #### 
 
@@ -449,51 +561,37 @@ test <- fileScan1("PowerStats_PercentageDistribution_20250203_181346.csv", "D4 P
 #### Disaggregated by INSTSTAT: Four-years  ####
 ################################################
 
+#### Averages, Medians, Percents (loadDatalab1) ####
 
+foldersForProcessing <- c(
+  "E1 Averages",
+  "E1 Percentages",
+  "E2 Averages",
+  "E2 Percentages",
+  "E3 Medians",
+  "E4 Medians",
+  "E4 Percentages",
+  "E5 Medians"
+)
+
+
+#### End #### 
 
 ################################################
 #### Disaggregated by INSTSTAT: Two-years   ####
 ################################################
 
+#### Averages, Medians, Percents (loadDatalab1) ####
 
-# A1
-# A2
-# A3
-# A4
-# A5
-# A6
-# A7
-# A8
-# A9
-# A10
-# A11
-# B1
-# B2
-# C1
-# C2
-# C3
-# C4
-# C5
-# C6
-# C7
-# D1
-# D2
-# D3
-# D4
-# D5
-# D6
-# D7
-# D8
-# D9
-# D10
-# E1
-# E2
-# E3
-# E4
-# E5
-# F1
-# F2
-# F3
-# F4
-# F5
+foldersForProcessing <- c(
+  "F1 Averages", 
+  "F1 Percentages", 
+  "F2 Averages",
+  "F2 Percentages", 
+  "F3 Medians", 
+  "F4 Medians", 
+  "F5 Medians"
+)
+
+#### End #### 
 
