@@ -6,10 +6,6 @@ library(tidyverse)
 
 #### End #### 
 
-################################################
-#### Disaggregated by SECTOR3               ####
-################################################
-
 #### Write function to load averages, percentages, and shares above zero ####
 
 loadDatalab1 <- function(
@@ -108,8 +104,6 @@ loadDatalab1 <- function(
 #### End #### 
 
 #### Write function to load for % distributions ####
-
-#### Write function to load averages, percentages, and shares above zero ####
 
 loadDatalab2 <- function(
     sectionName, 
@@ -339,55 +333,128 @@ loadDatalab2 <- function(
     dataDF <- left_join(x=dataDF, y=categoryNamesDF, by="Category number")
     rm(categoryNamesDF)
     
+    totalCategories <- length(unique(dataDF$`Category number`))
     
-    
-    
-    if(dataDF$V2[2]== "0 <= X <= 0"){ 
-      # Percentages
-      measureName <- "Share >0"
-      dataDF <- dataDF %>% select(-`V2`) %>% select(-`V3`)
-      if("100%" %in% dataDF$`V6`){dataDF <- dataDF %>% select(-`V6`)}
-      dataDF <- dataDF %>% filter(
-        (`V1` != "") & (`V4` != "")
-      )
-      dataDF <- dataDF %>% rename(
-        `V2` = `V4`, 
-        `V3` = `V5`
-      )
-    }else{
-      # Averages or Medians 
-      measureName <- dataDF$V2[2]
-      rowName <- dataDF$V1[5]
-      measureName <- gsub("[() ]", "", measureName)
-      dataDF <- dataDF %>% filter(
-        (`V1` != "") & (`V2` != "")
-      )
-    }
-    
-    if((measureName %in% c("Average", "Median", "Share >0"))==FALSE){
-      stop("The measure detetcted is not average, median, or share above 0. Use different function.")
-    }else{
-      dataDF <- dataDF %>% rename(
-        `Row value` = `V1`, 
-        `Distribution value` = `V2`, 
-        `Distribution confidence interval` = `V3`
-      ) %>% mutate(
-        `Sector value` = rep(sectorName), 
-        `Distribution name` = rep(distributionName), 
-        `Row name` = rep(rowName),
-        `Measure name` = rep(measureName), 
-        `Source code` = rep(retrievalCode), 
-        `Section name` = rep(sectionName)
-      )
-      return(dataDF)
-      rm(dataDF, sectorName, distributionName, rowName, measureName, correctFile)
-    }
+    dataDF <- dataDF %>% mutate(
+      `Sector value` = rep(sectorName), 
+      `Distribution name` = rep(distributionName), 
+      `Number of categories` = rep(totalCategories),
+      `Row name` = rep(rowName),
+      `Source code` = rep(retrievalCode), 
+      `Section name` = rep(sectionName)
+    )
+    return(dataDF)
+    rm(dataDF, sectorName, distributionName, rowName, measureName, correctFile, totalCategories)
   }
 }
 
 #### End #### 
 
+#### Write function to identify retrieval code, sectorRowVal, dataStart, and dataEnd from files: SECTOR3 subtables ####
+
+fileScan1 <- function(fileName, folderName){
+  
+  returnDF <- data.frame(
+    `retrievalCode` = character(), 
+    `sectorRowVal` = numeric(), 
+    `dataStart` = numeric(), 
+    `dataEnd` = numeric()
+  )
+  
+  workingDir <- paste("/Users/peter_granville/Net Price Equity/NPSAS Data/", folderName, sep="")
+  setwd(workingDir)
+  rm(workingDir)
+  
+  tempDF <- read.csv(fileName, header=FALSE, blank.lines.skip=FALSE, col.names=paste("V", (1:20), sep="")) 
+  tempDF <- tempDF %>% mutate(
+    `Original row number` = (1:nrow(tempDF))
+  )
+  
+  retrievalCodeLine <- tempDF$V1[nrow(tempDF)]
+  retrievalCodeLine <- gsub("The code to retrieve results is ", "", retrievalCodeLine)
+  retrievalCodeLine <- gsub("[.]", "", retrievalCodeLine)
+  
+  backstopLine <- tempDF %>% filter(
+    (grepl("! Interpret", `V1`)) | (grepl("Reporting standards", `V1`)) | (grepl("The names of the variables", `V1`)) | (grepl("The weight variable used", `V1`))
+  )
+  backstopLine <- min(backstopLine$`Original row number`, na.rm=TRUE)
+  
+  sectorLabels <- tempDF %>% filter(
+    grepl("NPSAS institution sector", `V1`)==TRUE, 
+    grepl("Filtered by", `V1`)==FALSE
+  )
+  sectorLabels <- sectorLabels$`Original row number`
+
+  intervalLabels <- tempDF %>% filter(
+    grepl("CONFIDENCE INTERVALS", `V1`)==TRUE, 
+  )
+  intervalLabels <- intervalLabels$`Original row number`
+  
+  if(length(sectorLabels) != length(intervalLabels)){
+    stop("Error")
+  }else{
+    for(i in (1:length(sectorLabels))){
+      startOfSet <- intervalLabels[i]
+      if(i==length(sectorLabels)){
+        endOfSet <- backstopLine
+      }else{
+        endOfSet <- sectorLabels[i+1]
+      }
+      if(tempDF$V1[endOfSet - 1]==""){endOfSet <- endOfSet - 1}
+      returnDF <- returnDF %>% add_row(
+        `retrievalCode` = retrievalCodeLine, 
+        `sectorRowVal` = sectorLabels[i], 
+        `dataStart` = startOfSet + 1, 
+        `dataEnd` = endOfSet - 1
+      )
+      rm(startOfSet, endOfSet)
+    }
+    rm(i)
+  }
+  
+  return(returnDF)
+  rm(backstopLine, intervalLabels, sectorLabels, retrievalCodeLine, tempDF, returnDF)
+}
+
 #### End #### 
+
+################################################
+#### Disaggregated by SECTOR3               ####
+################################################
+
+test <- loadDatalab1(
+    sectionName = "A5 Averages", 
+    retrievalCode = "nyoejt", 
+    sectorValRow = 57, 
+    dataStart = 97, 
+    dataEnd = 106 
+)
+
+test <- fileScan1("PowerStats_AveragesMediansPercents_20250209_164939.csv", "A10 Averages")
+test <- fileScan1("PowerStats_PercentageDistribution_20250203_181346.csv", "D4 Percentages")
+
+#### Section A (loadDatalab1) ####
+
+#### End #### 
+
+#### Section B1 (loadDatalab1) ####
+
+#### End #### 
+
+#### Section B2 (loadDatalab2) ####
+
+#### End #### 
+
+################################################
+#### Disaggregated by INSTSTAT: Four-years  ####
+################################################
+
+
+
+################################################
+#### Disaggregated by INSTSTAT: Two-years   ####
+################################################
+
 
 # A1
 # A2
