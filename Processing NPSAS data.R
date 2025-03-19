@@ -2,7 +2,9 @@
 #### Setup ####
 
 library(scales)
+library(plotly)
 library(tidyverse)
+library(kableExtra)
 
 #### End #### 
 
@@ -154,6 +156,7 @@ loadDatalab2 <- function(
     
     distributionName <- dataDF$V2[1]
     rowName <- dataDF$V1[5]
+    if((grepl("Interpret data with caution", rowName)) | (grepl("Not applicable", rowName)) | (is.na(rowName))){rowName <- "No row variable"}
     nDist <- (ncol(dataDF) - 2) / 2
     
     if(nDist==2){
@@ -462,13 +465,68 @@ folderScan <- function(folderName0, subtableSelect0){
 
 #### End #### 
 
+#### Write function to pull all the prior functions together ####
+
+runAllFunctions <- function(foldersForProcessing, functionSelection, subtableSelection){
+  
+  for(i in (1:length(foldersForProcessing))){
+    
+    print(paste("Running folder ", foldersForProcessing[i], ".", sep=""))
+    runThese <- folderScan(folderName0=foldersForProcessing[i], subtableSelect0=subtableSelection)
+    for(j in (1:nrow(runThese))){
+      
+      if(functionSelection=="loadDatalab1"){
+        innerEnvelope <- loadDatalab1(
+          sectionName = runThese$folder[j], 
+          retrievalCode = runThese$retrievalCode[j], 
+          sectorValRow = runThese$sectorRowVal[j], 
+          dataStart = runThese$dataStart[j], 
+          dataEnd = runThese$dataEnd[j]
+        )
+      }else{
+        if(functionSelection=="loadDatalab2"){
+          innerEnvelope <- loadDatalab2(
+            sectionName = runThese$folder[j], 
+            retrievalCode = runThese$retrievalCode[j], 
+            sectorValRow = runThese$sectorRowVal[j], 
+            dataStart = runThese$dataStart[j], 
+            dataEnd = runThese$dataEnd[j]
+          )
+        }else{
+          stop("Error")
+        }
+      }
+      if(j==1){
+        middleEnvelope <- innerEnvelope
+      }else{
+        middleEnvelope <- rbind(middleEnvelope, innerEnvelope)
+      }
+      rm(innerEnvelope)
+    }
+    rm(j)
+    
+    if(i==1){
+      outerEnvelope <- middleEnvelope
+    }else{
+      outerEnvelope <- rbind(outerEnvelope, middleEnvelope)
+    }
+    rm(middleEnvelope)
+  }
+  rm(i)
+  
+  return(outerEnvelope)
+  rm(outerEnvelope)
+}
+
+#### End #### 
+
 ################################################
 #### Disaggregated by SECTOR3               ####
 ################################################
 
 #### Averages, Medians, Percents (loadDatalab1) ####
 
-foldersForProcessing <- c(
+AMP.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "A1 Averages", 
   "A1 Percentages", 
   "A2 Averages", 
@@ -504,44 +562,13 @@ foldersForProcessing <- c(
   "C5 Percentages", 
   "C6 Medians", 
   "C7 Medians" 
-)
-
-for(i in (1:length(foldersForProcessing))){
-  
-  print(paste("Running folder ", foldersForProcessing[i], ".", sep=""))
-  runThese <- folderScan(folderName0=foldersForProcessing[i], subtableSelect0="SECTOR3")
-  for(j in (1:nrow(runThese))){
-    
-    innerEnvelope <- loadDatalab1(
-      sectionName = runThese$folder[j], 
-      retrievalCode = runThese$retrievalCode[j], 
-      sectorValRow = runThese$sectorRowVal[j], 
-      dataStart = runThese$dataStart[j], 
-      dataEnd = runThese$dataEnd[j]
-    )
-    if(j==1){
-      middleEnvelope <- innerEnvelope
-    }else{
-      middleEnvelope <- rbind(middleEnvelope, innerEnvelope)
-    }
-    rm(innerEnvelope)
-  }
-  rm(j)
-  
-  if(i==1){
-    outerEnvelope <- middleEnvelope
-  }else{
-    outerEnvelope <- rbind(outerEnvelope, middleEnvelope)
-  }
-  rm(middleEnvelope)
-}
-rm(i)
+), functionSelection="loadDatalab1", subtableSelection="SECTOR3")
 
 #### End #### 
 
 #### Distributions (loadDatalab2) ####
 
-foldersForProcessing <- c(
+DIST.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "B2 Percentages",  
   "D1 Percentages", 
   "D2 Percentages", 
@@ -553,7 +580,7 @@ foldersForProcessing <- c(
   "D8 Percentages", 
   "D9 Percentages", 
   "D10 Percentages"
-)
+), functionSelection="loadDatalab2", subtableSelection="SECTOR3")
 
 #### End #### 
 
@@ -563,17 +590,15 @@ foldersForProcessing <- c(
 
 #### Averages, Medians, Percents (loadDatalab1) ####
 
-foldersForProcessing <- c(
+AMP.INSTSTAT.4Y <- runAllFunctions(foldersForProcessing=c(
   "E1 Averages",
   "E1 Percentages",
   "E2 Averages",
   "E2 Percentages",
   "E3 Medians",
   "E4 Medians",
-  "E4 Percentages",
   "E5 Medians"
-)
-
+), functionSelection="loadDatalab1", subtableSelection="INSTSTAT")
 
 #### End #### 
 
@@ -583,7 +608,7 @@ foldersForProcessing <- c(
 
 #### Averages, Medians, Percents (loadDatalab1) ####
 
-foldersForProcessing <- c(
+AMP.INSTSTAT.2Y <- runAllFunctions(foldersForProcessing=c(
   "F1 Averages", 
   "F1 Percentages", 
   "F2 Averages",
@@ -591,7 +616,292 @@ foldersForProcessing <- c(
   "F3 Medians", 
   "F4 Medians", 
   "F5 Medians"
+), functionSelection="loadDatalab1", subtableSelection="INSTSTAT")
+
+#### End #### 
+
+################################################
+#### Store data files                       ####
+################################################
+
+#### Small adjustments ####
+
+AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% rename(`State` = `Sector value`)
+AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% rename(`State` = `Sector value`)
+
+#### End #### 
+
+#### Retitle row names ####
+
+AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
+  `Row name` = ifelse(`Row name`=="Expected Family Contribution", "Zero EFC Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Federal Pell Grant", "Pell Recipient Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Historical black college indicator", "Institution HBCU Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Income quartile (administrative collection)", "Income Quartile", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Minority Serving Institution indicator", "Institution MSI Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="NPSAS institution state", "Institution State", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Parents' highest education level (administrative collection)", "Parents' Highest Education Level", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Race/ethnicity (with multiple)", "Race/Ethnicity", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Selectivity (All 4-year institutions)", "Institution Selectivity", `Row name`)
+) %>% mutate(
+  `Sector value` = gsub("NPSAS institution sector - 3 categories - ", "", `Sector value`)
+)
+
+DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
+  `Row name` = ifelse(`Row name`=="Expected Family Contribution", "Zero EFC Status", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Expected Family Contribution", "Zero EFC Status", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Federal Pell Grant", "Pell Recipient Status", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Federal Pell Grant", "Pell Recipient Status", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Historical black college indicator", "Institution HBCU Status", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Historical black college indicator", "Institution HBCU Status", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Income quartile (administrative collection)", "Income Quartile", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Income quartile (administrative collection)", "Income Quartile", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Minority Serving Institution indicator", "Institution MSI Status", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Minority Serving Institution indicator", "Institution MSI Status", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="NPSAS institution state", "Institution State", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="NPSAS institution state", "Institution State", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Parents' highest education level (administrative collection)", "Parents' Highest Education Level", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Parents' highest education level (administrative collection)", "Parents' Highest Education Level", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Race/ethnicity (with multiple)", "Race/Ethnicity", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Race/ethnicity (with multiple)", "Race/Ethnicity", `Distribution name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Selectivity (All 4-year institutions)", "Institution Selectivity", `Row name`), 
+  `Distribution name` = ifelse(`Distribution name`=="Selectivity (All 4-year institutions)", "Institution Selectivity", `Distribution name`)
+) %>% mutate(
+  `Sector value` = gsub("NPSAS institution sector - 3 categories - ", "", `Sector value`)
+)
+
+AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
+  `Row name` = ifelse(`Row name`=="Expected Family Contribution", "Zero EFC Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Federal Pell Grant", "Pell Recipient Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Historical black college indicator", "Institution HBCU Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Income quartile (administrative collection)", "Income Quartile", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Minority Serving Institution indicator", "Institution MSI Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="NPSAS institution state", "Institution State", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Parents' highest education level (administrative collection)", "Parents' Highest Education Level", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Race/ethnicity (with multiple)", "Race/Ethnicity", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Selectivity (All 4-year institutions)", "Institution Selectivity", `Row name`)
+) %>% mutate(
+  `State` = gsub("NPSAS institution state - ", "", `State`)
+)
+
+AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
+  `Row name` = ifelse(`Row name`=="Expected Family Contribution", "Zero EFC Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Federal Pell Grant", "Pell Recipient Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Historical black college indicator", "Institution HBCU Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Income quartile (administrative collection)", "Income Quartile", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Minority Serving Institution indicator", "Institution MSI Status", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="NPSAS institution state", "Institution State", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Parents' highest education level (administrative collection)", "Parents' Highest Education Level", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Race/ethnicity (with multiple)", "Race/Ethnicity", `Row name`)
+) %>% mutate(
+  `Row name` = ifelse(`Row name`=="Selectivity (All 4-year institutions)", "Institution Selectivity", `Row name`)
+) %>% mutate(
+  `State` = gsub("NPSAS institution state - ", "", `State`)
 )
 
 #### End #### 
+
+#### Rename row values ####
+
+rowValueRename <- AMP.SECTOR3 %>% mutate(`Count` = rep(1))
+rowValueRename <- aggregate(data=rowValueRename, `Count` ~ `Row value` + `Row name`, FUN=sum)
+rowValueRename <- rowValueRename %>% mutate(
+  `New value` = `Row value`
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Yes") & (`Row name`=="Institution HBCU Status"), "HBCU", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="No") & (`Row name`=="Institution HBCU Status"), "Not an HBCU", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="American Indian/Alaska Native-serving") & (`Row name`=="Institution MSI Status"), "Tribal college", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Asian/Native Hawaiian/Pacific Islander-serving") & (`Row name`=="Institution MSI Status"), "AAPISI", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Black/African American-serving, non-HBCU") & (`Row name`=="Institution MSI Status"), "PBI", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Hispanic/Latino-serving") & (`Row name`=="Institution MSI Status"), "HSI", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Non-minority serving") & (`Row name`=="Institution MSI Status"), "Not an MSI", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Other minority-serving") & (`Row name`=="Institution MSI Status"), "Other MSI", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="0 <= X <= 0") & (`Row name`=="Pell Recipient Status"), "Not a Pell recipient", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="1 <= X <= 9293") & (`Row name`=="Pell Recipient Status"), "Pell recipient", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="American Indian or Alaska Native") & (`Row name`=="Race/Ethnicity"), "Native American", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="Native Hawaiian/other Pacific Islander") & (`Row name`=="Race/Ethnicity"), "Native Hawaiian/Pacific Islander", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="0 <= X <= 0") & (`Row name`=="Zero EFC Status"), "Zero EFC", `New value`)
+) %>% mutate(
+  `New value` = ifelse((`Row value`=="1 <= X <= 1000000") & (`Row name`=="Zero EFC Status"), "Nonzero EFC", `New value`)
+) 
+
+AMP.SECTOR3 <- left_join(
+  x=AMP.SECTOR3, y=rowValueRename, by=c("Row value", "Row name")
+) %>% select(
+  -(`Row value`)
+) %>% rename(
+  `Row value` = `New value`
+)
+
+AMP.INSTSTAT.2Y <- left_join(
+  x=AMP.INSTSTAT.2Y, y=rowValueRename, by=c("Row value", "Row name")
+) %>% select(
+  -(`Row value`)
+) %>% rename(
+  `Row value` = `New value`
+)
+
+AMP.INSTSTAT.4Y <- left_join(
+  x=AMP.INSTSTAT.4Y, y=rowValueRename, by=c("Row value", "Row name")
+) %>% select(
+  -(`Row value`)
+) %>% rename(
+  `Row value` = `New value`
+)
+
+
+
+#### End #### 
+
+#### Write files ####
+
+setwd("/Users/peter_granville/Net Price Equity")
+
+write.csv(AMP.INSTSTAT.2Y, "AMP-INSTSTAT-2Y.csv", row.names=FALSE)
+write.csv(AMP.INSTSTAT.4Y, "AMP-INSTSTAT-4Y.csv", row.names=FALSE)
+write.csv(AMP.SECTOR3, "AMP-SECTOR3.csv", row.names=FALSE)
+write.csv(DIST.SECTOR3, "DIST-SECTOR3.csv", row.names=FALSE)
+
+#### End #### 
+
+#### List unique tables ####
+
+AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
+  `Table ID 1` = paste(`Target name`, sep=" | "),
+  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `Sector value`, sep=" | ")
+)
+length(unique(AMP.SECTOR3$`Table ID 1`))
+length(unique(AMP.SECTOR3$`Table ID 2`))
+length(unique(AMP.SECTOR3$`Table ID 3`))
+length(unique(AMP.SECTOR3$`Table ID 4`))
+
+DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
+  `Table ID 1` = paste(`Distribution name`, sep=" | "),
+  `Table ID 2` = paste(`Distribution name`, `Row name`, sep=" | "),
+  `Table ID 3` = paste(`Distribution name`, `Row name`, `Sector value`, sep=" | ")
+)
+length(unique(DIST.SECTOR3$`Table ID 1`))
+length(unique(DIST.SECTOR3$`Table ID 2`))
+length(unique(DIST.SECTOR3$`Table ID 3`))
+
+AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
+  `Table ID 1` = paste(`Target name`, sep=" | "),
+  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
+)
+length(unique(AMP.INSTSTAT.2Y$`Table ID 1`))
+length(unique(AMP.INSTSTAT.2Y$`Table ID 2`))
+length(unique(AMP.INSTSTAT.2Y$`Table ID 3`))
+length(unique(AMP.INSTSTAT.2Y$`Table ID 4`))
+
+AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
+  `Table ID 1` = paste(`Target name`, sep=" | "),
+  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
+)
+length(unique(AMP.INSTSTAT.4Y$`Table ID 1`))
+length(unique(AMP.INSTSTAT.4Y$`Table ID 2`))
+length(unique(AMP.INSTSTAT.4Y$`Table ID 3`))
+length(unique(AMP.INSTSTAT.4Y$`Table ID 4`))
+
+#### End #### 
+
+#### Prep order of tables ####
+
+AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
+  `Target name` = as.factor(`Target name`), 
+  `Row name` = as.factor(`Row name`), 
+  `Measure name` = as.factor(`Measure name`), 
+  `Sector value` = as.factor(`Sector value`)
+) %>% mutate(
+  `Target name` = factor(`Target name`, levels=c(
+    "Federal Pell Grant",
+    "Federal campus-based aid (SEOG, FWS)",
+    "Title IV loans (includes Parent PLUS Loans)",
+    "State grants total",
+    "Institution grants total",
+    "Private source grants",
+    "State non-need & merit grants",
+    "State need-based grants",
+    "Institution non-need & merit grants",
+    "Institutional need-based grants",
+    "Total state and institutional grants",
+    "Grant amount exceeding federal need",
+    "Tuition and fees minus all grants",
+    "Net tuition after all grants as percent of income",
+    "Student budget minus all grants",
+    "Net price after grants as percent of income",
+    "Expected Family Contribution",
+    "Tuition and fees paid",
+    "Student budget (attendance adjusted)"
+  )), 
+  `Row name` = factor(`Row name`, levels=c(
+    "Income Quartile", 
+    "Zero EFC Status", 
+    "Pell Recipient Status",
+    "Parents' Highest Education Level",
+    "Race/Ethnicity",
+    "Institution HBCU Status",
+    "Institution MSI Status", 
+    "Institution Selectivity",
+    "Institution State"
+  ))
+)
+
+
+
+
+#### End #### 
+
+
+
+
+
 
