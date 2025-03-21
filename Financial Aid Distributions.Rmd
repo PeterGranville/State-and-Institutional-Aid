@@ -1,0 +1,3614 @@
+---
+title: "Financial Aid Distributions"
+author: "Peter Granville"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: united
+    toc: true
+    toc_float: true
+  
+---
+
+```{r setDefault, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r setup, include=FALSE}
+
+```
+
+
+Hey, you! Use the table of contents liberally! 
+
+# Section A: Nationwide distributions of financial aid 
+
+## Unit A1: Distributions of aid programs 
+
+### Federal Pell Grant
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Federal Pell Grant by Income Quartile
+
+```{r chunk51901809} 
+chartFn1(targetName="Federal Pell Grant", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Income Quartile
+
+```{r chunk34608388} 
+chartFn1(targetName="Federal Pell Grant", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Federal Pell Grant by Zero EFC Status
+
+```{r chunk12999968} 
+chartFn1(targetName="Federal Pell Grant", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Zero EFC Status
+
+```{r chunk50201470} 
+chartFn1(targetName="Federal Pell Grant", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Federal Pell Grant by Pell Recipient Status
+
+```{r chunk49240993} 
+chartFn1(targetName="Federal Pell Grant", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Pell Recipient Status
+
+```{r chunk87506682} 
+chartFn1(targetName="Federal Pell Grant", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Federal Pell Grant by Parents' Highest Education Level
+
+```{r chunk62476864} 
+chartFn1(targetName="Federal Pell Grant", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Parents' Highest Education Level
+
+```{r chunk28274931} 
+chartFn1(targetName="Federal Pell Grant", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Federal Pell Grant by Race/Ethnicity
+
+```{r chunk99839860} 
+chartFn1(targetName="Federal Pell Grant", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Race/Ethnicity
+
+```{r chunk48558864} 
+chartFn1(targetName="Federal Pell Grant", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Federal Pell Grant by Institution HBCU Status
+
+```{r chunk3722066} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Institution HBCU Status
+
+```{r chunk70893955} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Federal Pell Grant by Institution MSI Status
+
+```{r chunk4947001} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Institution MSI Status
+
+```{r chunk50988928} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Federal Pell Grant by Institution Selectivity
+
+```{r chunk10588420} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Institution Selectivity
+
+```{r chunk84453019} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Federal Pell Grant by Institution State
+
+```{r chunk92018076} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal Pell Grant award by Institution State
+
+```{r chunk93225442} 
+chartFn1(targetName="Federal Pell Grant", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+ 
+### Federal campus-based aid (SEOG, FWS)
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Income Quartile
+
+```{r chunk80796992} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Income Quartile
+
+```{r chunk66753992} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Zero EFC Status
+
+```{r chunk13320962} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Zero EFC Status
+
+```{r chunk25654771} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Pell Recipient Status
+
+```{r chunk17952826} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Pell Recipient Status
+
+```{r chunk34566211} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Parents' Highest Education Level
+
+```{r chunk15899056} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Parents' Highest Education Level
+
+```{r chunk8396142} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Race/Ethnicity
+
+```{r chunk67107596} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Race/Ethnicity
+
+```{r chunk18498755} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Institution HBCU Status
+
+```{r chunk81745155} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Institution HBCU Status
+
+```{r chunk44965299} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Institution MSI Status
+
+```{r chunk45950525} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Institution MSI Status
+
+```{r chunk79514429} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Institution Selectivity
+
+```{r chunk55571663} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Institution Selectivity
+
+```{r chunk43163601} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Federal campus-based aid (SEOG, FWS) by Institution State
+
+```{r chunk27577672} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Federal campus-based aid (SEOG, FWS) award by Institution State
+
+```{r chunk25350575} 
+chartFn1(targetName="Federal campus-based aid (SEOG, FWS)", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Title IV loans (includes Parent PLUS Loans)
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Income Quartile
+
+```{r chunk56592274} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Income Quartile
+
+```{r chunk43183158} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Zero EFC Status
+
+```{r chunk95625462} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Zero EFC Status
+
+```{r chunk28502858} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Pell Recipient Status
+
+```{r chunk1562748} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Pell Recipient Status
+
+```{r chunk57190618} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Parents' Highest Education Level
+
+```{r chunk3130161} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Parents' Highest Education Level
+
+```{r chunk91792823} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Race/Ethnicity
+
+```{r chunk45395979} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Race/Ethnicity
+
+```{r chunk86097948} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Institution HBCU Status
+
+```{r chunk38798080} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Institution HBCU Status
+
+```{r chunk667149} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Institution MSI Status
+
+```{r chunk33024058} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Institution MSI Status
+
+```{r chunk76155502} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Institution Selectivity
+
+```{r chunk25065874} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Institution Selectivity
+
+```{r chunk8107915} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Title IV loans (includes Parent PLUS Loans) by Institution State
+
+```{r chunk41932139} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Title IV loan (includes Parent PLUS Loans) amount by Institution State
+
+```{r chunk20163395} 
+chartFn1(targetName="Title IV loans (includes Parent PLUS Loans)", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### State grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving State grants by Income Quartile
+
+```{r chunk37746436} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Income Quartile
+
+```{r chunk18148946} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving State grants by Zero EFC Status
+
+```{r chunk52757386} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Zero EFC Status
+
+```{r chunk51716600} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving State grants by Pell Recipient Status
+
+```{r chunk26382799} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Pell Recipient Status
+
+```{r chunk34268056} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving State grants by Parents' Highest Education Level
+
+```{r chunk38139688} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Parents' Highest Education Level
+
+```{r chunk45274648} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving State grants by Race/Ethnicity
+
+```{r chunk66854634} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Race/Ethnicity
+
+```{r chunk85793417} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving State grants by Institution HBCU Status
+
+```{r chunk43319984} 
+chartFn1(targetName="State grants total", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Institution HBCU Status
+
+```{r chunk13711651} 
+chartFn1(targetName="State grants total", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving State grants by Institution MSI Status
+
+```{r chunk15912974} 
+chartFn1(targetName="State grants total", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Institution MSI Status
+
+```{r chunk89873235} 
+chartFn1(targetName="State grants total", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving State grants by Institution Selectivity
+
+```{r chunk68352228} 
+chartFn1(targetName="State grants total", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Institution Selectivity
+
+```{r chunk49461011} 
+chartFn1(targetName="State grants total", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving State grants by Institution State
+
+```{r chunk42285751} 
+chartFn1(targetName="State grants total", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State grant award by Institution State
+
+```{r chunk34117215} 
+chartFn1(targetName="State grants total", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Institution grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Institution grants by Income Quartile
+
+```{r chunk67473951} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Income Quartile
+
+```{r chunk49672332} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Institution grants by Zero EFC Status
+
+```{r chunk3228115} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Zero EFC Status
+
+```{r chunk16823944} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Institution grants by Pell Recipient Status
+
+```{r chunk31585463} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Pell Recipient Status
+
+```{r chunk82177570} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Institution grants by Parents' Highest Education Level
+
+```{r chunk94118198} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Parents' Highest Education Level
+
+```{r chunk64583194} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Institution grants by Race/Ethnicity
+
+```{r chunk12853002} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Race/Ethnicity
+
+```{r chunk96324196} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Institution grants by Institution HBCU Status
+
+```{r chunk18964806} 
+chartFn1(targetName="Institution grants total", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Institution HBCU Status
+
+```{r chunk59592458} 
+chartFn1(targetName="Institution grants total", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Institution grants by Institution MSI Status
+
+```{r chunk25846020} 
+chartFn1(targetName="Institution grants total", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Institution MSI Status
+
+```{r chunk27276977} 
+chartFn1(targetName="Institution grants total", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Institution grants by Institution Selectivity
+
+```{r chunk35134043} 
+chartFn1(targetName="Institution grants total", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Institution Selectivity
+
+```{r chunk62172712} 
+chartFn1(targetName="Institution grants total", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Institution grants by Institution State
+
+```{r chunk89569622} 
+chartFn1(targetName="Institution grants total", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution grant award by Institution State
+
+```{r chunk36662164} 
+chartFn1(targetName="Institution grants total", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Private source grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Private source grants by Income Quartile
+
+```{r chunk17841061} 
+chartFn1(targetName="Private source grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Income Quartile
+
+```{r chunk41052147} 
+chartFn1(targetName="Private source grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Private source grants by Zero EFC Status
+
+```{r chunk86310074} 
+chartFn1(targetName="Private source grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Zero EFC Status
+
+```{r chunk22267886} 
+chartFn1(targetName="Private source grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Private source grants by Pell Recipient Status
+
+```{r chunk17416769} 
+chartFn1(targetName="Private source grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Pell Recipient Status
+
+```{r chunk93186622} 
+chartFn1(targetName="Private source grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Private source grants by Parents' Highest Education Level
+
+```{r chunk88985257} 
+chartFn1(targetName="Private source grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Parents' Highest Education Level
+
+```{r chunk59745086} 
+chartFn1(targetName="Private source grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Private source grants by Race/Ethnicity
+
+```{r chunk77081415} 
+chartFn1(targetName="Private source grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Race/Ethnicity
+
+```{r chunk28375590} 
+chartFn1(targetName="Private source grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Private source grants by Institution HBCU Status
+
+```{r chunk22343539} 
+chartFn1(targetName="Private source grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Institution HBCU Status
+
+```{r chunk38169253} 
+chartFn1(targetName="Private source grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Private source grants by Institution MSI Status
+
+```{r chunk66724763} 
+chartFn1(targetName="Private source grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Institution MSI Status
+
+```{r chunk63480929} 
+chartFn1(targetName="Private source grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Private source grants by Institution Selectivity
+
+```{r chunk73482603} 
+chartFn1(targetName="Private source grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Institution Selectivity
+
+```{r chunk40719902} 
+chartFn1(targetName="Private source grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Private source grants by Institution State
+
+```{r chunk48409796} 
+chartFn1(targetName="Private source grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Private source grant award by Institution State
+
+```{r chunk77279733} 
+chartFn1(targetName="Private source grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+## Unit A2: Need-based and non-need-based aid 
+
+### State non-need & merit grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving State non-need & merit grants by Income Quartile
+
+```{r chunk147889} 
+chartFn1(targetName="State non-need & merit grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Income Quartile
+
+```{r chunk74588068} 
+chartFn1(targetName="State non-need & merit grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving State non-need & merit grants by Zero EFC Status
+
+```{r chunk55535111} 
+chartFn1(targetName="State non-need & merit grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Zero EFC Status
+
+```{r chunk42878383} 
+chartFn1(targetName="State non-need & merit grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving State non-need & merit grants by Pell Recipient Status
+
+```{r chunk56195529} 
+chartFn1(targetName="State non-need & merit grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Pell Recipient Status
+
+```{r chunk80217125} 
+chartFn1(targetName="State non-need & merit grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving State non-need & merit grants by Parents' Highest Education Level
+
+```{r chunk66095679} 
+chartFn1(targetName="State non-need & merit grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Parents' Highest Education Level
+
+```{r chunk71072449} 
+chartFn1(targetName="State non-need & merit grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving State non-need & merit grants by Race/Ethnicity
+
+```{r chunk38448956} 
+chartFn1(targetName="State non-need & merit grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Race/Ethnicity
+
+```{r chunk82122295} 
+chartFn1(targetName="State non-need & merit grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving State non-need & merit grants by Institution HBCU Status
+
+```{r chunk23400099} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Institution HBCU Status
+
+```{r chunk59144586} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving State non-need & merit grants by Institution MSI Status
+
+```{r chunk19870264} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Institution MSI Status
+
+```{r chunk32515965} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving State non-need & merit grants by Institution Selectivity
+
+```{r chunk45839754} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Institution Selectivity
+
+```{r chunk3717282} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving State non-need & merit grants by Institution State
+
+```{r chunk4369137} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State non-need & merit grant award by Institution State
+
+```{r chunk42746161} 
+chartFn1(targetName="State non-need & merit grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-} 
+ 
+### State need-based grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving State need-based grants by Income Quartile
+
+```{r chunk77466168} 
+chartFn1(targetName="State need-based grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Income Quartile
+
+```{r chunk15723440} 
+chartFn1(targetName="State need-based grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving State need-based grants by Zero EFC Status
+
+```{r chunk17426853} 
+chartFn1(targetName="State need-based grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Zero EFC Status
+
+```{r chunk65418731} 
+chartFn1(targetName="State need-based grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving State need-based grants by Pell Recipient Status
+
+```{r chunk83972761} 
+chartFn1(targetName="State need-based grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Pell Recipient Status
+
+```{r chunk56048092} 
+chartFn1(targetName="State need-based grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving State need-based grants by Parents' Highest Education Level
+
+```{r chunk23658913} 
+chartFn1(targetName="State need-based grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Parents' Highest Education Level
+
+```{r chunk89609677} 
+chartFn1(targetName="State need-based grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving State need-based grants by Race/Ethnicity
+
+```{r chunk90309778} 
+chartFn1(targetName="State need-based grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Race/Ethnicity
+
+```{r chunk4982586} 
+chartFn1(targetName="State need-based grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving State need-based grants by Institution HBCU Status
+
+```{r chunk21513456} 
+chartFn1(targetName="State need-based grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Institution HBCU Status
+
+```{r chunk50992486} 
+chartFn1(targetName="State need-based grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving State need-based grants by Institution MSI Status
+
+```{r chunk3932634} 
+chartFn1(targetName="State need-based grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Institution MSI Status
+
+```{r chunk66138616} 
+chartFn1(targetName="State need-based grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving State need-based grants by Institution Selectivity
+
+```{r chunk62022458} 
+chartFn1(targetName="State need-based grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Institution Selectivity
+
+```{r chunk96925196} 
+chartFn1(targetName="State need-based grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving State need-based grants by Institution State
+
+```{r chunk85373274} 
+chartFn1(targetName="State need-based grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average State need-based grant award by Institution State
+
+```{r chunk63215453} 
+chartFn1(targetName="State need-based grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Institution non-need & merit grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Institution non-need & merit grants by Income Quartile
+
+```{r chunk51644472} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Income Quartile
+
+```{r chunk81590431} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Institution non-need & merit grants by Zero EFC Status
+
+```{r chunk92593062} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Zero EFC Status
+
+```{r chunk40351818} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Institution non-need & merit grants by Pell Recipient Status
+
+```{r chunk7224502} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Pell Recipient Status
+
+```{r chunk56816818} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Institution non-need & merit grants by Parents' Highest Education Level
+
+```{r chunk65728367} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Parents' Highest Education Level
+
+```{r chunk88066992} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Institution non-need & merit grants by Race/Ethnicity
+
+```{r chunk763527} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Race/Ethnicity
+
+```{r chunk51908940} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Institution non-need & merit grants by Institution HBCU Status
+
+```{r chunk85613214} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Institution HBCU Status
+
+```{r chunk62921908} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Institution non-need & merit grants by Institution MSI Status
+
+```{r chunk23737518} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Institution MSI Status
+
+```{r chunk16976093} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Institution non-need & merit grants by Institution Selectivity
+
+```{r chunk74171048} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Institution Selectivity
+
+```{r chunk49127127} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Institution non-need & merit grants by Institution State
+
+```{r chunk84624721} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institution non-need & merit grant award by Institution State
+
+```{r chunk49784115} 
+chartFn1(targetName="Institution non-need & merit grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Institutional need-based grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Institutional need-based grants by Income Quartile
+
+```{r chunk2694975} 
+chartFn1(targetName="Institutional need-based grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Income Quartile
+
+```{r chunk79361602} 
+chartFn1(targetName="Institutional need-based grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving Institutional need-based grants by Zero EFC Status
+
+```{r chunk24380978} 
+chartFn1(targetName="Institutional need-based grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Zero EFC Status
+
+```{r chunk81976761} 
+chartFn1(targetName="Institutional need-based grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving Institutional need-based grants by Pell Recipient Status
+
+```{r chunk24525782} 
+chartFn1(targetName="Institutional need-based grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Pell Recipient Status
+
+```{r chunk25362643} 
+chartFn1(targetName="Institutional need-based grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving Institutional need-based grants by Parents' Highest Education Level
+
+```{r chunk547868} 
+chartFn1(targetName="Institutional need-based grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Parents' Highest Education Level
+
+```{r chunk68315542} 
+chartFn1(targetName="Institutional need-based grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving Institutional need-based grants by Race/Ethnicity
+
+```{r chunk45449622} 
+chartFn1(targetName="Institutional need-based grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Race/Ethnicity
+
+```{r chunk18965281} 
+chartFn1(targetName="Institutional need-based grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving Institutional need-based grants by Institution HBCU Status
+
+```{r chunk71782320} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Institution HBCU Status
+
+```{r chunk26692580} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving Institutional need-based grants by Institution MSI Status
+
+```{r chunk36050877} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Institution MSI Status
+
+```{r chunk25682061} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving Institutional need-based grants by Institution Selectivity
+
+```{r chunk70246750} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Institution Selectivity
+
+```{r chunk89168507} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving Institutional need-based grants by Institution State
+
+```{r chunk35178007} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average Institutional need-based grant award by Institution State
+
+```{r chunk30129445} 
+chartFn1(targetName="Institutional need-based grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+## Unit A3: Combined aid measures 
+
+### Total state and institutional grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving state or institutional grants by Income Quartile
+
+```{r chunk78734766} 
+chartFn1(targetName="Total state and institutional grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Income Quartile
+
+```{r chunk56685630} 
+chartFn1(targetName="Total state and institutional grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share receiving state or institutional grants by Zero EFC Status
+
+```{r chunk80704094} 
+chartFn1(targetName="Total state and institutional grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Zero EFC Status
+
+```{r chunk94497578} 
+chartFn1(targetName="Total state and institutional grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share receiving state or institutional grants by Pell Recipient Status
+
+```{r chunk80418791} 
+chartFn1(targetName="Total state and institutional grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Pell Recipient Status
+
+```{r chunk66498923} 
+chartFn1(targetName="Total state and institutional grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share receiving state or institutional grants by Parents' Highest Education Level
+
+```{r chunk43990511} 
+chartFn1(targetName="Total state and institutional grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Parents' Highest Education Level
+
+```{r chunk87630790} 
+chartFn1(targetName="Total state and institutional grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share receiving state or institutional grants by Race/Ethnicity
+
+```{r chunk97731556} 
+chartFn1(targetName="Total state and institutional grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Race/Ethnicity
+
+```{r chunk9416067} 
+chartFn1(targetName="Total state and institutional grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share receiving state or institutional grants by Institution HBCU Status
+
+```{r chunk28009272} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Institution HBCU Status
+
+```{r chunk39836673} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share receiving state or institutional grants by Institution MSI Status
+
+```{r chunk56741783} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Institution MSI Status
+
+```{r chunk3710642} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share receiving state or institutional grants by Institution Selectivity
+
+```{r chunk56854978} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Institution Selectivity
+
+```{r chunk53096604} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share receiving state or institutional grants by Institution State
+
+```{r chunk66889175} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average combined state and institutional grant award by Institution State
+
+```{r chunk37552824} 
+chartFn1(targetName="Total state and institutional grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Grant amount exceeding federal need
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share whose grants exceed federal need by Income Quartile
+
+```{r chunk323187} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Income Quartile
+
+```{r chunk52589831} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share whose grants exceed federal need by Zero EFC Status
+
+```{r chunk30058040} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Zero EFC Status
+
+```{r chunk98041459} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share whose grants exceed federal need by Pell Recipient Status
+
+```{r chunk40577623} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Pell Recipient Status
+
+```{r chunk39333777} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share whose grants exceed federal need by Parents' Highest Education Level
+
+```{r chunk23680361} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Parents' Highest Education Level
+
+```{r chunk41888744} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share whose grants exceed federal need by Race/Ethnicity
+
+```{r chunk21740877} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Race/Ethnicity
+
+```{r chunk2832997} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share whose grants exceed federal need by Institution HBCU Status
+
+```{r chunk9570250} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Institution HBCU Status
+
+```{r chunk28327742} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share whose grants exceed federal need by Institution MSI Status
+
+```{r chunk99025330} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Institution MSI Status
+
+```{r chunk75660055} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share whose grants exceed federal need by Institution Selectivity
+
+```{r chunk78590006} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Institution Selectivity
+
+```{r chunk83746527} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share whose grants exceed federal need by Institution State
+
+```{r chunk81635797} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average grant amount in excess of federal need by Institution State
+
+```{r chunk59717321} 
+chartFn1(targetName="Grant amount exceeding federal need", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+## Unit A4: Net price 
+
+### Tuition and fees minus all grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share with unmet tuition and fees after all grants by Income Quartile
+
+```{r chunk30621285} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Income Quartile", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Income Quartile
+
+```{r chunk88647911} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Income Quartile
+
+```{r chunk38958751} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Share with unmet tuition and fees after all grants by Zero EFC Status
+
+```{r chunk4310080} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Zero EFC Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Zero EFC Status
+
+```{r chunk20597620} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Zero EFC Status
+
+```{r chunk39586079} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Share with unmet tuition and fees after all grants by Pell Recipient Status
+
+```{r chunk78130159} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Pell Recipient Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Pell Recipient Status
+
+```{r chunk45865292} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Pell Recipient Status
+
+```{r chunk69839582} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Share with unmet tuition and fees after all grants by Parents' Highest Education Level
+
+```{r chunk8938016} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Parents' Highest Education Level
+
+```{r chunk94571548} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Parents' Highest Education Level
+
+```{r chunk78668323} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Share with unmet tuition and fees after all grants by Race/Ethnicity
+
+```{r chunk29988756} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Race/Ethnicity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Race/Ethnicity
+
+```{r chunk31577731} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Race/Ethnicity
+
+```{r chunk47284659} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Share with unmet tuition and fees after all grants by Institution HBCU Status
+
+```{r chunk77860182} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution HBCU Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Institution HBCU Status
+
+```{r chunk22197055} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Institution HBCU Status
+
+```{r chunk47676141} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Share with unmet tuition and fees after all grants by Institution MSI Status
+
+```{r chunk39181036} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution MSI Status", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Institution MSI Status
+
+```{r chunk71352407} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Institution MSI Status
+
+```{r chunk9583780} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Share with unmet tuition and fees after all grants by Institution Selectivity
+
+```{r chunk28240668} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution Selectivity", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Institution Selectivity
+
+```{r chunk98356470} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Institution Selectivity
+
+```{r chunk91089236} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Share with unmet tuition and fees after all grants by Institution State
+
+```{r chunk71001855} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution State", measureName="Share >0", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Average net tuition and fees after all grants by Institution State
+
+```{r chunk9243579} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net tuition and fees after all grants by Institution State
+
+```{r chunk62652923} 
+chartFn1(targetName="Tuition and fees minus all grants", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Net tuition after all grants as percent of income
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net tuition and fees after all grants as a percentage of income by Income Quartile
+
+```{r chunk51626285} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Median net tuition and fees after all grants as a percentage of income by Zero EFC Status
+
+```{r chunk67481360} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Median net tuition and fees after all grants as a percentage of income by Pell Recipient Status
+
+```{r chunk41637712} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Median net tuition and fees after all grants as a percentage of income by Parents' Highest Education Level
+
+```{r chunk16570251} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Median net tuition and fees after all grants as a percentage of income by Race/Ethnicity
+
+```{r chunk23036083} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Median net tuition and fees after all grants as a percentage of income by Institution HBCU Status
+
+```{r chunk47649822} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Median net tuition and fees after all grants as a percentage of income by Institution MSI Status
+
+```{r chunk13580993} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Median net tuition and fees after all grants as a percentage of income by Institution Selectivity
+
+```{r chunk74075400} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Median net tuition and fees after all grants as a percentage of income by Institution State
+
+```{r chunk26625888} 
+chartFn1(targetName="Net tuition after all grants as percent of income", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Student budget minus all grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Average net student budget after all grants by Income Quartile
+
+```{r chunk7072322} 
+chartFn1(targetName="Student budget minus all grants", rowName="Income Quartile", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Income Quartile
+
+```{r chunk30090899} 
+chartFn1(targetName="Student budget minus all grants", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Average net student budget after all grants by Zero EFC Status
+
+```{r chunk92374924} 
+chartFn1(targetName="Student budget minus all grants", rowName="Zero EFC Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Zero EFC Status
+
+```{r chunk5701617} 
+chartFn1(targetName="Student budget minus all grants", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Average net student budget after all grants by Pell Recipient Status
+
+```{r chunk81093029} 
+chartFn1(targetName="Student budget minus all grants", rowName="Pell Recipient Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Pell Recipient Status
+
+```{r chunk26365901} 
+chartFn1(targetName="Student budget minus all grants", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Average net student budget after all grants by Parents' Highest Education Level
+
+```{r chunk55900684} 
+chartFn1(targetName="Student budget minus all grants", rowName="Parents' Highest Education Level", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Parents' Highest Education Level
+
+```{r chunk2096444} 
+chartFn1(targetName="Student budget minus all grants", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Average net student budget after all grants by Race/Ethnicity
+
+```{r chunk12721994} 
+chartFn1(targetName="Student budget minus all grants", rowName="Race/Ethnicity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Race/Ethnicity
+
+```{r chunk73716230} 
+chartFn1(targetName="Student budget minus all grants", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Average net student budget after all grants by Institution HBCU Status
+
+```{r chunk6648436} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution HBCU Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Institution HBCU Status
+
+```{r chunk24905843} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Average net student budget after all grants by Institution MSI Status
+
+```{r chunk62139759} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution MSI Status", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Institution MSI Status
+
+```{r chunk89582824} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Average net student budget after all grants by Institution Selectivity
+
+```{r chunk66253929} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution Selectivity", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Institution Selectivity
+
+```{r chunk17009305} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Average net student budget after all grants by Institution State
+
+```{r chunk44753364} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution State", measureName="Average", subtable="SECTOR3", sector3Val="None")
+```
+ 
+###### Median net student budget after all grants by Institution State
+
+```{r chunk23874514} 
+chartFn1(targetName="Student budget minus all grants", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Net price after grants as percent of income
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net student budget after all grants as a percentage of income by Income Quartile
+
+```{r chunk72072136} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Median net student budget after all grants as a percentage of income by Zero EFC Status
+
+```{r chunk8964842} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Median net student budget after all grants as a percentage of income by Pell Recipient Status
+
+```{r chunk21497503} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Median net student budget after all grants as a percentage of income by Parents' Highest Education Level
+
+```{r chunk84612892} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Median net student budget after all grants as a percentage of income by Race/Ethnicity
+
+```{r chunk82607451} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Median net student budget after all grants as a percentage of income by Institution HBCU Status
+
+```{r chunk4582512} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Median net student budget after all grants as a percentage of income by Institution MSI Status
+
+```{r chunk16005624} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Median net student budget after all grants as a percentage of income by Institution Selectivity
+
+```{r chunk77476082} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Median net student budget after all grants as a percentage of income by Institution State
+
+```{r chunk66410707} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+## Unit A5: Context 
+
+### Expected Family Contribution
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median Expected Family Contribution by Income Quartile
+
+```{r chunk26529325} 
+chartFn1(targetName="Expected Family Contribution", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Median Expected Family Contribution by Zero EFC Status
+
+```{r chunk55034380} 
+chartFn1(targetName="Expected Family Contribution", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Median Expected Family Contribution by Pell Recipient Status
+
+```{r chunk14627895} 
+chartFn1(targetName="Expected Family Contribution", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Median Expected Family Contribution by Parents' Highest Education Level
+
+```{r chunk80785932} 
+chartFn1(targetName="Expected Family Contribution", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Median Expected Family Contribution by Race/Ethnicity
+
+```{r chunk127443} 
+chartFn1(targetName="Expected Family Contribution", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Median Expected Family Contribution by Institution HBCU Status
+
+```{r chunk40513851} 
+chartFn1(targetName="Expected Family Contribution", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Median Expected Family Contribution by Institution MSI Status
+
+```{r chunk53877674} 
+chartFn1(targetName="Expected Family Contribution", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Median Expected Family Contribution by Institution Selectivity
+
+```{r chunk18454728} 
+chartFn1(targetName="Expected Family Contribution", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Median Expected Family Contribution by Institution State
+
+```{r chunk79815942} 
+chartFn1(targetName="Expected Family Contribution", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Tuition and fees paid
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median tuition and fees paid by Income Quartile
+
+```{r chunk57895933} 
+chartFn1(targetName="Tuition and fees paid", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Median tuition and fees paid by Zero EFC Status
+
+```{r chunk38153193} 
+chartFn1(targetName="Tuition and fees paid", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Median tuition and fees paid by Pell Recipient Status
+
+```{r chunk70198910} 
+chartFn1(targetName="Tuition and fees paid", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Median tuition and fees paid by Parents' Highest Education Level
+
+```{r chunk48566414} 
+chartFn1(targetName="Tuition and fees paid", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Median tuition and fees paid by Race/Ethnicity
+
+```{r chunk53374166} 
+chartFn1(targetName="Tuition and fees paid", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Median tuition and fees paid by Institution HBCU Status
+
+```{r chunk44091555} 
+chartFn1(targetName="Tuition and fees paid", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Median tuition and fees paid by Institution State
+
+```{r chunk77302470} 
+chartFn1(targetName="Tuition and fees paid", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+### Student budget (attendance adjusted)
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median student budget (attendance adjusted) by Income Quartile
+
+```{r chunk82433907} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Income Quartile", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Zero EFC Status
+
+###### Median student budget (attendance adjusted) by Zero EFC Status
+
+```{r chunk77385065} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Zero EFC Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Pell Recipient Status
+
+###### Median student budget (attendance adjusted) by Pell Recipient Status
+
+```{r chunk6279823} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Pell Recipient Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Median student budget (attendance adjusted) by Parents' Highest Education Level
+
+```{r chunk45346010} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Parents' Highest Education Level", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Race/Ethnicity
+
+###### Median student budget (attendance adjusted) by Race/Ethnicity
+
+```{r chunk49422474} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Race/Ethnicity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution HBCU Status
+
+###### Median student budget (attendance adjusted) by Institution HBCU Status
+
+```{r chunk98537518} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Institution HBCU Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution MSI Status
+
+###### Median student budget (attendance adjusted) by Institution MSI Status
+
+```{r chunk70474364} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Institution MSI Status", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution Selectivity
+
+###### Median student budget (attendance adjusted) by Institution Selectivity
+
+```{r chunk71053720} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Institution Selectivity", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+ 
+##### By Institution State
+
+###### Median student budget (attendance adjusted) by Institution State
+
+```{r chunk14462049} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Institution State", measureName="Median", subtable="SECTOR3", sector3Val="None")
+```
+
+#### {-}
+
+# Section B: State public four-year sectors
+
+## Unit B1: Distributions of aid programs
+
+### State grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving State grants by Income Quartile
+
+```{r chunk17568446} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average State grant award by Income Quartile
+
+```{r chunk59735096} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Zero EFC Status
+
+###### Share receiving State grants by Zero EFC Status
+
+```{r chunk89249568} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average State grant award by Zero EFC Status
+
+```{r chunk64577192} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Pell Recipient Status
+
+###### Share receiving State grants by Pell Recipient Status
+
+```{r chunk80032095} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average State grant award by Pell Recipient Status
+
+```{r chunk5125527} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Share receiving State grants by Parents' Highest Education Level
+
+```{r chunk15023497} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average State grant award by Parents' Highest Education Level
+
+```{r chunk96070968} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Race/Ethnicity
+
+###### Share receiving State grants by Race/Ethnicity
+
+```{r chunk16749953} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average State grant award by Race/Ethnicity
+
+```{r chunk35949109} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+#### {-}
+
+### Institution grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Institution grants by Income Quartile
+
+```{r chunk50745611} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average Institution grant award by Income Quartile
+
+```{r chunk43216176} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Zero EFC Status
+
+###### Share receiving Institution grants by Zero EFC Status
+
+```{r chunk3574275} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average Institution grant award by Zero EFC Status
+
+```{r chunk43692847} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Pell Recipient Status
+
+###### Share receiving Institution grants by Pell Recipient Status
+
+```{r chunk37216563} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average Institution grant award by Pell Recipient Status
+
+```{r chunk56041219} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Share receiving Institution grants by Parents' Highest Education Level
+
+```{r chunk27815223} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average Institution grant award by Parents' Highest Education Level
+
+```{r chunk36710235} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Race/Ethnicity
+
+###### Share receiving Institution grants by Race/Ethnicity
+
+```{r chunk8318392} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+###### Average Institution grant award by Race/Ethnicity
+
+```{r chunk93558017} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Average", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+#### {-}
+
+## Unit B2: Net price
+
+### Student budget minus all grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net student budget after all grants by Income Quartile
+
+```{r chunk67220919} 
+chartFn1(targetName="Student budget minus all grants", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Zero EFC Status
+
+###### Median net student budget after all grants by Zero EFC Status
+
+```{r chunk90933196} 
+chartFn1(targetName="Student budget minus all grants", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median net student budget after all grants by Pell Recipient Status
+
+```{r chunk5142312} 
+chartFn1(targetName="Student budget minus all grants", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median net student budget after all grants by Parents' Highest Education Level
+
+```{r chunk57309913} 
+chartFn1(targetName="Student budget minus all grants", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median net student budget after all grants by Race/Ethnicity
+
+```{r chunk95999672} 
+chartFn1(targetName="Student budget minus all grants", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+#### {-}
+
+### Net price after grants as percent of income
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net student budget after all grants as a percentage of income by Income Quartile
+
+```{r chunk77671417} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Zero EFC Status
+
+###### Median net student budget after all grants as a percentage of income by Zero EFC Status
+
+```{r chunk40101387} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median net student budget after all grants as a percentage of income by Pell Recipient Status
+
+```{r chunk24887600} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median net student budget after all grants as a percentage of income by Parents' Highest Education Level
+
+```{r chunk9663917} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median net student budget after all grants as a percentage of income by Race/Ethnicity
+
+```{r chunk61505285} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+#### {-}
+
+## Unit B3: Context
+
+### Student budget (attendance adjusted)
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median student budget (attendance adjusted) by Income Quartile
+
+```{r chunk24593966} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Zero EFC Status
+
+###### Median student budget (attendance adjusted) by Zero EFC Status
+
+```{r chunk35111846} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median student budget (attendance adjusted) by Pell Recipient Status
+
+```{r chunk98776166} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median student budget (attendance adjusted) by Parents' Highest Education Level
+
+```{r chunk6461224} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median student budget (attendance adjusted) by Race/Ethnicity
+
+```{r chunk56663130} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 4-year")
+```
+
+#### {-}
+
+# Section C: State public two-year sectors
+
+## Unit C1: Distributions of aid programs
+
+### State grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving State grants by Income Quartile
+
+```{r chunk49571211} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average State grant award by Income Quartile
+
+```{r chunk46240588} 
+chartFn1(targetName="State grants total", rowName="Income Quartile", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Zero EFC Status
+
+###### Share receiving State grants by Zero EFC Status
+
+```{r chunk52618371} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average State grant award by Zero EFC Status
+
+```{r chunk52566867} 
+chartFn1(targetName="State grants total", rowName="Zero EFC Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Pell Recipient Status
+
+###### Share receiving State grants by Pell Recipient Status
+
+```{r chunk29946108} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average State grant award by Pell Recipient Status
+
+```{r chunk51567092} 
+chartFn1(targetName="State grants total", rowName="Pell Recipient Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Share receiving State grants by Parents' Highest Education Level
+
+```{r chunk72062326} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average State grant award by Parents' Highest Education Level
+
+```{r chunk40281} 
+chartFn1(targetName="State grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Race/Ethnicity
+
+###### Share receiving State grants by Race/Ethnicity
+
+```{r chunk20996483} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average State grant award by Race/Ethnicity
+
+```{r chunk72835120} 
+chartFn1(targetName="State grants total", rowName="Race/Ethnicity", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+#### {-}
+
+### Institution grants total
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Share receiving Institution grants by Income Quartile
+
+```{r chunk90179463} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average Institution grant award by Income Quartile
+
+```{r chunk31221467} 
+chartFn1(targetName="Institution grants total", rowName="Income Quartile", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Zero EFC Status
+
+###### Share receiving Institution grants by Zero EFC Status
+
+```{r chunk49250283} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average Institution grant award by Zero EFC Status
+
+```{r chunk13852389} 
+chartFn1(targetName="Institution grants total", rowName="Zero EFC Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Pell Recipient Status
+
+###### Share receiving Institution grants by Pell Recipient Status
+
+```{r chunk10271378} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average Institution grant award by Pell Recipient Status
+
+```{r chunk13125137} 
+chartFn1(targetName="Institution grants total", rowName="Pell Recipient Status", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Share receiving Institution grants by Parents' Highest Education Level
+
+```{r chunk38214239} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average Institution grant award by Parents' Highest Education Level
+
+```{r chunk75445375} 
+chartFn1(targetName="Institution grants total", rowName="Parents' Highest Education Level", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Race/Ethnicity
+
+###### Share receiving Institution grants by Race/Ethnicity
+
+```{r chunk59264608} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Share >0", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+###### Average Institution grant award by Race/Ethnicity
+
+```{r chunk35185685} 
+chartFn1(targetName="Institution grants total", rowName="Race/Ethnicity", measureName="Average", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+#### {-}
+
+## Unit C2: Net price
+
+### Student budget minus all grants
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net student budget after all grants by Income Quartile
+
+```{r chunk18536958} 
+chartFn1(targetName="Student budget minus all grants", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Zero EFC Status
+
+###### Median net student budget after all grants by Zero EFC Status
+
+```{r chunk47333721} 
+chartFn1(targetName="Student budget minus all grants", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median net student budget after all grants by Pell Recipient Status
+
+```{r chunk67817845} 
+chartFn1(targetName="Student budget minus all grants", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median net student budget after all grants by Parents' Highest Education Level
+
+```{r chunk17492098} 
+chartFn1(targetName="Student budget minus all grants", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median net student budget after all grants by Race/Ethnicity
+
+```{r chunk68366166} 
+chartFn1(targetName="Student budget minus all grants", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+#### {-}
+
+### Net price after grants as percent of income
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Median net student budget after all grants as a percentage of income by Income Quartile
+
+```{r chunk31999616} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Zero EFC Status
+
+###### Median net student budget after all grants as a percentage of income by Zero EFC Status
+
+```{r chunk84794674} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median net student budget after all grants as a percentage of income by Pell Recipient Status
+
+```{r chunk49717969} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median net student budget after all grants as a percentage of income by Parents' Highest Education Level
+
+```{r chunk65967164} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median net student budget after all grants as a percentage of income by Race/Ethnicity
+
+```{r chunk80743284} 
+chartFn1(targetName="Net price after grants as percent of income", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+#### {-}
+
+## Unit C3: Context
+
+####  {.tabset}
+
+### Student budget (attendance adjusted)
+
+##### By Income Quartile
+
+###### Median student budget (attendance adjusted) by Income Quartile
+
+```{r chunk79634960} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Income Quartile", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Zero EFC Status
+
+###### Median student budget (attendance adjusted) by Zero EFC Status
+
+```{r chunk28112054} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Zero EFC Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Pell Recipient Status
+
+###### Median student budget (attendance adjusted) by Pell Recipient Status
+
+```{r chunk47516273} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Pell Recipient Status", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Parents' Highest Education Level
+
+###### Median student budget (attendance adjusted) by Parents' Highest Education Level
+
+```{r chunk85050934} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Parents' Highest Education Level", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+##### By Race/Ethnicity
+
+###### Median student budget (attendance adjusted) by Race/Ethnicity
+
+```{r chunk47244698} 
+chartFn1(targetName="Student budget (attendance adjusted)", rowName="Race/Ethnicity", measureName="Median", subtable="INSTSTAT", sector3Val="Public 2-year")
+```
+
+#### {-}
+
+# Section D: Distributions across variables 
+
+## Unit D1: Distributions across variables 
+
+### Income Quartile
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Income Quartile
+
+```{r chunk21285487} 
+chartFn2(distributionName="Income Quartile", rowName="Overall")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Income Quartile by Zero EFC Status
+
+```{r chunk61110952} 
+chartFn2(distributionName="Income Quartile", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Income Quartile by Pell Recipient Status
+
+```{r chunk60880357} 
+chartFn2(distributionName="Income Quartile", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Income Quartile by Parents' Highest Education Level
+
+```{r chunk50159729} 
+chartFn2(distributionName="Income Quartile", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Income Quartile by Race/Ethnicity
+
+```{r chunk2673506} 
+chartFn2(distributionName="Income Quartile", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Income Quartile by Institution HBCU Status
+
+```{r chunk81535522} 
+chartFn2(distributionName="Income Quartile", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Income Quartile by Institution MSI Status
+
+```{r chunk97252930} 
+chartFn2(distributionName="Income Quartile", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Income Quartile by Institution Selectivity
+
+```{r chunk88980865} 
+chartFn2(distributionName="Income Quartile", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Income Quartile by Institution State
+
+```{r chunk76352259} 
+chartFn2(distributionName="Income Quartile", rowName="Institution State")
+```
+
+#### {-}
+
+### Zero EFC Status
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Zero EFC Status
+
+```{r chunk52557812} 
+chartFn2(distributionName="Zero EFC Status", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Zero EFC Status by Income Quartile
+
+```{r chunk62877694} 
+chartFn2(distributionName="Zero EFC Status", rowName="Income Quartile")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Zero EFC Status by Pell Recipient Status
+
+```{r chunk22397449} 
+chartFn2(distributionName="Zero EFC Status", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Zero EFC Status by Parents' Highest Education Level
+
+```{r chunk1739577} 
+chartFn2(distributionName="Zero EFC Status", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Zero EFC Status by Race/Ethnicity
+
+```{r chunk93806167} 
+chartFn2(distributionName="Zero EFC Status", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Zero EFC Status by Institution HBCU Status
+
+```{r chunk60057384} 
+chartFn2(distributionName="Zero EFC Status", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Zero EFC Status by Institution MSI Status
+
+```{r chunk13462969} 
+chartFn2(distributionName="Zero EFC Status", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Zero EFC Status by Institution Selectivity
+
+```{r chunk21818645} 
+chartFn2(distributionName="Zero EFC Status", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Zero EFC Status by Institution State
+
+```{r chunk66404237} 
+chartFn2(distributionName="Zero EFC Status", rowName="Institution State")
+```
+
+#### {-}
+
+### Pell Recipient Status
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Pell Recipient Status
+
+```{r chunk50423723} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Pell Recipient Status by Income Quartile
+
+```{r chunk10341132} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Pell Recipient Status by Zero EFC Status
+
+```{r chunk87337223} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Zero EFC Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Pell Recipient Status by Parents' Highest Education Level
+
+```{r chunk20513581} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Pell Recipient Status by Race/Ethnicity
+
+```{r chunk21042589} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Pell Recipient Status by Institution HBCU Status
+
+```{r chunk8637916} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Pell Recipient Status by Institution MSI Status
+
+```{r chunk34446016} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Pell Recipient Status by Institution Selectivity
+
+```{r chunk93142296} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Pell Recipient Status by Institution State
+
+```{r chunk53915545} 
+chartFn2(distributionName="Pell Recipient Status", rowName="Institution State")
+```
+
+#### {-}
+
+### Parents' Highest Education Level
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Parents' Highest Education Level
+
+```{r chunk50981952} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Parents' Highest Education Level by Income Quartile
+
+```{r chunk10634790} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Parents' Highest Education Level by Zero EFC Status
+
+```{r chunk7337061} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Parents' Highest Education Level by Pell Recipient Status
+
+```{r chunk83980521} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Pell Recipient Status")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Parents' Highest Education Level by Race/Ethnicity
+
+```{r chunk20888415} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Parents' Highest Education Level by Institution HBCU Status
+
+```{r chunk11742342} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Parents' Highest Education Level by Institution MSI Status
+
+```{r chunk449097} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Parents' Highest Education Level by Institution Selectivity
+
+```{r chunk55869199} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Parents' Highest Education Level by Institution State
+
+```{r chunk40402759} 
+chartFn2(distributionName="Parents' Highest Education Level", rowName="Institution State")
+```
+
+#### {-}
+
+### Race/Ethnicity
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Race/Ethnicity
+
+```{r chunk83424412} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Race/Ethnicity by Income Quartile
+
+```{r chunk97835230} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Race/Ethnicity by Zero EFC Status
+
+```{r chunk43878198} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Race/Ethnicity by Pell Recipient Status
+
+```{r chunk62457188} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Race/Ethnicity by Parents' Highest Education Level
+
+```{r chunk37090882} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Race/Ethnicity by Institution HBCU Status
+
+```{r chunk5361692} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Race/Ethnicity by Institution MSI Status
+
+```{r chunk78950206} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Race/Ethnicity by Institution Selectivity
+
+```{r chunk36318482} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Race/Ethnicity by Institution State
+
+```{r chunk5826190} 
+chartFn2(distributionName="Race/Ethnicity", rowName="Institution State")
+```
+
+#### {-}
+
+### High School GPA
+
+####  {.tabset}
+
+##### By Income Quartile
+
+###### Distribution of High School GPA by Income Quartile
+
+```{r chunk69111367} 
+chartFn2(distributionName="High School GPA", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of High School GPA by Zero EFC Status
+
+```{r chunk78838351} 
+chartFn2(distributionName="High School GPA", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of High School GPA by Pell Recipient Status
+
+```{r chunk4480418} 
+chartFn2(distributionName="High School GPA", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of High School GPA by Parents' Highest Education Level
+
+```{r chunk15614645} 
+chartFn2(distributionName="High School GPA", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of High School GPA by Race/Ethnicity
+
+```{r chunk23645188} 
+chartFn2(distributionName="High School GPA", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of High School GPA by Institution HBCU Status
+
+```{r chunk21585575} 
+chartFn2(distributionName="High School GPA", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of High School GPA by Institution MSI Status
+
+```{r chunk88406244} 
+chartFn2(distributionName="High School GPA", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of High School GPA by Institution Selectivity
+
+```{r chunk61918527} 
+chartFn2(distributionName="High School GPA", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of High School GPA by Institution State
+
+```{r chunk58769353} 
+chartFn2(distributionName="High School GPA", rowName="Institution State")
+```
+
+#### {-}
+
+### Institution HBCU Status
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Institution HBCU Status
+
+```{r chunk56654027} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Institution HBCU Status by Income Quartile
+
+```{r chunk62720479} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Institution HBCU Status by Zero EFC Status
+
+```{r chunk76775898} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Institution HBCU Status by Pell Recipient Status
+
+```{r chunk34456158} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Institution HBCU Status by Parents' Highest Education Level
+
+```{r chunk4705165} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Institution HBCU Status by Race/Ethnicity
+
+```{r chunk81936383} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Institution HBCU Status by Institution MSI Status
+
+```{r chunk96629739} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Institution MSI Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Institution HBCU Status by Institution Selectivity
+
+```{r chunk57559333} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Institution HBCU Status by Institution State
+
+```{r chunk2439493} 
+chartFn2(distributionName="Institution HBCU Status", rowName="Institution State")
+```
+
+#### {-}
+
+### Institution MSI Status
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Institution MSI Status
+
+```{r chunk41735544} 
+chartFn2(distributionName="Institution MSI Status", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Institution MSI Status by Income Quartile
+
+```{r chunk24690406} 
+chartFn2(distributionName="Institution MSI Status", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Institution MSI Status by Zero EFC Status
+
+```{r chunk36081062} 
+chartFn2(distributionName="Institution MSI Status", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Institution MSI Status by Pell Recipient Status
+
+```{r chunk90438112} 
+chartFn2(distributionName="Institution MSI Status", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Institution MSI Status by Parents' Highest Education Level
+
+```{r chunk62713825} 
+chartFn2(distributionName="Institution MSI Status", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Institution MSI Status by Race/Ethnicity
+
+```{r chunk57783129} 
+chartFn2(distributionName="Institution MSI Status", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Institution MSI Status by Institution HBCU Status
+
+```{r chunk20928641} 
+chartFn2(distributionName="Institution MSI Status", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution Selectivity
+
+###### Distribution of Institution MSI Status by Institution Selectivity
+
+```{r chunk37268494} 
+chartFn2(distributionName="Institution MSI Status", rowName="Institution Selectivity")
+```
+ 
+##### By Institution State
+
+###### Distribution of Institution MSI Status by Institution State
+
+```{r chunk35218199} 
+chartFn2(distributionName="Institution MSI Status", rowName="Institution State")
+```
+
+#### {-}
+
+### Institution Selectivity
+
+####  {.tabset}
+
+##### Overall
+
+###### Distribution of Institution Selectivity
+
+```{r chunk86891062} 
+chartFn2(distributionName="Institution Selectivity", rowName="Overall")
+```
+ 
+##### By Income Quartile
+
+###### Distribution of Institution Selectivity by Income Quartile
+
+```{r chunk24159689} 
+chartFn2(distributionName="Institution Selectivity", rowName="Income Quartile")
+```
+ 
+##### By Zero EFC Status
+
+###### Distribution of Institution Selectivity by Zero EFC Status
+
+```{r chunk71251531} 
+chartFn2(distributionName="Institution Selectivity", rowName="Zero EFC Status")
+```
+ 
+##### By Pell Recipient Status
+
+###### Distribution of Institution Selectivity by Pell Recipient Status
+
+```{r chunk76016375} 
+chartFn2(distributionName="Institution Selectivity", rowName="Pell Recipient Status")
+```
+ 
+##### By Parents' Highest Education Level
+
+###### Distribution of Institution Selectivity by Parents' Highest Education Level
+
+```{r chunk21428687} 
+chartFn2(distributionName="Institution Selectivity", rowName="Parents' Highest Education Level")
+```
+ 
+##### By Race/Ethnicity
+
+###### Distribution of Institution Selectivity by Race/Ethnicity
+
+```{r chunk51678473} 
+chartFn2(distributionName="Institution Selectivity", rowName="Race/Ethnicity")
+```
+ 
+##### By Institution HBCU Status
+
+###### Distribution of Institution Selectivity by Institution HBCU Status
+
+```{r chunk41283899} 
+chartFn2(distributionName="Institution Selectivity", rowName="Institution HBCU Status")
+```
+ 
+##### By Institution MSI Status
+
+###### Distribution of Institution Selectivity by Institution MSI Status
+
+```{r chunk65594084} 
+chartFn2(distributionName="Institution Selectivity", rowName="Institution MSI Status")
+```
+ 
+##### By Institution State
+
+###### Distribution of Institution Selectivity by Institution State
+
+```{r chunk60829118} 
+chartFn2(distributionName="Institution Selectivity", rowName="Institution State")
+```
+
+#### {-}
+
+

@@ -156,7 +156,7 @@ loadDatalab2 <- function(
     
     distributionName <- dataDF$V2[1]
     if(sectionName=="D10 Percentages"){
-      rowName <- "No row variable"
+      rowName <- "Overall"
     }else{
       rowName <- dataDF$V1[5]
     }
@@ -562,7 +562,6 @@ AMP.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "C3 Percentages", 
   "C4 Medians", 
   "C5 Medians", 
-  "C5 Percentages", 
   "C6 Medians", 
   "C7 Medians" 
 ), functionSelection="loadDatalab1", subtableSelection="SECTOR3")
@@ -933,6 +932,7 @@ levels.TargetName <- c(
 )
 
 levels.RowName <- c(
+  "Overall",
   "Income Quartile", 
   "Zero EFC Status", 
   "Pell Recipient Status", 
@@ -1221,6 +1221,28 @@ AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
   `State`,
   `Row value`
 )
+
+#### End #### 
+
+#### Print table IDs ####
+
+output1 <- AMP.SECTOR3 %>% filter(
+  duplicated(`Table ID 3`)==FALSE
+)
+output2 <- DIST.SECTOR3 %>% filter(
+  duplicated(`Table ID 2`)==FALSE
+)
+output3 <- AMP.INSTSTAT.2Y %>% filter(
+  duplicated(`Table ID 3`)==FALSE
+)
+output4 <- AMP.INSTSTAT.4Y %>% filter(
+  duplicated(`Table ID 3`)==FALSE
+)
+
+write.csv(output1, "output1.csv", row.names=FALSE)
+write.csv(output2, "output2.csv", row.names=FALSE)
+write.csv(output3, "output3.csv", row.names=FALSE)
+write.csv(output4, "output4.csv", row.names=FALSE)
 
 #### End #### 
 
