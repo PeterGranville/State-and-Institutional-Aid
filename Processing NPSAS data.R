@@ -6,6 +6,8 @@ library(plotly)
 library(tidyverse)
 library(kableExtra)
 
+setwd("/Users/peter_granville/Net Price Equity")
+
 #### End #### 
 
 #### Write function to load averages, percentages, and shares above zero ####
@@ -552,7 +554,7 @@ AMP.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "A10 Percentages", 
   "A11 Averages", 
   "A11 Percentages", 
-  "B1 Averages", 
+  "B1 Medians", 
   "C1 Averages", 
   "C1 Percentages", 
   "C2 Averages", 
@@ -1226,23 +1228,23 @@ AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
 
 #### Print table IDs ####
 
-output1 <- AMP.SECTOR3 %>% filter(
-  duplicated(`Table ID 3`)==FALSE
-)
-output2 <- DIST.SECTOR3 %>% filter(
-  duplicated(`Table ID 2`)==FALSE
-)
-output3 <- AMP.INSTSTAT.2Y %>% filter(
-  duplicated(`Table ID 3`)==FALSE
-)
-output4 <- AMP.INSTSTAT.4Y %>% filter(
-  duplicated(`Table ID 3`)==FALSE
-)
-
-write.csv(output1, "output1.csv", row.names=FALSE)
-write.csv(output2, "output2.csv", row.names=FALSE)
-write.csv(output3, "output3.csv", row.names=FALSE)
-write.csv(output4, "output4.csv", row.names=FALSE)
+# output1 <- AMP.SECTOR3 %>% filter(
+#   duplicated(`Table ID 3`)==FALSE
+# )
+# output2 <- DIST.SECTOR3 %>% filter(
+#   duplicated(`Table ID 2`)==FALSE
+# )
+# output3 <- AMP.INSTSTAT.2Y %>% filter(
+#   duplicated(`Table ID 3`)==FALSE
+# )
+# output4 <- AMP.INSTSTAT.4Y %>% filter(
+#   duplicated(`Table ID 3`)==FALSE
+# )
+# 
+# write.csv(output1, "output1.csv", row.names=FALSE)
+# write.csv(output2, "output2.csv", row.names=FALSE)
+# write.csv(output3, "output3.csv", row.names=FALSE)
+# write.csv(output4, "output4.csv", row.names=FALSE)
 
 #### End #### 
 
