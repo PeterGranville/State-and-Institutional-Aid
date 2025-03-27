@@ -14,383 +14,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r axisTitles, include=FALSE}
-
-axisTitles1 <- data.frame(
-  `Target name` = character(), 
-  `Measure name` = character(), 
-  `Title name` = character(), 
-  check.names=FALSE
-) 
-
-axisTitles1 <- axisTitles1 %>% add_row(
-  `Target name`="Tuition and fees paid",  `Measure name`="Median", `Title name`="Median tuition and fees"
-) %>% add_row(
-  `Target name`="Tuition and fees minus all grants",  `Measure name`="Share >0", `Title name`="Share with unmet tuition and fees after all grants"
-) %>% add_row(
-  `Target name`="Tuition and fees minus all grants",  `Measure name`="Median", `Title name`="Median net tuition and fees after all grants"
-) %>% add_row(
-  `Target name`="Tuition and fees minus all grants",  `Measure name`="Average", `Title name`="Average net tuition and fees after all grants"
-) %>% add_row(
-  `Target name`="Total state and institutional grants",  `Measure name`="Share >0", `Title name`="Share receiving state or institutional grants"
-) %>% add_row(
-  `Target name`="Total state and institutional grants",  `Measure name`="Average", `Title name`=" Average combined state and institutional grant award"
-) %>% add_row(
-  `Target name`="Title IV loans (includes Parent PLUS Loans)",  `Measure name`="Share >0", `Title name`="Share receiving Title IV loans (includes Parent PLUS Loans)"
-) %>% add_row(
-  `Target name`="Title IV loans (includes Parent PLUS Loans)",  `Measure name`="Average", `Title name`="Average Title IV loan amount (includes Parent PLUS Loans)"
-) %>% add_row(
-  `Target name`="Student budget minus all grants",  `Measure name`="Median", `Title name`="Median net student budget after all grants"
-) %>% add_row(
-  `Target name`="Student budget minus all grants",  `Measure name`="Average", `Title name`="Average net student budget after all grants"
-) %>% add_row(
-  `Target name`="Student budget (attendance adjusted)",  `Measure name`="Median", `Title name`="Median student budget (attendance adjusted)"
-) %>% add_row(
-  `Target name`="State non-need & merit grants",  `Measure name`="Share >0", `Title name`="Share receiving state non-need & merit grants"
-) %>% add_row(
-  `Target name`="State non-need & merit grants",  `Measure name`="Average", `Title name`="Average state non-need & merit grant award"
-) %>% add_row(
-  `Target name`="State need-based grants",  `Measure name`="Share >0", `Title name`="Share receiving state need-based grants"
-) %>% add_row(
-  `Target name`="State need-based grants",  `Measure name`="Average", `Title name`="Average state need-based grant award"
-) %>% add_row(
-  `Target name`="State grants total",  `Measure name`="Share >0", `Title name`="Share receiving state grants"
-) %>% add_row(
-  `Target name`="State grants total",  `Measure name`="Average", `Title name`="Average state grant award"
-) %>% add_row(
-  `Target name`="Private source grants",  `Measure name`="Share >0", `Title name`="Share receiving private source grants"
-) %>% add_row(
-  `Target name`="Private source grants",  `Measure name`="Average", `Title name`="Average private source grant award"
-) %>% add_row(
-  `Target name`="Net tuition after all grants as percent of income",  `Measure name`="Median", `Title name`="Median net tuition after all grants as percent of income"
-) %>% add_row(
-  `Target name`="Net price after grants as percent of income",  `Measure name`="Median", `Title name`="Median net price after grants as percent of income"
-) %>% add_row(
-  `Target name`="Institutional need-based grants",  `Measure name`="Share >0", `Title name`="Share receiving institutional need-based grants"
-) %>% add_row(
-  `Target name`="Institutional need-based grants",  `Measure name`="Average", `Title name`="Average institutional need-based grant award"
-) %>% add_row(
-  `Target name`="Institution non-need & merit grants",  `Measure name`="Share >0", `Title name`="Share receiving institutional non-need & merit grants"
-) %>% add_row(
-  `Target name`="Institution non-need & merit grants",  `Measure name`="Average", `Title name`="Average institutional non-need & merit grant award"
-) %>% add_row(
-  `Target name`="Institution grants total",  `Measure name`="Share >0", `Title name`="Share receiving institutional grants"
-) %>% add_row(
-  `Target name`="Institution grants total",  `Measure name`="Average", `Title name`="Average institutional grant award"
-) %>% add_row(
-  `Target name`="Grant amount exceeding federal need",  `Measure name`="Share >0", `Title name`="Share whose grants exceed federal need"
-) %>% add_row(
-  `Target name`="Grant amount exceeding federal need",  `Measure name`="Average", `Title name`="Average grant amount in excess of federal need"
-) %>% add_row(
-  `Target name`="Federal Pell Grant",  `Measure name`="Share >0", `Title name`="Share receiving federal Pell Grants"
-) %>% add_row(
-  `Target name`="Federal Pell Grant",  `Measure name`="Average", `Title name`="Average federal Pell Grant award"
-) %>% add_row(
-  `Target name`="Federal campus-based aid (SEOG, FWS)",  `Measure name`="Share >0", `Title name`="Share receiving federal campus-based aid (SEOG, FWS)"
-) %>% add_row(
-  `Target name`="Federal campus-based aid (SEOG, FWS)",  `Measure name`="Average", `Title name`="Average federal campus-based aid award (SEOG, FWS)"
-) %>% add_row(
-  `Target name`="Expected Family Contribution",  `Measure name`="Median", `Title name`="Median Expected Family Contribution"
-)
-
-```
-
-```{r setBounds, include=FALSE}
-
-suppressWarnings({
-  
-  AMP.SECTOR3 <- AMP.SECTOR3 %>% separate(
-    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
-  ) %>% mutate(
-    `Target value` = gsub(" !!", "", `Target value`), 
-    `Target value` = gsub(" !", "", `Target value`), 
-    `Target value` = gsub(",", "", `Target value`), 
-    `Lower bound` = gsub(" !!", "", `Lower bound`), 
-    `Lower bound` = gsub(" !", "", `Lower bound`), 
-    `Lower bound` = gsub(",", "", `Lower bound`), 
-    `Upper bound` = gsub(" !!", "", `Upper bound`), 
-    `Upper bound` = gsub(" !", "", `Upper bound`),
-    `Upper bound` = gsub(",", "", `Upper bound`)
-  ) %>% mutate(
-    `Target value` = as.numeric(`Target value`), 
-    `Lower bound` = as.numeric(`Lower bound`), 
-    `Upper bound` = as.numeric(`Upper bound`)
-  )
-  
-  AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% separate(
-    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
-  ) %>% mutate(
-    `Target value` = gsub(" !!", "", `Target value`), 
-    `Target value` = gsub(" !", "", `Target value`), 
-    `Target value` = gsub(",", "", `Target value`), 
-    `Lower bound` = gsub(" !!", "", `Lower bound`), 
-    `Lower bound` = gsub(" !", "", `Lower bound`), 
-    `Lower bound` = gsub(",", "", `Lower bound`), 
-    `Upper bound` = gsub(" !!", "", `Upper bound`), 
-    `Upper bound` = gsub(" !", "", `Upper bound`),
-    `Upper bound` = gsub(",", "", `Upper bound`)
-  ) %>% mutate(
-    `Target value` = as.numeric(`Target value`), 
-    `Lower bound` = as.numeric(`Lower bound`), 
-    `Upper bound` = as.numeric(`Upper bound`)
-  )
-  
-  AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% separate(
-    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
-  ) %>% mutate(
-    `Target value` = gsub(" !!", "", `Target value`), 
-    `Target value` = gsub(" !", "", `Target value`), 
-    `Target value` = gsub(",", "", `Target value`), 
-    `Lower bound` = gsub(" !!", "", `Lower bound`), 
-    `Lower bound` = gsub(" !", "", `Lower bound`), 
-    `Lower bound` = gsub(",", "", `Lower bound`), 
-    `Upper bound` = gsub(" !!", "", `Upper bound`), 
-    `Upper bound` = gsub(" !", "", `Upper bound`),
-    `Upper bound` = gsub(",", "", `Upper bound`)
-  ) %>% mutate(
-    `Target value` = as.numeric(`Target value`), 
-    `Lower bound` = as.numeric(`Lower bound`), 
-    `Upper bound` = as.numeric(`Upper bound`)
-  )
-  
-  DIST.SECTOR3 <- DIST.SECTOR3 %>% separate(
-    `Interval`, c("Lower bound", "Upper bound"), " - "
-  ) %>% mutate(
-    `Share` = gsub(" !!", "", `Share`), 
-    `Share` = gsub(" !", "", `Share`), 
-    `Share` = gsub(",", "", `Share`), 
-    `Lower bound` = gsub(" !!", "", `Lower bound`), 
-    `Lower bound` = gsub(" !", "", `Lower bound`), 
-    `Lower bound` = gsub(",", "", `Lower bound`), 
-    `Upper bound` = gsub(" !!", "", `Upper bound`), 
-    `Upper bound` = gsub(" !", "", `Upper bound`),
-    `Upper bound` = gsub(",", "", `Upper bound`)
-  ) %>% mutate(
-    `Share` = as.numeric(`Share`), 
-    `Lower bound` = as.numeric(`Lower bound`), 
-    `Upper bound` = as.numeric(`Upper bound`)
-  )
-    
-})
-
-minValues <- rbind(
-  aggregate(data=AMP.SECTOR3, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
-  aggregate(data=AMP.INSTSTAT.2Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
-  aggregate(data=AMP.INSTSTAT.4Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min)
-) %>% filter(`Measure name` %in% c("Median", "Average"))
-
-maxValues <- rbind(
-  aggregate(data=AMP.SECTOR3, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
-  aggregate(data=AMP.INSTSTAT.2Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
-  aggregate(data=AMP.INSTSTAT.4Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max)
-) %>% filter(`Measure name` %in% c("Median", "Average"))
-
-minValues <- aggregate(data=minValues, `Lower bound` ~ `Target name`, FUN=min)
-maxValues <- aggregate(data=maxValues, `Upper bound` ~ `Target name`, FUN=max)
-
-axisBounds <- full_join(
-  x=minValues, y=maxValues, by="Target name"
-) %>% rename(
-  `Lower bound for axis` = `Lower bound`, 
-  `Upper bound for axis` = `Upper bound`
-) %>% mutate(
-  `Distance between bounds` = `Upper bound for axis` - `Lower bound for axis`
-) %>% mutate(
-  `Extra margin` = `Distance between bounds` * 0.03
-) %>% mutate(
-  `Lower bound for axis` = `Lower bound for axis` - `Extra margin`, 
-  `Upper bound for axis` = `Upper bound for axis` + `Extra margin`
-) %>% select(
-  -(`Distance between bounds`), -(`Extra margin`)
-)
-
-rm(minValues, maxValues)
-
-```
-
-```{r chartFn1, include=FALSE}
-
-chartFn1 <- function(targetName, rowName, measureName, subtable, sector3Val){
-  
-  # targetName <- "Federal Pell Grant"
-  # rowName <- "Income Quartile"
-  # measureName <- "Share >0"
-  # subtable <- "SECTOR3"
-  # sector3Val <- "None"
-
-  if(subtable=="SECTOR3"){
-    tempDF <- AMP.SECTOR3
-  }else{
-    if(subtable=="INSTSTAT"){
-      if(sector3Val=="Public 4-year"){
-        tempDF <- AMP.INSTSTAT.4Y
-      }else{
-        if(sector3Val=="Public 2-year"){
-          tempDF <- AMP.INSTSTAT.2Y
-        }else{
-          stop("Bad sector3Val input")
-        }
-      }
-    }else{
-      stop("Bad subtable input")
-    }
-  }
-  
-  tempDF <- tempDF %>% filter(
-    `Target name`==targetName, 
-    `Row name`==rowName, 
-    `Measure name`==measureName
-  )
-  tempDF <- left_join(x=tempDF, y=axisTitles1, by=c("Target name", "Measure name"))
-  tempDF <- left_join(x=tempDF, y=axisBounds, by="Target name")
-  
-  if(measureName=="Share >0"){
-    tempDF <- tempDF %>% mutate(
-      `Target value` = `Target value` / 100, 
-      `Lower bound` = `Lower bound` / 100, 
-      `Upper bound` = `Upper bound` / 100
-    ) %>% mutate(
-      `Target value` = ifelse(`Target value` < 0, 0, `Target value`), 
-      `Lower bound` = ifelse(`Lower bound` < 0, 0, `Lower bound`), 
-      `Upper bound` = ifelse(`Upper bound` < 0, 0, `Upper bound`)
-    ) %>% mutate(
-      `Target value` = ifelse(`Target value` > 1, 1, `Target value`), 
-      `Lower bound` = ifelse(`Lower bound` > 1, 1, `Lower bound`), 
-      `Upper bound` = ifelse(`Upper bound` > 1, 1, `Upper bound`)
-    )
-  }
-  
-  tempDF <- tempDF %>% mutate(
-    `Row value` = factor(`Row value`, levels=rev(levels(`Row value`)))
-  ) 
-  
-  if(measureName=="Share >0"){
-    tempDF <- tempDF %>% mutate(
-      `For Tooltip`=paste(
-        "Target variable: ", tempDF$`Target name`, '\n', 
-        "Selected group: ", tempDF$`Row value`, '\n', 
-        "Sector: ", tempDF$`Sector value`, '\n', 
-        "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
-        "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
-        sep=""
-      )
-    )
-  }
-  if(measureName %in% c("Median", "Average")){
-    tempDF <- tempDF %>% mutate(
-      `For Tooltip`=paste(
-        "Target variable: ", tempDF$`Target name`, '\n', 
-        "Selected group: ", tempDF$`Row value`, '\n', 
-        "Sector: ", tempDF$`Sector value`, '\n', 
-        "Estimate: ", dollar(tempDF$`Target value`, accuracy=1), '\n',
-        "95% confidence interval: ", dollar(tempDF$`Lower bound`, accuracy=1), " to ", dollar(tempDF$`Upper bound`, accuracy=1), 
-        sep=""
-      )
-    )
-  }
-
-  plot1 <- ggplot(
-    data=tempDF, mapping=aes(x=`Target value`, y=`Row value`, fill=`Row value`, text=`For Tooltip`)
-  ) + geom_point() + geom_errorbar(
-    aes(xmin=`Lower bound`, xmax=`Upper bound`, width=0.2)
-  ) + facet_grid(
-    `Sector value` ~ .
-  ) + labs(
-    x=tempDF$`Title name`[1], y=""
-  )
-  
-  if(measureName=="Share >0"){
-    plot1 <- plot1 + scale_x_continuous(
-      labels=percent_format(accuracy=1), limits=c(-0.03, 1.03), breaks=c(0, 0.25, 0.5, 0.75, 1)
-    ) 
-  }
-  if(measureName %in% c("Median", "Average")){
-    plot1 <- plot1 + scale_x_continuous(
-      labels=dollar_format(accuracy=1, limits=c(
-        tempDF$`Lower bound for axis`[1], 
-        tempDF$`Upper bound for axis`[1]
-      ))
-    ) 
-  }
-
-  return(ggplotly(plot1, tooltip="text"))
-  
-  rm(plot1, tempDF)
-
-}
-
-```
-
-```{r chartFn2, include=FALSE}
-
-chartFn2 <- function(distributionName, rowName){
-  
-  # distributionName <- "Income Quartile"
-  # rowName <- "Parents' Highest Education Level"
-  
-  tempDF <- DIST.SECTOR3 %>% filter(
-    `Distribution name`==distributionName, 
-    `Row name`==rowName
-  )
-  
-  tempDF <- tempDF %>% mutate(
-    `Share` = `Share` / 100, 
-    `Lower bound` = `Lower bound` / 100, 
-    `Upper bound` = `Upper bound` / 100
-  ) %>% mutate(
-    `Share` = ifelse(`Share` < 0, 0, `Share`), 
-    `Lower bound` = ifelse(`Lower bound` < 0, 0, `Lower bound`), 
-    `Upper bound` = ifelse(`Upper bound` < 0, 0, `Upper bound`)
-  ) %>% mutate(
-    `Share` = ifelse(`Share` > 1, 1, `Share`), 
-    `Lower bound` = ifelse(`Lower bound` > 1, 1, `Lower bound`), 
-    `Upper bound` = ifelse(`Upper bound` > 1, 1, `Upper bound`)
-  )
-  
-  # Confirm whether this is needed:
-  tempDF <- tempDF %>% mutate(
-    `Row value` = factor(`Row value`, levels=rev(levels(`Row value`)))
-  ) 
-  
-  tempDF <- tempDF %>% mutate(
-    `For Tooltip`=paste(
-      "Distribution variable: ", tempDF$`Distribution name`, '\n', 
-      "Selected group: ", tempDF$`Row value`, '\n', 
-      "Sector: ", tempDF$`Sector value`, '\n', 
-      "Estimate: ", percent(tempDF$`Share`, accuracy=0.1), '\n',
-      "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
-      sep=""
-    )
-  )
-  
-  plot1 <- ggplot(
-    data=tempDF, mapping=aes(x=`Share`, y=`Row value`, fill=`Category name`, text=`For Tooltip`)
-  ) + geom_bar(
-    position="stack", stat="identity"
-  ) + facet_grid(
-    `Sector value` ~ .
-  ) + labs(
-    x=paste("Distribution of ", tempDF$`Distribution name`[1], " by ", tempDF$`Row name`[1]), y=""
-  ) + theme(
-    legend.position="top"
-  ) + scale_x_continuous(labels=percent_format(accuracy=1))
-  
-  plot1 <- ggplotly(
-    plot1, tooltip="text"
-  ) %>% layout(legend = list(
-    orientation = "h",   # show entries horizontally
-    xanchor = "center",  # use center of legend as anchor
-    x = 0.5)             # put legend in center of x-axis
-  )
-  
-  return(plot1)
-  
-  rm(plot1, tempDF)
-  
-}
-
-```
-
 ```{r processing, include=FALSE}
 
 #### Setup ####
@@ -1641,6 +1264,425 @@ AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
 # write.csv(output4, "output4.csv", row.names=FALSE)
 
 #### End #### 
+
+```
+
+```{r setDimensions, include=FALSE}
+
+overallWidth <- 800
+heightIntercept <- 300
+heightCoefficient <- 20
+
+```
+
+```{r axisTitles, include=FALSE}
+
+axisTitles1 <- data.frame(
+  `Target name` = character(), 
+  `Measure name` = character(), 
+  `Title name` = character(), 
+  check.names=FALSE
+) 
+
+axisTitles1 <- axisTitles1 %>% add_row(
+  `Target name`="Tuition and fees paid",  `Measure name`="Median", `Title name`="Median tuition and fees"
+) %>% add_row(
+  `Target name`="Tuition and fees minus all grants",  `Measure name`="Share >0", `Title name`="Share with unmet tuition and fees after all grants"
+) %>% add_row(
+  `Target name`="Tuition and fees minus all grants",  `Measure name`="Median", `Title name`="Median net tuition and fees after all grants"
+) %>% add_row(
+  `Target name`="Tuition and fees minus all grants",  `Measure name`="Average", `Title name`="Average net tuition and fees after all grants"
+) %>% add_row(
+  `Target name`="Total state and institutional grants",  `Measure name`="Share >0", `Title name`="Share receiving state or institutional grants"
+) %>% add_row(
+  `Target name`="Total state and institutional grants",  `Measure name`="Average", `Title name`=" Average combined state and institutional grant award"
+) %>% add_row(
+  `Target name`="Title IV loans (includes Parent PLUS Loans)",  `Measure name`="Share >0", `Title name`="Share receiving Title IV loans (includes Parent PLUS Loans)"
+) %>% add_row(
+  `Target name`="Title IV loans (includes Parent PLUS Loans)",  `Measure name`="Average", `Title name`="Average Title IV loan amount (includes Parent PLUS Loans)"
+) %>% add_row(
+  `Target name`="Student budget minus all grants",  `Measure name`="Median", `Title name`="Median net student budget after all grants"
+) %>% add_row(
+  `Target name`="Student budget minus all grants",  `Measure name`="Average", `Title name`="Average net student budget after all grants"
+) %>% add_row(
+  `Target name`="Student budget (attendance adjusted)",  `Measure name`="Median", `Title name`="Median student budget (attendance adjusted)"
+) %>% add_row(
+  `Target name`="State non-need & merit grants",  `Measure name`="Share >0", `Title name`="Share receiving state non-need & merit grants"
+) %>% add_row(
+  `Target name`="State non-need & merit grants",  `Measure name`="Average", `Title name`="Average state non-need & merit grant award"
+) %>% add_row(
+  `Target name`="State need-based grants",  `Measure name`="Share >0", `Title name`="Share receiving state need-based grants"
+) %>% add_row(
+  `Target name`="State need-based grants",  `Measure name`="Average", `Title name`="Average state need-based grant award"
+) %>% add_row(
+  `Target name`="State grants total",  `Measure name`="Share >0", `Title name`="Share receiving state grants"
+) %>% add_row(
+  `Target name`="State grants total",  `Measure name`="Average", `Title name`="Average state grant award"
+) %>% add_row(
+  `Target name`="Private source grants",  `Measure name`="Share >0", `Title name`="Share receiving private source grants"
+) %>% add_row(
+  `Target name`="Private source grants",  `Measure name`="Average", `Title name`="Average private source grant award"
+) %>% add_row(
+  `Target name`="Net tuition after all grants as percent of income",  `Measure name`="Median", `Title name`="Median net tuition after all grants as percent of income"
+) %>% add_row(
+  `Target name`="Net price after grants as percent of income",  `Measure name`="Median", `Title name`="Median net price after grants as percent of income"
+) %>% add_row(
+  `Target name`="Institutional need-based grants",  `Measure name`="Share >0", `Title name`="Share receiving institutional need-based grants"
+) %>% add_row(
+  `Target name`="Institutional need-based grants",  `Measure name`="Average", `Title name`="Average institutional need-based grant award"
+) %>% add_row(
+  `Target name`="Institution non-need & merit grants",  `Measure name`="Share >0", `Title name`="Share receiving institutional non-need & merit grants"
+) %>% add_row(
+  `Target name`="Institution non-need & merit grants",  `Measure name`="Average", `Title name`="Average institutional non-need & merit grant award"
+) %>% add_row(
+  `Target name`="Institution grants total",  `Measure name`="Share >0", `Title name`="Share receiving institutional grants"
+) %>% add_row(
+  `Target name`="Institution grants total",  `Measure name`="Average", `Title name`="Average institutional grant award"
+) %>% add_row(
+  `Target name`="Grant amount exceeding federal need",  `Measure name`="Share >0", `Title name`="Share whose grants exceed federal need"
+) %>% add_row(
+  `Target name`="Grant amount exceeding federal need",  `Measure name`="Average", `Title name`="Average grant amount in excess of federal need"
+) %>% add_row(
+  `Target name`="Federal Pell Grant",  `Measure name`="Share >0", `Title name`="Share receiving federal Pell Grants"
+) %>% add_row(
+  `Target name`="Federal Pell Grant",  `Measure name`="Average", `Title name`="Average federal Pell Grant award"
+) %>% add_row(
+  `Target name`="Federal campus-based aid (SEOG, FWS)",  `Measure name`="Share >0", `Title name`="Share receiving federal campus-based aid (SEOG, FWS)"
+) %>% add_row(
+  `Target name`="Federal campus-based aid (SEOG, FWS)",  `Measure name`="Average", `Title name`="Average federal campus-based aid award (SEOG, FWS)"
+) %>% add_row(
+  `Target name`="Expected Family Contribution",  `Measure name`="Median", `Title name`="Median Expected Family Contribution"
+)
+
+```
+
+```{r setBounds, include=FALSE}
+
+suppressWarnings({
+  
+  AMP.SECTOR3 <- AMP.SECTOR3 %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  DIST.SECTOR3 <- DIST.SECTOR3 %>% separate(
+    `Interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Share` = gsub(" !!", "", `Share`), 
+    `Share` = gsub(" !", "", `Share`), 
+    `Share` = gsub(",", "", `Share`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Share` = as.numeric(`Share`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+    
+})
+
+minValues <- rbind(
+  aggregate(data=AMP.SECTOR3, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
+  aggregate(data=AMP.INSTSTAT.2Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
+  aggregate(data=AMP.INSTSTAT.4Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min)
+) %>% filter(`Measure name` %in% c("Median", "Average"))
+
+maxValues <- rbind(
+  aggregate(data=AMP.SECTOR3, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
+  aggregate(data=AMP.INSTSTAT.2Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
+  aggregate(data=AMP.INSTSTAT.4Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max)
+) %>% filter(`Measure name` %in% c("Median", "Average"))
+
+minValues <- aggregate(data=minValues, `Lower bound` ~ `Target name`, FUN=min)
+maxValues <- aggregate(data=maxValues, `Upper bound` ~ `Target name`, FUN=max)
+
+axisBounds <- full_join(
+  x=minValues, y=maxValues, by="Target name"
+) %>% rename(
+  `Lower bound for axis` = `Lower bound`, 
+  `Upper bound for axis` = `Upper bound`
+) %>% mutate(
+  `Distance between bounds` = `Upper bound for axis` - `Lower bound for axis`
+) %>% mutate(
+  `Extra margin` = `Distance between bounds` * 0.03
+) %>% mutate(
+  `Lower bound for axis` = `Lower bound for axis` - `Extra margin`, 
+  `Upper bound for axis` = `Upper bound for axis` + `Extra margin`
+) %>% select(
+  -(`Distance between bounds`), -(`Extra margin`)
+)
+
+rm(minValues, maxValues)
+
+```
+
+```{r chartFn1, include=FALSE}
+
+chartFn1 <- function(targetName, rowName, measureName, subtable, sector3Val){
+
+  if(subtable=="SECTOR3"){
+    tempDF <- AMP.SECTOR3
+  }else{
+    if(subtable=="INSTSTAT"){
+      if(sector3Val=="Public 4-year"){
+        tempDF <- AMP.INSTSTAT.4Y
+      }else{
+        if(sector3Val=="Public 2-year"){
+          tempDF <- AMP.INSTSTAT.2Y
+        }else{
+          stop("Bad sector3Val input")
+        }
+      }
+    }else{
+      stop("Bad subtable input")
+    }
+  }
+  
+  tempDF <- tempDF %>% filter(
+    `Target name`==targetName, 
+    `Row name`==rowName, 
+    `Measure name`==measureName
+  )
+  tempDF <- left_join(x=tempDF, y=axisTitles1, by=c("Target name", "Measure name"))
+  tempDF <- left_join(x=tempDF, y=axisBounds, by="Target name")
+  
+  if(measureName=="Share >0"){
+    tempDF <- tempDF %>% mutate(
+      `Target value` = `Target value` / 100, 
+      `Lower bound` = `Lower bound` / 100, 
+      `Upper bound` = `Upper bound` / 100
+    ) %>% mutate(
+      `Target value` = ifelse(`Target value` < 0, 0, `Target value`), 
+      `Lower bound` = ifelse(`Lower bound` < 0, 0, `Lower bound`), 
+      `Upper bound` = ifelse(`Upper bound` < 0, 0, `Upper bound`)
+    ) %>% mutate(
+      `Target value` = ifelse(`Target value` > 1, 1, `Target value`), 
+      `Lower bound` = ifelse(`Lower bound` > 1, 1, `Lower bound`), 
+      `Upper bound` = ifelse(`Upper bound` > 1, 1, `Upper bound`)
+    )
+  }
+  
+  tempDF <- tempDF %>% mutate(
+    `Row value` = factor(`Row value`, levels=rev(levels(`Row value`)))
+  ) 
+  
+  if(subtable=="SECTOR3"){
+    if(measureName=="Share >0"){
+      tempDF <- tempDF %>% mutate(
+        `For Tooltip`=paste(
+          "Target variable: ", tempDF$`Target name`, '\n', 
+          "Selected group: ", tempDF$`Row value`, '\n', 
+          "Sector: ", tempDF$`Sector value`, '\n', 
+          "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
+          "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
+          sep=""
+        )
+      )
+    }
+    if(measureName %in% c("Median", "Average")){
+      tempDF <- tempDF %>% mutate(
+        `For Tooltip`=paste(
+          "Target variable: ", tempDF$`Target name`, '\n', 
+          "Selected group: ", tempDF$`Row value`, '\n', 
+          "Sector: ", tempDF$`Sector value`, '\n', 
+          "Estimate: ", dollar(tempDF$`Target value`, accuracy=1), '\n',
+          "95% confidence interval: ", dollar(tempDF$`Lower bound`, accuracy=1), " to ", dollar(tempDF$`Upper bound`, accuracy=1), 
+          sep=""
+        )
+      )
+    }
+  }else{
+    if(subtable=="INSTSTAT"){
+      if(measureName=="Share >0"){
+        tempDF <- tempDF %>% mutate(
+          `For Tooltip`=paste(
+            "Target variable: ", tempDF$`Target name`, '\n', 
+            "Selected group: ", tempDF$`Row value`, '\n', 
+            "State: ", tempDF$`State`, '\n', 
+            "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
+            "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
+            sep=""
+          )
+        )
+      }
+      if(measureName %in% c("Median", "Average")){
+        tempDF <- tempDF %>% mutate(
+          `For Tooltip`=paste(
+            "Target variable: ", tempDF$`Target name`, '\n', 
+            "Selected group: ", tempDF$`Row value`, '\n', 
+            "State: ", tempDF$`State`, '\n', 
+            "Estimate: ", dollar(tempDF$`Target value`, accuracy=1), '\n',
+            "95% confidence interval: ", dollar(tempDF$`Lower bound`, accuracy=1), " to ", dollar(tempDF$`Upper bound`, accuracy=1), 
+            sep=""
+          )
+        )
+      }
+    }else{
+      stop("Bad input")
+    }
+  }
+  
+
+  plot1 <- ggplot(
+    data=tempDF, mapping=aes(x=`Target value`, y=`Row value`, fill=`Row value`, text=`For Tooltip`)
+  ) + geom_point() + geom_errorbar(
+    aes(xmin=`Lower bound`, xmax=`Upper bound`, width=0.2)
+  ) + labs(
+    x=tempDF$`Title name`[1], y=""
+  )
+  
+  if(subtable=="SECTOR3"){
+    plot1 <- plot1 + facet_grid(`Sector value` ~ .) 
+  }else{
+    if(subtable=="INSTSTAT"){
+      plot1 <- plot1 + facet_grid(`State` ~ .) 
+    }else{
+      stop("Bad input")
+    }
+  }
+  
+  if(measureName=="Share >0"){
+    plot1 <- plot1 + scale_x_continuous(
+      labels=percent_format(accuracy=1), limits=c(-0.03, 1.03), breaks=c(0, 0.25, 0.5, 0.75, 1)
+    ) 
+  }
+  if(measureName %in% c("Median", "Average")){
+    plot1 <- plot1 + scale_x_continuous(
+      labels=dollar_format(accuracy=1, limits=c(
+        tempDF$`Lower bound for axis`[1], 
+        tempDF$`Upper bound for axis`[1]
+      ))
+    ) 
+  }
+
+  return(ggplotly(plot1, tooltip="text", width=overallWidth, height=heightIntercept+(nrow(tempDF)*heightCoefficient)))
+  
+  rm(plot1, tempDF)
+
+}
+
+```
+
+```{r chartFn2, include=FALSE}
+
+chartFn2 <- function(distributionName, rowName){
+  
+  # distributionName <- "Income Quartile"
+  # rowName <- "Parents' Highest Education Level"
+  
+  tempDF <- DIST.SECTOR3 %>% filter(
+    `Distribution name`==distributionName, 
+    `Row name`==rowName
+  )
+  
+  tempDF <- tempDF %>% mutate(
+    `Share` = `Share` / 100, 
+    `Lower bound` = `Lower bound` / 100, 
+    `Upper bound` = `Upper bound` / 100
+  ) %>% mutate(
+    `Share` = ifelse(`Share` < 0, 0, `Share`), 
+    `Lower bound` = ifelse(`Lower bound` < 0, 0, `Lower bound`), 
+    `Upper bound` = ifelse(`Upper bound` < 0, 0, `Upper bound`)
+  ) %>% mutate(
+    `Share` = ifelse(`Share` > 1, 1, `Share`), 
+    `Lower bound` = ifelse(`Lower bound` > 1, 1, `Lower bound`), 
+    `Upper bound` = ifelse(`Upper bound` > 1, 1, `Upper bound`)
+  )
+  
+  # Confirm whether this is needed:
+  tempDF <- tempDF %>% mutate(
+    `Row value` = factor(`Row value`, levels=rev(levels(`Row value`)))
+  ) 
+  
+  tempDF <- tempDF %>% mutate(
+    `For Tooltip`=paste(
+      "Distribution variable: ", tempDF$`Distribution name`, '\n', 
+      "Selected group: ", tempDF$`Row value`, '\n', 
+      "Sector: ", tempDF$`Sector value`, '\n', 
+      "Estimate: ", percent(tempDF$`Share`, accuracy=0.1), '\n',
+      "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
+      sep=""
+    )
+  )
+  
+  plot1 <- ggplot(
+    data=tempDF, mapping=aes(x=`Share`, y=`Row value`, fill=`Category name`, text=`For Tooltip`)
+  ) + geom_bar(
+    position="stack", stat="identity"
+  ) + facet_grid(
+    `Sector value` ~ .
+  ) + labs(
+    x=paste("Distribution of ", tempDF$`Distribution name`[1], " by ", tempDF$`Row name`[1]), y=""
+  ) + theme(
+    legend.position="top"
+  ) + scale_x_continuous(labels=percent_format(accuracy=1))
+  
+  plot1 <- ggplotly(
+    plot1, tooltip="text", width=overallWidth, height=heightIntercept+(nrow(tempDF)*heightCoefficient)
+  ) %>% layout(legend = list(
+    orientation = "h",   # show entries horizontally
+    xanchor = "center",  # use center of legend as anchor
+    x = 0.5)             # put legend in center of x-axis
+  )
+  
+  return(plot1)
+  
+  rm(plot1, tempDF)
+  
+}
 
 ```
 

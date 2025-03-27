@@ -845,16 +845,136 @@ rm(categoryNameRename, rowValueRename)
 
 #### End #### 
 
+#### Set bounds ####
+
+suppressWarnings({
+  
+  AMP.SECTOR3 <- AMP.SECTOR3 %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% separate(
+    `Target confidence interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Target value` = gsub(" !!", "", `Target value`), 
+    `Target value` = gsub(" !", "", `Target value`), 
+    `Target value` = gsub(",", "", `Target value`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Target value` = as.numeric(`Target value`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+  DIST.SECTOR3 <- DIST.SECTOR3 %>% separate(
+    `Interval`, c("Lower bound", "Upper bound"), " - "
+  ) %>% mutate(
+    `Share` = gsub(" !!", "", `Share`), 
+    `Share` = gsub(" !", "", `Share`), 
+    `Share` = gsub(",", "", `Share`), 
+    `Lower bound` = gsub(" !!", "", `Lower bound`), 
+    `Lower bound` = gsub(" !", "", `Lower bound`), 
+    `Lower bound` = gsub(",", "", `Lower bound`), 
+    `Upper bound` = gsub(" !!", "", `Upper bound`), 
+    `Upper bound` = gsub(" !", "", `Upper bound`),
+    `Upper bound` = gsub(",", "", `Upper bound`)
+  ) %>% mutate(
+    `Share` = as.numeric(`Share`), 
+    `Lower bound` = as.numeric(`Lower bound`), 
+    `Upper bound` = as.numeric(`Upper bound`)
+  )
+  
+})
+
+minValues <- rbind(
+  aggregate(data=AMP.SECTOR3, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
+  aggregate(data=AMP.INSTSTAT.2Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min), 
+  aggregate(data=AMP.INSTSTAT.4Y, `Lower bound` ~ `Target name` + `Measure name`, FUN=min)
+) %>% filter(`Measure name` %in% c("Median", "Average"))
+
+maxValues <- rbind(
+  aggregate(data=AMP.SECTOR3, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
+  aggregate(data=AMP.INSTSTAT.2Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max), 
+  aggregate(data=AMP.INSTSTAT.4Y, `Upper bound` ~ `Target name` + `Measure name`, FUN=max)
+) %>% filter(`Measure name` %in% c("Median", "Average"))
+
+minValues <- aggregate(data=minValues, `Lower bound` ~ `Target name`, FUN=min)
+maxValues <- aggregate(data=maxValues, `Upper bound` ~ `Target name`, FUN=max)
+
+axisBounds <- full_join(
+  x=minValues, y=maxValues, by="Target name"
+) %>% rename(
+  `Lower bound for axis` = `Lower bound`, 
+  `Upper bound for axis` = `Upper bound`
+) %>% mutate(
+  `Distance between bounds` = `Upper bound for axis` - `Lower bound for axis`
+) %>% mutate(
+  `Extra margin` = `Distance between bounds` * 0.03
+) %>% mutate(
+  `Lower bound for axis` = `Lower bound for axis` - `Extra margin`, 
+  `Upper bound for axis` = `Upper bound for axis` + `Extra margin`
+) %>% select(
+  -(`Distance between bounds`), -(`Extra margin`)
+)
+
+rm(minValues, maxValues)
+
+#### End #### 
+
 #### Write files ####
 
-setwd("/Users/peter_granville/Net Price Equity")
+setwd("/Users/peter_granville/Net Price Equity/Data")
 
 write.csv(AMP.INSTSTAT.2Y, "AMP-INSTSTAT-2Y.csv", row.names=FALSE)
 write.csv(AMP.INSTSTAT.4Y, "AMP-INSTSTAT-4Y.csv", row.names=FALSE)
 write.csv(AMP.SECTOR3, "AMP-SECTOR3.csv", row.names=FALSE)
 write.csv(DIST.SECTOR3, "DIST-SECTOR3.csv", row.names=FALSE)
+write.csv(axisBounds, "Axis-Bounds.csv", row.names=FALSE)
+
+setwd("/Users/peter_granville/Net Price Equity")
 
 #### End #### 
+
+################################################
+#### Old, no longer needed                  ####
+################################################
 
 #### List unique tables ####
 
