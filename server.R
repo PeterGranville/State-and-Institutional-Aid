@@ -606,13 +606,28 @@ shinyServer(function(output, input)({
     
     #### Define plot1 ####
     
+    if(printView=="National View"){
+      errorBarWidth <- 0.2
+    }
+    if(printView=="State View"){
+      errorBarWidth <- 0.01
+    }
+    
     plot1 <- ggplot(
-      data=tempDF, mapping=aes(x=`Target value`, y=`Row value`, fill=`Row value`, text=`For Tooltip`)
+      data=tempDF, mapping=aes(
+        x=`Target value`, 
+        y=`Row value`, 
+        fill=`Row value`,
+        text=`For Tooltip`)
     ) + geom_point() + geom_errorbar(
-      aes(xmin=`Lower bound`, xmax=`Upper bound`, width=0.2)
+      aes(xmin=`Lower bound`, 
+          xmax=`Upper bound`,
+          width=errorBarWidth)
     ) + labs(
       x=tempDF$`Title`[1], y=""
-    )
+    ) + guides(
+      fill="none"
+    ) 
     
     #### End #### 
     
@@ -647,15 +662,64 @@ shinyServer(function(output, input)({
     
     #### Finalize plot1 #### 
   
+    if(printView=="National View"){
+      plotHeight <- 180+(nrow(tempDF)*20)
+    }
+    if(printView=="State View"){
+      plotHeight <- 5000+(nrow(tempDF)*18)
+    }
+    
     ggplotly(
-      plot1, tooltip="text"
-    ) %>% layout(legend = list(
-      orientation = "h",   
-      xanchor = "center",
-      x = 0.5)             
+      plot1, 
+      tooltip="text", 
+      height = plotHeight, 
+      width = 750
+    ) %>% layout(
+      legend = list(
+        orientation = "h",   
+        xanchor = "center",
+        x = 0.5
+      )
     )
   
     #### End ####   
+    
+  })
+  
+  output$titleFig <- renderText({
+    
+    #### Create "print" objects ####
+    
+    printView <- input$view
+    printTarget <- input$selectTarget
+    printRow <- input$selectRow
+    printSector <- input$selectSector
+    
+    if(printTarget=="---Section 1: Aid distributions---"){
+      printTarget <- "Share receiving federal Pell Grant"
+    }
+    if(printTarget=="---Section 2: Need-based and merit-based aid---"){
+      printTarget <- "Share receiving state non-need & merit grants"
+    }
+    if(printTarget=="---Section 3: Combined aid measures---"){
+      printTarget <- "Share receiving state or institutional grants"
+    }
+    if(printTarget=="---Section 4: Net price---"){
+      printTarget <- "Share with unmet tuition and fees after all grants"
+    }
+    if(printTarget=="---Section 5: Pricing and need---"){
+      printTarget <- "Median tuition and fees paid"
+    }
+    
+    #### End #### 
+    
+    #### Return plot title ####
+    
+    paste(
+      printTarget, " by ", printRow, sep=""
+    )
+    
+    #### End #### 
     
   })
   
@@ -993,7 +1057,7 @@ shinyServer(function(output, input)({
     
     #### Return text ####
     
-    paste("The view is ", printView, ". The target is ", printTarget, ". The row is ", printRow, ". The sector is ", printSector, ". The number of rows is ", nrow(tempDF), ".", sep="")
+    paste("The view is ", printView, ". The target is ", printTarget, ". The row is ", printRow, ". The sector is ", printSector, ".", sep="")
     
     #### End #### 
     

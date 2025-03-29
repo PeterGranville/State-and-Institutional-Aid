@@ -2,10 +2,11 @@
 #### Setup #### 
 
 library(shiny)
+library(shinythemes)
 
 #### End #### 
 
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme = shinytheme("sandstone"),
   
   #### Title panel ####
   
@@ -35,7 +36,9 @@ shinyUI(fluidPage(
       
       #### Output figure #### 
       
-      plotlyOutput("displayFig"),
+      h3(textOutput("titleFig")),
+      plotlyOutput("displayFig", width = "100%", height = "100%"),
+      br(),
       
       #### End #### 
       
