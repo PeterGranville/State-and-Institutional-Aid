@@ -679,7 +679,8 @@ shinyServer(function(output, input)({
         orientation = "h",   
         xanchor = "center",
         x = 0.5
-      )
+      ), 
+      plot_bgcolor='#EFF1F7'
     )
   
     #### End ####   
@@ -715,9 +716,31 @@ shinyServer(function(output, input)({
     
     #### Return plot title ####
     
-    paste(
+    title1 <- paste(
       printTarget, " by ", printRow, sep=""
     )
+    
+    # Make it all lowercase: 
+    title1 <- tolower(title1)
+    
+    # Make the first character uppercase: 
+    title1 <- paste0(toupper(substring(title1, 1, 1)), substring(title1, 2))
+    
+    # Turn certain phrases uppercase: 
+    title1 <- gsub("pell grant", "Pell Grant", title1)
+    title1 <- gsub("pell", "Pell", title1)
+    title1 <- gsub("msi", "MSI", title1)
+    title1 <- gsub("hbcu", "HBCU", title1)
+    title1 <- gsub("gpa", "GPA", title1)
+    title1 <- gsub("seog", "SEOG", title1)
+    title1 <- gsub("fws", "FWS", title1)
+    title1 <- gsub("parent plus", "Parent PLUS", title1)
+    title1 <- gsub("title iv", "Title IV", title1)
+    title1 <- gsub("efc", "EFC", title1)
+    title1 <- gsub("expected family contribution", "Expected Family Contribution", title1)
+    
+    # Return it: 
+    title1
     
     #### End #### 
     
