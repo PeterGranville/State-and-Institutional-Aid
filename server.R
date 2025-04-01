@@ -69,6 +69,17 @@ shinyServer(function(output, input)({
     "Median student budget (attendance adjusted)"
   )
   
+  contextTargetChoices <- c(
+    "Percentage distribution of income quartile", 
+    "Percentage distribution of zero EFC status", 
+    "Percentage distribution of Pell recipient status", 
+    "Percentage distribution of parents' highest education level", 
+    "Percentage distribution of race/ethnicity",
+    "Percentage distribution of institution HBCU status", 
+    "Percentage distribution of institution MSI status", 
+    "Percentage distribution of institution selectivity"
+  )
+  
   #### End #### 
   
   #### Establish row variable lists ####
@@ -81,7 +92,8 @@ shinyServer(function(output, input)({
     "Race/Ethnicity", 
     "Institution HBCU Status", 
     "Institution MSI Status", 
-    "Institution Selectivity"
+    "Institution Selectivity", 
+    "Institution State"
   )
   
   stateRowChoices <- c(
@@ -90,6 +102,17 @@ shinyServer(function(output, input)({
     "Zero EFC Status",
     "Parents' Highest Education Level", 
     "Race/Ethnicity"
+  )
+  
+  contextRowChoices <- c(
+    "Parents' Highest Education Level", 
+    "Income Quartile", 
+    "Pell Recipient Status", 
+    "Zero EFC Status",
+    "Race/Ethnicity", 
+    "Institution HBCU Status", 
+    "Institution MSI Status", 
+    "Institution Selectivity"
   )
   
   #### End ####
@@ -108,6 +131,8 @@ shinyServer(function(output, input)({
     "Public 2-Years"
   )
   
+  contextSectorChoices <- nationalSectorChoices
+  
   #### End #### 
   
   #### Set choice lists ####
@@ -116,8 +141,9 @@ shinyServer(function(output, input)({
     
     switch(input$view, 
            "National View" = nationalTargetChoices,
-           "State View" = stateTargetChoices
-           )
+           "State View" = stateTargetChoices, 
+           "Context View" = contextTargetChoices
+    )
     
   })
   
@@ -125,7 +151,8 @@ shinyServer(function(output, input)({
     
     switch(input$view, 
            "National View" = nationalRowChoices,
-           "State View" = stateRowChoices
+           "State View" = stateRowChoices, 
+           "Context View" = contextRowChoices
     )
     
   })
@@ -134,7 +161,8 @@ shinyServer(function(output, input)({
     
     switch(input$view, 
            "National View" = nationalSectorChoices,
-           "State View" = stateSectorChoices
+           "State View" = stateSectorChoices, 
+           "Context View" = contextSectorChoices
     )
     
   })
@@ -233,7 +261,17 @@ shinyServer(function(output, input)({
       "Net price after grants as percent of income",
       "Expected Family Contribution",
       "Tuition and fees paid",
-      "Student budget (attendance adjusted)"
+      "Student budget (attendance adjusted)", 
+      
+      # Context only:
+      "Percentage distribution of income quartile", 
+      "Percentage distribution of zero EFC status", 
+      "Percentage distribution of Pell recipient status", 
+      "Percentage distribution of parents' highest education level", 
+      "Percentage distribution of race/ethnicity",
+      "Percentage distribution of institution HBCU status", 
+      "Percentage distribution of institution MSI status", 
+      "Percentage distribution of institution selectivity"
     )
     
     levels.RowName <- c(
@@ -247,12 +285,6 @@ shinyServer(function(output, input)({
       "Institution MSI Status", 
       "Institution Selectivity", 
       "Institution State"
-    )
-    
-    levels.MeasureName <- c(
-      "Share >0", 
-      "Average", 
-      "Median"
     )
     
     levels.RowValue <- c(
@@ -360,18 +392,6 @@ shinyServer(function(output, input)({
       # Zero EFC Status
       "Zero EFC",
       "Nonzero EFC"
-    )
-    
-    levels.DistributionName <- c(
-      "Income Quartile", 
-      "Zero EFC Status", 
-      "Pell Recipient Status", 
-      "Parents' Highest Education Level", 
-      "Race/Ethnicity", 
-      "High School GPA",
-      "Institution HBCU Status", 
-      "Institution MSI Status", 
-      "Institution Selectivity" 
     )
     
     levels.CategoryName <- c(
@@ -475,6 +495,16 @@ shinyServer(function(output, input)({
         )
       }
     }
+    if(printView=="Context View"){
+      tempDF <- read.csv(
+        "DIST-SECTOR3.csv", header=TRUE, check.names=FALSE
+      ) %>% mutate(
+        `Measure name` = rep("Percentage distribution")
+      ) %>% rename(
+        `Target name` = `Distribution name`, 
+        `Target value` = `Share`
+      )
+    }
     
     #### End #### 
     
@@ -485,7 +515,7 @@ shinyServer(function(output, input)({
     
     #### End #### 
     
-    #### Filter by row variable and sector ####
+    #### Filter by title, row variable, and sector ####
     
     tempDF <- tempDF %>% filter(
       `Title`==printTarget, 
@@ -515,14 +545,153 @@ shinyServer(function(output, input)({
     
     #### End #### 
     
+    #### Remove states without data from State View ####
+    
+    if((printView=="State View") & (printSector=="Public 4-Years")){
+      
+      stateList <- c(
+        "Total",
+        # "Alabama",
+        # "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        # "Connecticut",
+        # "Delaware",
+        # "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        # "Idaho",
+        "Illinois",
+        # "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        # "Missouri",
+        # "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        # "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Puerto Rico",
+        # "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        # "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      )
+      
+      tempDF <- tempDF %>% filter(
+        `State` %in% stateList
+      ) %>% mutate(
+        `State` = factor(`State`, levels=stateList)
+      )
+      
+    }
+    if((printView=="State View") & (printSector=="Public 2-Years")){
+      
+      stateList <- c(
+        "Total",
+        "Alabama",
+        # "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        # "Delaware",
+        # "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        # "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        # "Kansas",
+        "Kentucky",
+        # "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        # "Missouri",
+        # "Montana",
+        "Nebraska",
+        # "Nevada",
+        # "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        # "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        # "Oregon",
+        "Pennsylvania",
+        # "Puerto Rico",
+        # "Rhode Island",
+        "South Carolina",
+        # "South Dakota",
+        "Tennessee",
+        "Texas",
+        # "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia"
+        # ,
+        # "Wisconsin",
+        # "Wyoming"
+      )
+      
+      tempDF <- tempDF %>% filter(
+        `State` %in% stateList
+      ) %>% mutate(
+        `State` = factor(`State`, levels=stateList)
+      )
+    }
+    
+    #### End #### 
+    
     #### Clean percentages ####
     
-    if(substr(printTarget, 1, 5)=="Share"){
+    if((substr(printTarget, 1, 5) %in% c("Share", "Perce")) | (grepl("percent", printTarget))){
       tempDF <- tempDF %>% mutate(
         `Target value` = `Target value` / 100, 
         `Lower bound` = `Lower bound` / 100, 
         `Upper bound` = `Upper bound` / 100
-      ) %>% mutate(
+      ) 
+    }
+    
+    if(substr(printTarget, 1, 5) %in% c("Share", "Perce")){
+      tempDF <- tempDF %>% mutate(
         `Target value` = ifelse(`Target value` < 0, 0, `Target value`), 
         `Lower bound` = ifelse(`Lower bound` < 0, 0, `Lower bound`), 
         `Upper bound` = ifelse(`Upper bound` < 0, 0, `Upper bound`)
@@ -542,12 +711,18 @@ shinyServer(function(output, input)({
       `Row value` = factor(`Row value`, levels=rev(levels.RowValue))
     ) 
     
+    if(printView=="Context View"){
+      tempDF <- tempDF %>% mutate(
+        `Category name` = factor(`Category name`, levels=levels.CategoryName)
+      )
+    }
+    
     #### End #### 
     
     #### Establish tooltip ####
     
     if(printView=="National View"){
-      if(substr(printTarget, 1, 5)=="Share"){
+      if((substr(printTarget, 1, 5)=="Share") | (grepl("percent", printTarget))){
         tempDF <- tempDF %>% mutate(
           `For Tooltip`=paste(
             "Target variable: ", tempDF$`Title`, '\n', 
@@ -559,7 +734,7 @@ shinyServer(function(output, input)({
           )
         )
       }
-      if(substr(printTarget, 1, 5) %in% c("Media", "Avera")){
+      if((substr(printTarget, 1, 5) %in% c("Media", "Avera")) & (grepl("percent", printTarget)==FALSE)){
         tempDF <- tempDF %>% mutate(
           `For Tooltip`=paste(
             "Target variable: ", tempDF$`Title`, '\n', 
@@ -571,102 +746,153 @@ shinyServer(function(output, input)({
           )
         )
       }
-    }else{
-      if(printView=="State View"){
-        if(substr(printTarget, 1, 5)=="Share"){
-          tempDF <- tempDF %>% mutate(
-            `For Tooltip`=paste(
-              "Target variable: ", tempDF$`Title`, '\n', 
-              "Selected group: ", tempDF$`Row value`, '\n', 
-              "State/Sector: ", tempDF$`State`, " ", printSector, '\n', 
-              "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
-              "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
-              sep=""
-            )
+    }
+    
+    if(printView=="State View"){
+      if((substr(printTarget, 1, 5)=="Share") | (grepl("percent", printTarget))){
+        tempDF <- tempDF %>% mutate(
+          `For Tooltip`=paste(
+            "Target variable: ", tempDF$`Title`, '\n', 
+            "Selected group: ", tempDF$`Row value`, '\n', 
+            "State/Sector: ", tempDF$`State`, " ", printSector, '\n', 
+            "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
+            "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
+            sep=""
           )
-        }
-        if(substr(printTarget, 1, 5) %in% c("Media", "Avera")){
-          tempDF <- tempDF %>% mutate(
-            `For Tooltip`=paste(
-              "Target variable: ", tempDF$`Title`, '\n', 
-              "Selected group: ", tempDF$`Row value`, '\n', 
-              "State/Sector: ", tempDF$`State`, " ", printSector, '\n',
-              "Estimate: ", dollar(tempDF$`Target value`, accuracy=1), '\n',
-              "95% confidence interval: ", dollar(tempDF$`Lower bound`, accuracy=1), " to ", dollar(tempDF$`Upper bound`, accuracy=1), 
-              sep=""
-            )
+        )
+      }
+      if((substr(printTarget, 1, 5) %in% c("Media", "Avera")) & (grepl("percent", printTarget)==FALSE)){
+        tempDF <- tempDF %>% mutate(
+          `For Tooltip`=paste(
+            "Target variable: ", tempDF$`Title`, '\n', 
+            "Selected group: ", tempDF$`Row value`, '\n', 
+            "State/Sector: ", tempDF$`State`, " ", printSector, '\n',
+            "Estimate: ", dollar(tempDF$`Target value`, accuracy=1), '\n',
+            "95% confidence interval: ", dollar(tempDF$`Lower bound`, accuracy=1), " to ", dollar(tempDF$`Upper bound`, accuracy=1), 
+            sep=""
           )
-        }
-      }else{
-        stop("Bad input")
+        )
       }
     }
     
-    #### End #### 
-    
-    #### Define plot1 ####
-    
-    if(printView=="National View"){
-      errorBarWidth <- 0.2
-    }
-    if(printView=="State View"){
-      errorBarWidth <- 0.01
-    }
-    
-    plot1 <- ggplot(
-      data=tempDF, mapping=aes(
-        x=`Target value`, 
-        y=`Row value`, 
-        fill=`Row value`,
-        text=`For Tooltip`)
-    ) + geom_point() + geom_errorbar(
-      aes(xmin=`Lower bound`, 
-          xmax=`Upper bound`,
-          width=errorBarWidth)
-    ) + labs(
-      x=tempDF$`Title`[1], y=""
-    ) + guides(
-      fill="none"
-    ) 
-    
-    #### End #### 
-    
-    #### Format plot1 facet ####
-    
-    if(printView=="State View"){
-      plot1 <- plot1 + facet_wrap(
-        `State`~., strip.position = "top", ncol=1
+    if(printView=="Context View"){
+      tempDF <- tempDF %>% mutate(
+        `For Tooltip`=paste(
+          "Target variable: ", tempDF$`Title`, '\n', 
+          "Category name: ", tempDF$`Category name`, '\n', 
+          "Selected group: ", tempDF$`Row value`, '\n', 
+          "Sector: ", tempDF$`Sector value`, '\n', 
+          "Estimate: ", percent(tempDF$`Target value`, accuracy=0.1), '\n',
+          "95% confidence interval: ", percent(tempDF$`Lower bound`, accuracy=0.1), " to ", percent(tempDF$`Upper bound`, accuracy=0.1), 
+          sep=""
+        )
       )
     }
     
     #### End #### 
     
-    #### Format plot1 x-axis ####
-    
-    if(substr(printTarget, 1, 5)=="Share"){
-      plot1 <- plot1 + scale_x_continuous(
-        labels=percent_format(accuracy=1), limits=c(-0.03, 1.03), breaks=c(0, 0.25, 0.5, 0.75, 1)
-      ) 
+    if(printView %in% c("National View", "State View")){
+      
+      #### Define plot1 ####
+      
+      if(printView=="National View"){
+        errorBarWidth <- 0.2
+      }
+      if(printView=="State View"){
+        errorBarWidth <- 0.01
+      }
+      plot1 <- ggplot(
+        data=tempDF, mapping=aes(
+          x=`Target value`, 
+          y=`Row value`, 
+          fill=`Row value`,
+          text=`For Tooltip`)
+      ) + geom_point() + geom_errorbar(
+        aes(xmin=`Lower bound`, 
+            xmax=`Upper bound`,
+            width=errorBarWidth)
+      ) + labs(
+        x=tempDF$`Title`[1], y=""
+      ) + guides(
+        fill="none"
+      )
+      
+      #### End #### 
+      
+      #### Format plot1 facet ####
+      
+      if(printView=="State View"){
+        plot1 <- plot1 + facet_wrap(
+          `State`~., strip.position = "top", ncol=1
+        )
+      }
+      
+      #### End #### 
+      
+      #### Format plot1 x-axis ####
+      
+      if((substr(printTarget, 1, 5)=="Share") & (grepl("percent", printTarget)==FALSE)){
+        plot1 <- plot1 + scale_x_continuous(
+          labels=percent_format(accuracy=1), 
+          limits=c(-0.03, 1.03), 
+          breaks=c(0, 0.25, 0.5, 0.75, 1)
+        ) 
+      }
+      
+      if((substr(printTarget, 1, 5) %in% c("Media", "Avera")) & (grepl("percent", printTarget)==FALSE)){
+        plot1 <- plot1 + scale_x_continuous(
+          labels=dollar_format(accuracy=1), 
+          limits=c(
+            tempDF$`Lower bound for axis`[1], 
+            tempDF$`Upper bound for axis`[1]
+          )
+        ) 
+      }
+      
+      if(grepl("percent", printTarget)){
+        plot1 <- plot1 + scale_x_continuous(
+          labels=percent_format(accuracy=1), 
+          limits=c(
+            tempDF$`Lower bound for axis`[1] / 100, 
+            tempDF$`Upper bound for axis`[1] / 100
+          )
+        ) 
+      }
+      
+      #### End #### 
+      
     }
     
-    if(substr(printTarget, 1, 5) %in% c("Media", "Avera")){
-      plot1 <- plot1 + scale_x_continuous(
-        labels=dollar_format(accuracy=1, limits=c(
-          tempDF$`Lower bound for axis`[1], 
-          tempDF$`Upper bound for axis`[1]
-        ))
-      ) 
+    if(printView=="Context View"){
+      
+      #### Define plot1 ####
+      
+      plot1 <- ggplot(
+        data=tempDF, mapping=aes(x=`Target value`, y=`Row value`, fill=`Category name`, text=`For Tooltip`)
+      ) + geom_bar(
+        position="stack", stat="identity"
+      ) + labs(
+        x=tempDF$`Title`[1], y=""
+      ) + theme(
+        legend.position="top"
+      ) + scale_x_continuous(
+        labels=percent_format(accuracy=1)
+      )
+      
+      #### End #### 
+      
     }
-    
-    #### End #### 
     
     #### Finalize plot1 #### 
-  
+    
     if(printView=="National View"){
       plotHeight <- 180+(nrow(tempDF)*20)
     }
     if(printView=="State View"){
       plotHeight <- 5000+(nrow(tempDF)*18)
+    }
+    if(printView=="Context View"){
+      plotHeight <- 320+(nrow(tempDF)*20 / tempDF$`Number of categories`[1])
     }
     
     ggplotly(
@@ -678,12 +904,13 @@ shinyServer(function(output, input)({
       legend = list(
         orientation = "h",   
         xanchor = "center",
+        yanchor="bottom",
         x = 0.5
       ), 
       plot_bgcolor='#EFF1F7'
     )
-  
-    #### End ####   
+    
+    #### End ####
     
   })
   
@@ -749,7 +976,7 @@ shinyServer(function(output, input)({
   ###############################################
   #### Text generation                       ####
   ###############################################
-    
+  
   output$summary <- renderText({
     
     #### Create "print" objects ####
@@ -758,6 +985,27 @@ shinyServer(function(output, input)({
     printTarget <- input$selectTarget
     printRow <- input$selectRow
     printSector <- input$selectSector
+    
+    if(printTarget=="---Section 1: Aid distributions---"){
+      printTarget <- "Share receiving federal Pell Grant"
+    }
+    if(printTarget=="---Section 2: Need-based and merit-based aid---"){
+      printTarget <- "Share receiving state non-need & merit grants"
+    }
+    if(printTarget=="---Section 3: Combined aid measures---"){
+      printTarget <- "Share receiving state or institutional grants"
+    }
+    if(printTarget=="---Section 4: Net price---"){
+      printTarget <- "Share with unmet tuition and fees after all grants"
+    }
+    if(printTarget=="---Section 5: Pricing and need---"){
+      printTarget <- "Median tuition and fees paid"
+    }
+    
+    # printView <- "State View"
+    # printTarget <- "Average state grant award"
+    # printRow <- "Zero EFC Status"
+    # printSector <- "Public 4-Years"
     
     #### End #### 
     
@@ -789,7 +1037,17 @@ shinyServer(function(output, input)({
       "Net price after grants as percent of income",
       "Expected Family Contribution",
       "Tuition and fees paid",
-      "Student budget (attendance adjusted)"
+      "Student budget (attendance adjusted)", 
+      
+      # Context only:
+      "Percentage distribution of income quartile", 
+      "Percentage distribution of zero EFC status", 
+      "Percentage distribution of Pell recipient status", 
+      "Percentage distribution of parents' highest education level", 
+      "Percentage distribution of race/ethnicity",
+      "Percentage distribution of institution HBCU status", 
+      "Percentage distribution of institution MSI status", 
+      "Percentage distribution of institution selectivity"
     )
     
     levels.RowName <- c(
@@ -803,12 +1061,6 @@ shinyServer(function(output, input)({
       "Institution MSI Status", 
       "Institution Selectivity", 
       "Institution State"
-    )
-    
-    levels.MeasureName <- c(
-      "Share >0", 
-      "Average", 
-      "Median"
     )
     
     levels.RowValue <- c(
@@ -918,18 +1170,6 @@ shinyServer(function(output, input)({
       "Nonzero EFC"
     )
     
-    levels.DistributionName <- c(
-      "Income Quartile", 
-      "Zero EFC Status", 
-      "Pell Recipient Status", 
-      "Parents' Highest Education Level", 
-      "Race/Ethnicity", 
-      "High School GPA",
-      "Institution HBCU Status", 
-      "Institution MSI Status", 
-      "Institution Selectivity" 
-    )
-    
     levels.CategoryName <- c(
       levels.RowValue, c(
         # High School GPA
@@ -1001,10 +1241,10 @@ shinyServer(function(output, input)({
     
     #### End #### 
     
-    #### Load targetLookup and axisBounds ####
+    #### Load targetLookup ####
     
     targetLookup <- read_excel("Target-Lookup.xls") %>% select(-(`Entry`)) %>% select(-(`Section`))
-
+    
     #### End #### 
     
     #### Load dataset, create tempDF ####
@@ -1030,16 +1270,26 @@ shinyServer(function(output, input)({
         )
       }
     }
+    if(printView=="Context View"){
+      tempDF <- read.csv(
+        "DIST-SECTOR3.csv", header=TRUE, check.names=FALSE
+      ) %>% mutate(
+        `Measure name` = rep("Percentage distribution")
+      ) %>% rename(
+        `Target name` = `Distribution name`, 
+        `Target value` = `Share`
+      )
+    }
     
     #### End #### 
     
     #### Import targetLookup to tempDF ####
     
     tempDF <- left_join(x=tempDF, y=targetLookup, by=c("Target name", "Measure name"))
-
+    
     #### End #### 
     
-    #### Filter by row variable and sector ####
+    #### Filter by title, row variable, and sector ####
     
     tempDF <- tempDF %>% filter(
       `Title`==printTarget, 
@@ -1069,18 +1319,277 @@ shinyServer(function(output, input)({
     
     #### End #### 
     
+    #### Arrange by row value and state #### 
+    
+    if(printView=="National View"){
+      tempDF <- tempDF %>% arrange(
+        `Row value`
+      )
+    }
+    if(printView=="State View"){
+      tempDF <- tempDF %>% arrange(
+        `State`, 
+        `Row value`
+      )
+    }
+    if(printView=="Context View"){
+      tempDF <- tempDF %>% arrange(
+        `Row value`, 
+        `Category name`
+      )
+    }
+    
+    #### End #### 
+    
+    #### Remove states without data from State View, list those with missing data ####
+    
+    missingStates <- ""
+    
+    if((printView=="State View") & (printSector=="Public 4-Years")){
+      
+      stateList <- c(
+        "Total",
+        # "Alabama",
+        # "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        # "Connecticut",
+        # "Delaware",
+        # "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        # "Idaho",
+        "Illinois",
+        # "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        # "Missouri",
+        # "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        # "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Puerto Rico",
+        # "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        # "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      )
+      
+      tempDF <- tempDF %>% filter(
+        `State` %in% stateList
+      ) %>% mutate(
+        `State` = factor(`State`, levels=stateList)
+      )
+      
+      missingStates <- "NPSAS-AC lacks representative samples for the following states' Public 4-Year sectors: Alabama, Alaska, Connecticut, Delaware, District of Columbia, Idaho, Indiana, Missouri, Montana, North Dakota, Rhode Island, and Vermont. The figure above does not include these states."
+      
+    }
+    if((printView=="State View") & (printSector=="Public 2-Years")){
+      
+      stateList <- c(
+        "Total",
+        "Alabama",
+        # "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        # "Delaware",
+        # "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        # "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        # "Kansas",
+        "Kentucky",
+        # "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        # "Missouri",
+        # "Montana",
+        "Nebraska",
+        # "Nevada",
+        # "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        # "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        # "Oregon",
+        "Pennsylvania",
+        # "Puerto Rico",
+        # "Rhode Island",
+        "South Carolina",
+        # "South Dakota",
+        "Tennessee",
+        "Texas",
+        # "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia"
+        # ,
+        # "Wisconsin",
+        # "Wyoming"
+      )
+      
+      tempDF <- tempDF %>% filter(
+        `State` %in% stateList
+      ) %>% mutate(
+        `State` = factor(`State`, levels=stateList)
+      )
+      
+      missingStates <- "NPSAS-AC lacks representative samples for the following states' Public 2-Year sectors: Alaska, Delaware, District of Columbia, Idaho, Kansas, Louisiana, Missouri, Montana, Nevada, New Hampshire, North Dakota, Oregon, Puerto Rico, Rhode Island, South Dakota, Utah, Wisconsin, and Wyoming. The figure above does not include these states."
+      
+    }
+    
+    #### End #### 
+    
     #### Set row value and sector value as factors ####
     
     tempDF <- tempDF %>% mutate(
       `Sector value` = factor(`Sector value`, levels=levels.SectorValue),
-      `Row value` = factor(`Row value`, levels=rev(levels.RowValue))
+      `Row value` = factor(`Row value`, levels=levels.RowValue)
     ) 
+    
+    if(printView=="State View"){
+      tempDF <- tempDF %>% mutate(`State`=factor(`State`, levels=levels.State))
+    }
+    
+    if(printView=="Context View"){
+      tempDF <- tempDF %>% mutate(`Category name`=factor(`Category name`, levels=levels.CategoryName))
+    }
     
     #### End #### 
     
     #### Return text ####
     
-    paste("The view is ", printView, ". The target is ", printTarget, ". The row is ", printRow, ". The sector is ", printSector, ".", sep="")
+    text1 <- paste("The NCES Datalab retrieval code for this chart is ", tempDF$`Source code`[1], ". ", sep="")
+    
+    if(printView=="National View"){
+      
+      tempDF <- tempDF %>% mutate(
+        `Count NA` = ifelse(is.na(`Target value`), 1, 0)
+      )
+      agg1 <- aggregate(data=tempDF, `Count NA` ~ `Row value`, FUN=sum)
+      if(sum(agg1$`Count NA`) > 0){
+        agg1 <- agg1 %>% filter(`Count NA` > 0)
+        for(i in (1:nrow(agg1))){
+          if(i==1){
+            text2entries <- agg1$`Row value`[i]
+          }else{
+            text2entries <- paste(text2entries, ", ", agg1$`Row value`[i], sep="")
+          }
+        }
+        text2 <- paste(
+          "The following rows in this table have missing statistics in NCES Datalab: ",
+          text2entries,
+          ". ",
+          sep="")
+        rm(text2entries, i)
+      }else{
+        text2 <- ""
+      }
+      
+    }
+    if(printView=="State View"){
+      
+      tempDF <- tempDF %>% mutate(
+        `Count NA` = ifelse(is.na(`Target value`), 1, 0)
+      )
+      agg1 <- aggregate(data=tempDF, `Count NA` ~ `Row value` + `State`, FUN=sum)
+      if(sum(agg1$`Count NA`) > 0){
+        agg1 <- agg1 %>% filter(`Count NA` > 0)
+        for(i in (1:nrow(agg1))){
+          if(i==1){
+            text2entries <- paste(agg1$`Row value`[i], " (", agg1$`State`[i], ")", sep="")
+          }else{
+            text2entries <- paste(text2entries, ", ", agg1$`Row value`[i], " (", agg1$`State`[i], ")", sep="")
+          }
+        }
+        text2 <- paste(
+          "The following rows in this table have missing statistics in NCES Datalab: ",
+          text2entries,
+          ". ",
+          sep="")
+        rm(text2entries, i)
+      }else{
+        text2 <- ""
+      }
+      
+    }
+    
+    if(printView=="Context View"){
+      
+      tempDF <- tempDF %>% mutate(
+        `Count NA` = ifelse(is.na(`Target value`), 1, 0)
+      )
+      agg1 <- aggregate(data=tempDF, `Count NA` ~ `Row value` + `Category name`, FUN=sum)
+      if(sum(agg1$`Count NA`) > 0){
+        agg1 <- agg1 %>% filter(`Count NA` > 0)
+        for(i in (1:nrow(agg1))){
+          if(i==1){
+            text2entries <- paste(agg1$`Row value`[i], " (", agg1$`Category name`[i], ")", sep="")
+          }else{
+            text2entries <- paste(text2entries, ", ", agg1$`Row value`[i], " (", agg1$`Category name`[i], ")", sep="")
+          }
+        }
+        text2 <- paste(
+          "The following rows in this table have missing statistics in NCES Datalab: ",
+          text2entries,
+          ". ",
+          sep="")
+        rm(text2entries, i)
+      }else{
+        text2 <- ""
+      }
+      
+    }
+    
+    paste(
+      text1,
+      text2,
+      missingStates,
+      sep=""
+    )
     
     #### End #### 
     

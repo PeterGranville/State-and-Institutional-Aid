@@ -954,13 +954,31 @@ axisBounds <- full_join(
   -(`Distance between bounds`), -(`Extra margin`)
 )
 
+axisBounds <- axisBounds %>% add_row(
+  `Target name` = "Income Quartile", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Zero EFC Status", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Pell Recipient Status", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Parents' Highest Education Level", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Race/Ethnicity", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Institution HBCU Status", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Institution MSI Status", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+) %>% add_row(
+  `Target name` = "Institution Selectivity", `Lower bound for axis` = -0.03, `Upper bound for axis` = 1.03
+)
+
 rm(minValues, maxValues)
 
 #### End #### 
 
 #### Write files ####
 
-setwd("/Users/peter_granville/Net Price Equity/Data")
+setwd("/Users/peter_granville/Net Price Equity/Financial-Aid-Distributions")
 
 write.csv(AMP.INSTSTAT.2Y, "AMP-INSTSTAT-2Y.csv", row.names=FALSE)
 write.csv(AMP.INSTSTAT.4Y, "AMP-INSTSTAT-4Y.csv", row.names=FALSE)
@@ -976,397 +994,397 @@ setwd("/Users/peter_granville/Net Price Equity")
 #### Old, no longer needed                  ####
 ################################################
 
-#### List unique tables ####
-
-AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
-  `Table ID 1` = paste(`Target name`, sep=" | "),
-  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
-  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
-  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `Sector value`, sep=" | ")
-)
-length(unique(AMP.SECTOR3$`Table ID 1`))
-length(unique(AMP.SECTOR3$`Table ID 2`))
-length(unique(AMP.SECTOR3$`Table ID 3`))
-length(unique(AMP.SECTOR3$`Table ID 4`))
-
-DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
-  `Table ID 1` = paste(`Distribution name`, sep=" | "),
-  `Table ID 2` = paste(`Distribution name`, `Row name`, sep=" | "),
-  `Table ID 3` = paste(`Distribution name`, `Row name`, `Sector value`, sep=" | ")
-)
-length(unique(DIST.SECTOR3$`Table ID 1`))
-length(unique(DIST.SECTOR3$`Table ID 2`))
-length(unique(DIST.SECTOR3$`Table ID 3`))
-
-AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
-  `Table ID 1` = paste(`Target name`, sep=" | "),
-  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
-  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
-  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
-)
-length(unique(AMP.INSTSTAT.2Y$`Table ID 1`))
-length(unique(AMP.INSTSTAT.2Y$`Table ID 2`))
-length(unique(AMP.INSTSTAT.2Y$`Table ID 3`))
-length(unique(AMP.INSTSTAT.2Y$`Table ID 4`))
-
-AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
-  `Table ID 1` = paste(`Target name`, sep=" | "),
-  `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
-  `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
-  `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
-)
-length(unique(AMP.INSTSTAT.4Y$`Table ID 1`))
-length(unique(AMP.INSTSTAT.4Y$`Table ID 2`))
-length(unique(AMP.INSTSTAT.4Y$`Table ID 3`))
-length(unique(AMP.INSTSTAT.4Y$`Table ID 4`))
-
-#### End #### 
-
-#### Create factor lists ####
-
-levels.SectorValue <- c(
-  "Total", 
-  "Public 4-year",
-  "Public 2-year", 
-  "Other"
-)
-
-levels.TargetName <- c(
-  "Federal Pell Grant",
-  "Federal campus-based aid (SEOG, FWS)",
-  "Title IV loans (includes Parent PLUS Loans)",
-  "State grants total",
-  "Institution grants total",
-  "Private source grants",
-  "State non-need & merit grants",
-  "State need-based grants",
-  "Institution non-need & merit grants",
-  "Institutional need-based grants",
-  "Total state and institutional grants",
-  "Grant amount exceeding federal need",
-  "Tuition and fees minus all grants",
-  "Net tuition after all grants as percent of income",
-  "Student budget minus all grants",
-  "Net price after grants as percent of income",
-  "Expected Family Contribution",
-  "Tuition and fees paid",
-  "Student budget (attendance adjusted)"
-)
-
-levels.RowName <- c(
-  "Overall",
-  "Income Quartile", 
-  "Zero EFC Status", 
-  "Pell Recipient Status", 
-  "Parents' Highest Education Level", 
-  "Race/Ethnicity", 
-  "Institution HBCU Status", 
-  "Institution MSI Status", 
-  "Institution Selectivity", 
-  "Institution State"
-)
-
-levels.MeasureName <- c(
-  "Share >0", 
-  "Average", 
-  "Median"
-)
-
-levels.RowValue <- c(
-  
-  "Total",
-  
-  # Income Quartile
-  "Top quartile",
-  "Upper-middle quartile",
-  "Lower-middle quartile",
-  "Bottom quartile",
-  
-  # Institution HBCU Status
-  "HBCUs",
-  "Non-HBCUs",
-  
-  # Institution MSI Status
-  "AAPISI",
-  "HBCU",
-  "HSI",
-  "PBI",
-  "Tribal college",
-  "Other MSI",
-  "Not an MSI",
-  
-  # Institution Selectivity
-  "Very selective",
-  "Moderately selective",  
-  "Minimally selective",
-  "Open admission",
-  "Not a 4-year institution",
-  
-  # Institution State
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District of Columbia",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Puerto Rico",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-  
-  # Parents' Highest Education Level
-  "College or beyond",
-  "High school",
-  "Middle school/junior high",
-  
-  # Pell Recipient Status
-  "Pell recipient",
-  "Not a Pell recipient",
-  
-  # Race/Ethnicity
-  "White",
-  "Hispanic or Latino",
-  "Black or African American",
-  "Asian",
-  "Native American",
-  "Native Hawaiian/Pacific Islander",
-  "More than one race",
-  
-  # Zero EFC Status
-  "Zero EFC",
-  "Nonzero EFC"
-)
-
-levels.DistributionName <- c(
-  "Income Quartile", 
-  "Zero EFC Status", 
-  "Pell Recipient Status", 
-  "Parents' Highest Education Level", 
-  "Race/Ethnicity", 
-  "High School GPA",
-  "Institution HBCU Status", 
-  "Institution MSI Status", 
-  "Institution Selectivity" 
-)
-
-levels.CategoryName <- c(
-  levels.RowValue, c(
-    # High School GPA
-    "0.5 to 0.9", 
-    "1.0 to 1.4", 
-    "1.5 to 1.9", 
-    "2.0 to 2.4", 
-    "2.5 to 2.9", 
-    "3.0 to 3.4", 
-    "3.5 to 4.0"
-  )
-)
-
-levels.State <- c(
-  "Total",
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District of Columbia",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Puerto Rico",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming"
-)
-
-#### End #### 
-
-#### Assign order of tables ####
-
-AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
-  `Target name` = as.factor(`Target name`), 
-  `Row name` = as.factor(`Row name`), 
-  `Measure name` = as.factor(`Measure name`), 
-  `Sector value` = as.factor(`Sector value`),
-  `Row value` = as.factor(`Row value`)
-) %>% mutate(
-  `Target name` = factor(`Target name`, levels=levels.TargetName), 
-  `Row name` = factor(`Row name`, levels=levels.RowName), 
-  `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
-  `Sector value` = factor(`Sector value`, levels=levels.SectorValue),
-  `Row value` = factor(`Row value`, levels=levels.RowValue)
-) %>% arrange(
-  `Target name`, 
-  `Row name`, 
-  `Measure name`, 
-  `Sector value`,
-  `Row value`
-)
-
-DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
-  `Distribution name` = as.factor(`Distribution name`), 
-  `Row name` = as.factor(`Row name`), 
-  `Sector value` = as.factor(`Sector value`),
-  `Category name` = as.factor(`Category name`), 
-  `Row value` = as.factor(`Row value`)
-) %>% mutate(
-  `Distribution name` = factor(`Distribution name`, levels=levels.DistributionName), 
-  `Row name` = factor(`Row name`, levels=levels.RowName), 
-  `Sector value` = factor(`Sector value`, levels=levels.SectorValue),
-  `Category name` = factor(`Category name`, levels=levels.CategoryName), 
-  `Row value` = factor(`Row value`, levels=levels.RowValue)
-) %>% arrange(
-  `Distribution name`, 
-  `Row name`, 
-  `Sector value`,
-  `Category name`, 
-  `Row value`
-)
-
-AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
-  `Target name` = as.factor(`Target name`), 
-  `Row name` = as.factor(`Row name`), 
-  `Measure name` = as.factor(`Measure name`), 
-  `State` = as.factor(`State`),
-  `Row value` = as.factor(`Row value`)
-) %>% mutate(
-  `Target name` = factor(`Target name`, levels=levels.TargetName), 
-  `Row name` = factor(`Row name`, levels=levels.RowName), 
-  `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
-  `State` = factor(`State`, levels=levels.State),
-  `Row value` = factor(`Row value`, levels=levels.RowValue)
-) %>% arrange(
-  `Target name`, 
-  `Row name`, 
-  `Measure name`, 
-  `State`,
-  `Row value`
-)
-
-AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
-  `Target name` = as.factor(`Target name`), 
-  `Row name` = as.factor(`Row name`), 
-  `Measure name` = as.factor(`Measure name`), 
-  `State` = as.factor(`State`),
-  `Row value` = as.factor(`Row value`)
-) %>% mutate(
-  `Target name` = factor(`Target name`, levels=levels.TargetName), 
-  `Row name` = factor(`Row name`, levels=levels.RowName), 
-  `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
-  `State` = factor(`State`, levels=levels.State),
-  `Row value` = factor(`State`, levels=levels.RowValue)
-) %>% arrange(
-  `Target name`, 
-  `Row name`, 
-  `Measure name`, 
-  `State`,
-  `Row value`
-)
-
-#### End #### 
-
-#### Print table IDs ####
-
-# output1 <- AMP.SECTOR3 %>% filter(
-#   duplicated(`Table ID 3`)==FALSE
+# #### List unique tables ####
+# 
+# AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
+#   `Table ID 1` = paste(`Target name`, sep=" | "),
+#   `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+#   `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+#   `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `Sector value`, sep=" | ")
 # )
-# output2 <- DIST.SECTOR3 %>% filter(
-#   duplicated(`Table ID 2`)==FALSE
+# length(unique(AMP.SECTOR3$`Table ID 1`))
+# length(unique(AMP.SECTOR3$`Table ID 2`))
+# length(unique(AMP.SECTOR3$`Table ID 3`))
+# length(unique(AMP.SECTOR3$`Table ID 4`))
+# 
+# DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
+#   `Table ID 1` = paste(`Distribution name`, sep=" | "),
+#   `Table ID 2` = paste(`Distribution name`, `Row name`, sep=" | "),
+#   `Table ID 3` = paste(`Distribution name`, `Row name`, `Sector value`, sep=" | ")
 # )
-# output3 <- AMP.INSTSTAT.2Y %>% filter(
-#   duplicated(`Table ID 3`)==FALSE
+# length(unique(DIST.SECTOR3$`Table ID 1`))
+# length(unique(DIST.SECTOR3$`Table ID 2`))
+# length(unique(DIST.SECTOR3$`Table ID 3`))
+# 
+# AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
+#   `Table ID 1` = paste(`Target name`, sep=" | "),
+#   `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+#   `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+#   `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
 # )
-# output4 <- AMP.INSTSTAT.4Y %>% filter(
-#   duplicated(`Table ID 3`)==FALSE
+# length(unique(AMP.INSTSTAT.2Y$`Table ID 1`))
+# length(unique(AMP.INSTSTAT.2Y$`Table ID 2`))
+# length(unique(AMP.INSTSTAT.2Y$`Table ID 3`))
+# length(unique(AMP.INSTSTAT.2Y$`Table ID 4`))
+# 
+# AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
+#   `Table ID 1` = paste(`Target name`, sep=" | "),
+#   `Table ID 2` = paste(`Target name`, `Row name`, sep=" | "),
+#   `Table ID 3` = paste(`Target name`, `Row name`, `Measure name`, sep=" | "),
+#   `Table ID 4` = paste(`Target name`, `Row name`, `Measure name`, `State`, sep=" | ")
+# )
+# length(unique(AMP.INSTSTAT.4Y$`Table ID 1`))
+# length(unique(AMP.INSTSTAT.4Y$`Table ID 2`))
+# length(unique(AMP.INSTSTAT.4Y$`Table ID 3`))
+# length(unique(AMP.INSTSTAT.4Y$`Table ID 4`))
+# 
+# #### End #### 
+# 
+# #### Create factor lists ####
+# 
+# levels.SectorValue <- c(
+#   "Total", 
+#   "Public 4-year",
+#   "Public 2-year", 
+#   "Other"
 # )
 # 
-# write.csv(output1, "output1.csv", row.names=FALSE)
-# write.csv(output2, "output2.csv", row.names=FALSE)
-# write.csv(output3, "output3.csv", row.names=FALSE)
-# write.csv(output4, "output4.csv", row.names=FALSE)
-
-#### End #### 
+# levels.TargetName <- c(
+#   "Federal Pell Grant",
+#   "Federal campus-based aid (SEOG, FWS)",
+#   "Title IV loans (includes Parent PLUS Loans)",
+#   "State grants total",
+#   "Institution grants total",
+#   "Private source grants",
+#   "State non-need & merit grants",
+#   "State need-based grants",
+#   "Institution non-need & merit grants",
+#   "Institutional need-based grants",
+#   "Total state and institutional grants",
+#   "Grant amount exceeding federal need",
+#   "Tuition and fees minus all grants",
+#   "Net tuition after all grants as percent of income",
+#   "Student budget minus all grants",
+#   "Net price after grants as percent of income",
+#   "Expected Family Contribution",
+#   "Tuition and fees paid",
+#   "Student budget (attendance adjusted)"
+# )
+# 
+# levels.RowName <- c(
+#   "Overall",
+#   "Income Quartile", 
+#   "Zero EFC Status", 
+#   "Pell Recipient Status", 
+#   "Parents' Highest Education Level", 
+#   "Race/Ethnicity", 
+#   "Institution HBCU Status", 
+#   "Institution MSI Status", 
+#   "Institution Selectivity", 
+#   "Institution State"
+# )
+# 
+# levels.MeasureName <- c(
+#   "Share >0", 
+#   "Average", 
+#   "Median"
+# )
+# 
+# levels.RowValue <- c(
+#   
+#   "Total",
+#   
+#   # Income Quartile
+#   "Top quartile",
+#   "Upper-middle quartile",
+#   "Lower-middle quartile",
+#   "Bottom quartile",
+#   
+#   # Institution HBCU Status
+#   "HBCUs",
+#   "Non-HBCUs",
+#   
+#   # Institution MSI Status
+#   "AAPISI",
+#   "HBCU",
+#   "HSI",
+#   "PBI",
+#   "Tribal college",
+#   "Other MSI",
+#   "Not an MSI",
+#   
+#   # Institution Selectivity
+#   "Very selective",
+#   "Moderately selective",  
+#   "Minimally selective",
+#   "Open admission",
+#   "Not a 4-year institution",
+#   
+#   # Institution State
+#   "Alabama",
+#   "Alaska",
+#   "Arizona",
+#   "Arkansas",
+#   "California",
+#   "Colorado",
+#   "Connecticut",
+#   "Delaware",
+#   "District of Columbia",
+#   "Florida",
+#   "Georgia",
+#   "Hawaii",
+#   "Idaho",
+#   "Illinois",
+#   "Indiana",
+#   "Iowa",
+#   "Kansas",
+#   "Kentucky",
+#   "Louisiana",
+#   "Maine",
+#   "Maryland",
+#   "Massachusetts",
+#   "Michigan",
+#   "Minnesota",
+#   "Mississippi",
+#   "Missouri",
+#   "Montana",
+#   "Nebraska",
+#   "Nevada",
+#   "New Hampshire",
+#   "New Jersey",
+#   "New Mexico",
+#   "New York",
+#   "North Carolina",
+#   "North Dakota",
+#   "Ohio",
+#   "Oklahoma",
+#   "Oregon",
+#   "Pennsylvania",
+#   "Puerto Rico",
+#   "Rhode Island",
+#   "South Carolina",
+#   "South Dakota",
+#   "Tennessee",
+#   "Texas",
+#   "Utah",
+#   "Vermont",
+#   "Virginia",
+#   "Washington",
+#   "West Virginia",
+#   "Wisconsin",
+#   "Wyoming",
+#   
+#   # Parents' Highest Education Level
+#   "College or beyond",
+#   "High school",
+#   "Middle school/junior high",
+#   
+#   # Pell Recipient Status
+#   "Pell recipient",
+#   "Not a Pell recipient",
+#   
+#   # Race/Ethnicity
+#   "White",
+#   "Hispanic or Latino",
+#   "Black or African American",
+#   "Asian",
+#   "Native American",
+#   "Native Hawaiian/Pacific Islander",
+#   "More than one race",
+#   
+#   # Zero EFC Status
+#   "Zero EFC",
+#   "Nonzero EFC"
+# )
+# 
+# levels.DistributionName <- c(
+#   "Income Quartile", 
+#   "Zero EFC Status", 
+#   "Pell Recipient Status", 
+#   "Parents' Highest Education Level", 
+#   "Race/Ethnicity", 
+#   "High School GPA",
+#   "Institution HBCU Status", 
+#   "Institution MSI Status", 
+#   "Institution Selectivity" 
+# )
+# 
+# levels.CategoryName <- c(
+#   levels.RowValue, c(
+#     # High School GPA
+#     "0.5 to 0.9", 
+#     "1.0 to 1.4", 
+#     "1.5 to 1.9", 
+#     "2.0 to 2.4", 
+#     "2.5 to 2.9", 
+#     "3.0 to 3.4", 
+#     "3.5 to 4.0"
+#   )
+# )
+# 
+# levels.State <- c(
+#   "Total",
+#   "Alabama",
+#   "Alaska",
+#   "Arizona",
+#   "Arkansas",
+#   "California",
+#   "Colorado",
+#   "Connecticut",
+#   "Delaware",
+#   "District of Columbia",
+#   "Florida",
+#   "Georgia",
+#   "Hawaii",
+#   "Idaho",
+#   "Illinois",
+#   "Indiana",
+#   "Iowa",
+#   "Kansas",
+#   "Kentucky",
+#   "Louisiana",
+#   "Maine",
+#   "Maryland",
+#   "Massachusetts",
+#   "Michigan",
+#   "Minnesota",
+#   "Mississippi",
+#   "Missouri",
+#   "Montana",
+#   "Nebraska",
+#   "Nevada",
+#   "New Hampshire",
+#   "New Jersey",
+#   "New Mexico",
+#   "New York",
+#   "North Carolina",
+#   "North Dakota",
+#   "Ohio",
+#   "Oklahoma",
+#   "Oregon",
+#   "Pennsylvania",
+#   "Puerto Rico",
+#   "Rhode Island",
+#   "South Carolina",
+#   "South Dakota",
+#   "Tennessee",
+#   "Texas",
+#   "Utah",
+#   "Vermont",
+#   "Virginia",
+#   "Washington",
+#   "West Virginia",
+#   "Wisconsin",
+#   "Wyoming"
+# )
+# 
+# #### End #### 
+# 
+# #### Assign order of tables ####
+# 
+# AMP.SECTOR3 <- AMP.SECTOR3 %>% mutate(
+#   `Target name` = as.factor(`Target name`), 
+#   `Row name` = as.factor(`Row name`), 
+#   `Measure name` = as.factor(`Measure name`), 
+#   `Sector value` = as.factor(`Sector value`),
+#   `Row value` = as.factor(`Row value`)
+# ) %>% mutate(
+#   `Target name` = factor(`Target name`, levels=levels.TargetName), 
+#   `Row name` = factor(`Row name`, levels=levels.RowName), 
+#   `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
+#   `Sector value` = factor(`Sector value`, levels=levels.SectorValue),
+#   `Row value` = factor(`Row value`, levels=levels.RowValue)
+# ) %>% arrange(
+#   `Target name`, 
+#   `Row name`, 
+#   `Measure name`, 
+#   `Sector value`,
+#   `Row value`
+# )
+# 
+# DIST.SECTOR3 <- DIST.SECTOR3 %>% mutate(
+#   `Distribution name` = as.factor(`Distribution name`), 
+#   `Row name` = as.factor(`Row name`), 
+#   `Sector value` = as.factor(`Sector value`),
+#   `Category name` = as.factor(`Category name`), 
+#   `Row value` = as.factor(`Row value`)
+# ) %>% mutate(
+#   `Distribution name` = factor(`Distribution name`, levels=levels.DistributionName), 
+#   `Row name` = factor(`Row name`, levels=levels.RowName), 
+#   `Sector value` = factor(`Sector value`, levels=levels.SectorValue),
+#   `Category name` = factor(`Category name`, levels=levels.CategoryName), 
+#   `Row value` = factor(`Row value`, levels=levels.RowValue)
+# ) %>% arrange(
+#   `Distribution name`, 
+#   `Row name`, 
+#   `Sector value`,
+#   `Category name`, 
+#   `Row value`
+# )
+# 
+# AMP.INSTSTAT.2Y <- AMP.INSTSTAT.2Y %>% mutate(
+#   `Target name` = as.factor(`Target name`), 
+#   `Row name` = as.factor(`Row name`), 
+#   `Measure name` = as.factor(`Measure name`), 
+#   `State` = as.factor(`State`),
+#   `Row value` = as.factor(`Row value`)
+# ) %>% mutate(
+#   `Target name` = factor(`Target name`, levels=levels.TargetName), 
+#   `Row name` = factor(`Row name`, levels=levels.RowName), 
+#   `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
+#   `State` = factor(`State`, levels=levels.State),
+#   `Row value` = factor(`Row value`, levels=levels.RowValue)
+# ) %>% arrange(
+#   `Target name`, 
+#   `Row name`, 
+#   `Measure name`, 
+#   `State`,
+#   `Row value`
+# )
+# 
+# AMP.INSTSTAT.4Y <- AMP.INSTSTAT.4Y %>% mutate(
+#   `Target name` = as.factor(`Target name`), 
+#   `Row name` = as.factor(`Row name`), 
+#   `Measure name` = as.factor(`Measure name`), 
+#   `State` = as.factor(`State`),
+#   `Row value` = as.factor(`Row value`)
+# ) %>% mutate(
+#   `Target name` = factor(`Target name`, levels=levels.TargetName), 
+#   `Row name` = factor(`Row name`, levels=levels.RowName), 
+#   `Measure name` = factor(`Measure name`, levels=levels.MeasureName), 
+#   `State` = factor(`State`, levels=levels.State),
+#   `Row value` = factor(`State`, levels=levels.RowValue)
+# ) %>% arrange(
+#   `Target name`, 
+#   `Row name`, 
+#   `Measure name`, 
+#   `State`,
+#   `Row value`
+# )
+# 
+# #### End #### 
+# 
+# #### Print table IDs ####
+# 
+# # output1 <- AMP.SECTOR3 %>% filter(
+# #   duplicated(`Table ID 3`)==FALSE
+# # )
+# # output2 <- DIST.SECTOR3 %>% filter(
+# #   duplicated(`Table ID 2`)==FALSE
+# # )
+# # output3 <- AMP.INSTSTAT.2Y %>% filter(
+# #   duplicated(`Table ID 3`)==FALSE
+# # )
+# # output4 <- AMP.INSTSTAT.4Y %>% filter(
+# #   duplicated(`Table ID 3`)==FALSE
+# # )
+# # 
+# # write.csv(output1, "output1.csv", row.names=FALSE)
+# # write.csv(output2, "output2.csv", row.names=FALSE)
+# # write.csv(output3, "output3.csv", row.names=FALSE)
+# # write.csv(output4, "output4.csv", row.names=FALSE)
+# 
+# #### End #### 
 
 
 
