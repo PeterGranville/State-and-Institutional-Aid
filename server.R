@@ -2,7 +2,6 @@
 #### Setup ####
 
 library(shiny)
-library(readxl)
 library(scales)
 library(plotly)
 library(tidyverse)
@@ -192,6 +191,14 @@ shinyServer(function(output, input)({
     selectInput("selectSector", 
                 "Select a sector", 
                 choices=sectorChoices())
+    
+  })
+  
+  output$selectionI <- renderUI({
+    
+    checkboxInput("toggleInState", 
+                "Check to filter for in-state students", 
+                value=TRUE)
     
   })
   
@@ -467,43 +474,81 @@ shinyServer(function(output, input)({
     
     #### Load targetLookup and axisBounds ####
     
-    targetLookup <- read_excel("Target-Lookup.xls") %>% select(-(`Entry`)) %>% select(-(`Section`))
+    targetLookup <- read.csv("Target-Lookup.csv", header=TRUE, check.names=FALSE) %>% select(-(`Entry`)) %>% select(-(`Section`))
     axisBounds <- read.csv("Axis-Bounds.csv", header=TRUE, check.names=FALSE)
     
     #### End #### 
     
     #### Load dataset, create tempDF ####
     
-    if(printView=="National View"){
-      tempDF <- read.csv(
-        "AMP-SECTOR3.csv", header=TRUE, check.names=FALSE
-      )
-    }
-    if(printView=="State View"){
-      if(printSector=="Public 4-Years"){
+    if(input$toggleInState==TRUE){
+      
+      if(printView=="National View"){
         tempDF <- read.csv(
-          "AMP-INSTSTAT-4Y.csv", header=TRUE, check.names=FALSE
-        ) %>% mutate(
-          `Sector value` = rep("Public 4-year")
+          "AMP-SECTOR3 (In-State).csv", header=TRUE, check.names=FALSE
         )
       }
-      if(printSector=="Public 2-Years"){
+      if(printView=="State View"){
+        if(printSector=="Public 4-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-4Y (In-State).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 4-year")
+          )
+        }
+        if(printSector=="Public 2-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-2Y (In-State).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 2-year")
+          )
+        }
+      }
+      if(printView=="Context View"){
         tempDF <- read.csv(
-          "AMP-INSTSTAT-2Y.csv", header=TRUE, check.names=FALSE
+          "DIST-SECTOR3 (In-State).csv", header=TRUE, check.names=FALSE
         ) %>% mutate(
-          `Sector value` = rep("Public 2-year")
+          `Measure name` = rep("Percentage distribution")
+        ) %>% rename(
+          `Target name` = `Distribution name`, 
+          `Target value` = `Share`
+        )
+        
+      }
+    }else{
+      
+      if(printView=="National View"){
+        tempDF <- read.csv(
+          "AMP-SECTOR3 (Overall).csv", header=TRUE, check.names=FALSE
         )
       }
-    }
-    if(printView=="Context View"){
-      tempDF <- read.csv(
-        "DIST-SECTOR3.csv", header=TRUE, check.names=FALSE
-      ) %>% mutate(
-        `Measure name` = rep("Percentage distribution")
-      ) %>% rename(
-        `Target name` = `Distribution name`, 
-        `Target value` = `Share`
-      )
+      if(printView=="State View"){
+        if(printSector=="Public 4-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-4Y (Overall).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 4-year")
+          )
+        }
+        if(printSector=="Public 2-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-2Y (Overall).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 2-year")
+          )
+        }
+      }
+      if(printView=="Context View"){
+        tempDF <- read.csv(
+          "DIST-SECTOR3 (Overall).csv", header=TRUE, check.names=FALSE
+        ) %>% mutate(
+          `Measure name` = rep("Percentage distribution")
+        ) %>% rename(
+          `Target name` = `Distribution name`, 
+          `Target value` = `Share`
+        )
+      }
+      
     }
     
     #### End #### 
@@ -1243,42 +1288,80 @@ shinyServer(function(output, input)({
     
     #### Load targetLookup ####
     
-    targetLookup <- read_excel("Target-Lookup.xls") %>% select(-(`Entry`)) %>% select(-(`Section`))
+    targetLookup <- read.csv("Target-Lookup.csv", header=TRUE, check.names=FALSE) %>% select(-(`Entry`)) %>% select(-(`Section`))
     
     #### End #### 
     
     #### Load dataset, create tempDF ####
     
-    if(printView=="National View"){
-      tempDF <- read.csv(
-        "AMP-SECTOR3.csv", header=TRUE, check.names=FALSE
-      )
-    }
-    if(printView=="State View"){
-      if(printSector=="Public 4-Years"){
+    if(input$toggleInState==TRUE){
+      
+      if(printView=="National View"){
         tempDF <- read.csv(
-          "AMP-INSTSTAT-4Y.csv", header=TRUE, check.names=FALSE
-        ) %>% mutate(
-          `Sector value` = rep("Public 4-year")
+          "AMP-SECTOR3 (In-State).csv", header=TRUE, check.names=FALSE
         )
       }
-      if(printSector=="Public 2-Years"){
+      if(printView=="State View"){
+        if(printSector=="Public 4-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-4Y (In-State).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 4-year")
+          )
+        }
+        if(printSector=="Public 2-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-2Y (In-State).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 2-year")
+          )
+        }
+      }
+      if(printView=="Context View"){
         tempDF <- read.csv(
-          "AMP-INSTSTAT-2Y.csv", header=TRUE, check.names=FALSE
+          "DIST-SECTOR3 (In-State).csv", header=TRUE, check.names=FALSE
         ) %>% mutate(
-          `Sector value` = rep("Public 2-year")
+          `Measure name` = rep("Percentage distribution")
+        ) %>% rename(
+          `Target name` = `Distribution name`, 
+          `Target value` = `Share`
         )
       }
-    }
-    if(printView=="Context View"){
-      tempDF <- read.csv(
-        "DIST-SECTOR3.csv", header=TRUE, check.names=FALSE
-      ) %>% mutate(
-        `Measure name` = rep("Percentage distribution")
-      ) %>% rename(
-        `Target name` = `Distribution name`, 
-        `Target value` = `Share`
-      )
+      
+    }else{
+    
+      if(printView=="National View"){
+        tempDF <- read.csv(
+          "AMP-SECTOR3 (Overall).csv", header=TRUE, check.names=FALSE
+        )
+      }
+      if(printView=="State View"){
+        if(printSector=="Public 4-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-4Y (Overall).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 4-year")
+          )
+        }
+        if(printSector=="Public 2-Years"){
+          tempDF <- read.csv(
+            "AMP-INSTSTAT-2Y (Overall).csv", header=TRUE, check.names=FALSE
+          ) %>% mutate(
+            `Sector value` = rep("Public 2-year")
+          )
+        }
+      }
+      if(printView=="Context View"){
+        tempDF <- read.csv(
+          "DIST-SECTOR3 (Overall).csv", header=TRUE, check.names=FALSE
+        ) %>% mutate(
+          `Measure name` = rep("Percentage distribution")
+        ) %>% rename(
+          `Target name` = `Distribution name`, 
+          `Target value` = `Share`
+        )
+      }
+      
     }
     
     #### End #### 

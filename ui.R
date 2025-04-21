@@ -49,7 +49,8 @@ shinyUI(fluidPage(theme = shinytheme("sandstone"),
                       ),
                       uiOutput("selectionT"), # Target
                       uiOutput("selectionR"), # Row
-                      uiOutput("selectionS")  # Sector
+                      uiOutput("selectionS"), # Sector
+                      uiOutput("selectionI")  # Sector
                       
                       #### End #### 
                       
