@@ -1,0 +1,28 @@
+"Target name","Lower bound for axis","Upper bound for axis"
+"Expected Family Contribution",-9417.2738,36176.6124
+"Federal campus-based aid (SEOG, FWS)",-276.8163,1631.4063
+"Federal Pell Grant",-20.2933,5457.9033
+"Grant amount exceeding federal need",-1124.2306,7123.6506
+"Institution grants total",-3773.0067,40433.1167
+"Institution non-need & merit grants",-1451.1571,12965.4471
+"Institutional need-based grants",-1519.6704,38751.5104
+"Net price after grants as percent of income",-62.3448,210.2448
+"Net tuition after all grants as percent of income",-66.0914,266.0914
+"Private source grants",-637.1546,3895.2146
+"State grants total",-1500.0401,11802.6101
+"State need-based grants",-659.7026,5148.4826
+"State non-need & merit grants",-696.5861,4689.1361
+"Student budget (attendance adjusted)",-4925.6385,82397.1085
+"Student budget minus all grants",-4264.8872,44326.8272
+"Title IV loans (includes Parent PLUS Loans)",-2394.8557,12628.8942
+"Total state and institutional grants",-1803.8986,41886.7786
+"Tuition and fees minus all grants",-4666.5551,23895.962
+"Tuition and fees paid",-4107.8366,65099.7966
+"Income Quartile",-0.03,1.03
+"Zero EFC Status",-0.03,1.03
+"Pell Recipient Status",-0.03,1.03
+"Parents' Highest Education Level",-0.03,1.03
+"Race/Ethnicity",-0.03,1.03
+"Institution HBCU Status",-0.03,1.03
+"Institution MSI Status",-0.03,1.03
+"Institution Selectivity",-0.03,1.03

@@ -1,0 +1,43 @@
+﻿Title,Target name,Measure name,Entry,Section
+Share receiving federal Pell Grant,Federal Pell Grant,Share >0,1,A
+Average federal Pell Grant award,Federal Pell Grant,Average,2,A
+"Share receiving federal campus-based aid (SEOG, FWS)","Federal campus-based aid (SEOG, FWS)",Share >0,3,A
+"Average federal campus-based aid (SEOG, FWS) award","Federal campus-based aid (SEOG, FWS)",Average,4,A
+Share receiving Title IV loans (includes Parent PLUS Loans),Title IV loans (includes Parent PLUS Loans),Share >0,5,A
+Average Title IV loan (includes Parent PLUS Loans) amount,Title IV loans (includes Parent PLUS Loans),Average,6,A
+Share receiving state grants,State grants total,Share >0,7,A
+Average state grant award,State grants total,Average,8,A
+Share receiving institutional grants,Institution grants total,Share >0,9,A
+Average institutional grant award,Institution grants total,Average,10,A
+Share receiving private source grants,Private source grants,Share >0,11,A
+Average private source grant award,Private source grants,Average,12,A
+Share receiving state non-need & merit grants,State non-need & merit grants,Share >0,1,B
+Average state non-need & merit grant award,State non-need & merit grants,Average,2,B
+Share receiving state need-based grants,State need-based grants,Share >0,3,B
+Average state need-based grant award,State need-based grants,Average,4,B
+Share receiving institutional non-need & merit grants,Institution non-need & merit grants,Share >0,5,B
+Average institutional non-need & merit grant award,Institution non-need & merit grants,Average,6,B
+Share receiving institutional need-based grants,Institutional need-based grants,Share >0,7,B
+Average institutional need-based grant award,Institutional need-based grants,Average,8,B
+Share receiving state or institutional grants,Total state and institutional grants,Share >0,1,C
+Average combined state and institutional grant award,Total state and institutional grants,Average,2,C
+Share whose grants exceed federal need,Grant amount exceeding federal need,Share >0,3,C
+Average grant amount in excess of federal need,Grant amount exceeding federal need,Average,4,C
+Share with unmet tuition and fees after all grants,Tuition and fees minus all grants,Share >0,1,D
+Median net tuition and fees after all grants,Tuition and fees minus all grants,Median,2,D
+Average net tuition and fees after all grants,Tuition and fees minus all grants,Average,2.5,D
+Median net tuition and fees after all grants as a percentage of income,Net tuition after all grants as percent of income,Median,3,D
+Average net student budget after all grants,Student budget minus all grants,Average,4,D
+Median net student budget after all grants,Student budget minus all grants,Median,5,D
+Median net student budget after all grants as a percentage of income,Net price after grants as percent of income,Median,6,D
+Median tuition and fees paid,Tuition and fees paid,Median,1,E
+Median student budget (attendance adjusted),Student budget (attendance adjusted),Median,2,E
+Median Expected Family Contribution,Expected Family Contribution,Median,3,E
+Percentage distribution of parents' highest education level,Parents' Highest Education Level,Percentage distribution,4,F
+Percentage distribution of income quartile,Income Quartile,Percentage distribution,1,F
+Percentage distribution of zero EFC status,Zero EFC Status,Percentage distribution,2,F
+Percentage distribution of Pell recipient status,Pell Recipient Status,Percentage distribution,3,F
+Percentage distribution of institution HBCU status,Institution HBCU Status,Percentage distribution,6,F
+Percentage distribution of institution MSI status,Institution MSI Status,Percentage distribution,7,F
+Percentage distribution of institution selectivity,Institution Selectivity,Percentage distribution,8,F
+Percentage distribution of race/ethnicity,Race/Ethnicity,Percentage distribution,5,F
