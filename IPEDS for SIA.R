@@ -296,8 +296,8 @@ ggplot(data=agg20,
   `Sector` ~ .
 ) + scale_y_continuous(
   labels=percent_format(accuracy=1)
-) + scale_fill_brewer(
-  palette = "Dark2"
+) + scale_fill_manual(
+  values=c("#756fb3", "#d95f01", "#1c9e78")
 ) + geom_text(
   aes(label = `For Label`), 
   position=position_dodge(width=0.75), 
@@ -406,8 +406,8 @@ ggplot(
   breaks=c(2009, 2016, 2023)
 ) + theme(
   legend.position="bottom"
-) + scale_color_brewer(
-  palette = "Dark2"
+) + scale_color_manual(
+  values=c("#756fb3", "#d95f01", "#1c9e78", "#e72989")
 ) + theme(legend.position="right")
 
 #### End #### 
@@ -640,6 +640,49 @@ vizTotals(data1=agg8, facetVar="STABBR", plotTitle="Shares of total grants to FT
 # ) + scale_fill_brewer(
 #   palette = "Dark2"
 # ) + facet_wrap(`STABBR` ~ .)
+
+#### End #### 
+
+#### Special plot: Specific sectors ####
+
+agg60 <- agg6 %>% filter(
+  `SECTOR` %in% c(1, 4)
+) %>% mutate(
+  `SECTOR` = ifelse(
+    `SECTOR`==1, "Public four-year", "Community college"
+  ) 
+) %>% mutate(
+  `SECTOR` = factor(`SECTOR`, levels=c(
+    "Public four-year", "Community college"
+  )), 
+  `Grant type` = factor(`Grant type`, levels=c(
+    "Federal grants", 
+    "State/local grants", 
+    "Institutional grants"
+  ))
+)
+
+ggplot(
+  data=agg60, 
+  mapping=aes(
+    x=`Year`, y=`Share`, fill=forcats::fct_rev(`Grant type`)
+  ) 
+) + geom_bar(
+  position="stack", stat="identity"
+) + facet_wrap(
+  `SECTOR` ~ .
+) + scale_y_continuous(
+  labels=percent_format(accuracy=1), limits=c(0, 1), breaks=c(0, 0.25, 0.5, 0.75, 1)
+) + scale_x_continuous(
+  breaks=c(2009, 2016, 2023)
+) + theme(
+  legend.position="bottom"
+) + scale_fill_brewer(
+  palette = "Dark2"
+) + labs(
+  fill="Grant type", 
+  y="Share of total grant aid"
+)
 
 #### End #### 
 
@@ -1003,15 +1046,63 @@ ggplot(
   mapping=aes(
     x=`Year`, y=`Change since 2009`, grouping=`Total`, color=`Total`
   ) 
-) + geom_point() + geom_line() + scale_y_continuous(
+) + geom_point(size=2.5) + geom_line(size=1.5) + scale_y_continuous(
   labels=percent_format(accuracy=1), limits=c(-0.1, 2.2)
 ) + scale_x_continuous(
   breaks=c(2009, 2016, 2023)
 ) + theme(
   legend.position="bottom"
-) + scale_color_brewer(
-  palette = "Dark2"
+) + scale_color_manual(
+  values=c("#756fb3", "#d95f01", "#1c9e78", "#e72989")
+) + theme(text = element_text(size = 13)) 
+
+#### End #### 
+
+#### Special plot: Public 2- and 4-years ####
+
+agg101 <- agg10 %>% filter(
+  `SECTOR` %in% c(1, 4)
+) %>% mutate(
+  `Year` = as.numeric(`Year`)
+) %>% mutate(
+  `Variable` = ifelse(
+    `Variable`=="FTFT students", "First-time full-time students", `Variable`
+  )
+) %>% mutate(
+  `Variable` = factor(`Variable`, levels=c(
+    "Federal grants", 
+    "State/local grants", 
+    "Institutional grants", 
+    "First-time full-time students"
+  ))
+) %>% rename(
+  `Total` = `Variable`
+) %>% mutate(
+  `SECTOR` = ifelse(
+    `SECTOR` == 1, "Public four-year", "Community college"
+  )
+) %>% mutate(
+  `SECTOR` = factor(`SECTOR`, levels=c(
+    "Public four-year", "Community college"
+  ))
 )
+
+ggplot(
+  data=agg101, 
+  mapping=aes(
+    x=`Year`, y=`Change since 2009`, grouping=`Total`, color=`Total`
+  ) 
+) + geom_point(size=2.5) + geom_line(size=1.5) + scale_y_continuous(
+  labels=percent_format(accuracy=1), limits=c(-0.5, 2.2)
+) + facet_grid(
+  .~`SECTOR`
+) + scale_x_continuous(
+  breaks=c(2009, 2016, 2023)
+) + theme(
+  legend.position="bottom"
+) + scale_color_manual(
+  values=c("#756fb3", "#d95f01", "#1c9e78", "#e72989")
+) + theme(text = element_text(size = 13)) 
 
 #### End #### 
 
@@ -2307,6 +2398,8 @@ data20 <- data2 %>% filter(
   `In-state status`=="Overall", 
   `Selectivity` %in% c("Open admission", "Very selective"), 
   `Poverty bracket` <= 610
+) %>% mutate(
+  `Poverty bracket` = `Poverty bracket` / 100
 )
 
 ggplot(
@@ -2322,6 +2415,10 @@ ggplot(
   labels=dollar_format(accuracy=1)
 ) + scale_fill_brewer(
   palette = "Dark2"
+) + labs(
+  x="Family income as share of federal poverty line"
+) + scale_x_continuous(
+  labels=percent_format(accuracy=1)
 )
 
 #### End #### 
@@ -2332,6 +2429,8 @@ data21 <- data2 %>% filter(
   `In-state status` %in% c("In-state", "Out-of-state"), 
   `Selectivity`=="Overall", 
   `Poverty bracket` <= 610
+) %>% mutate(
+  `Poverty bracket` = `Poverty bracket` / 100
 )
 
 ggplot(
@@ -2347,6 +2446,10 @@ ggplot(
   labels=dollar_format(accuracy=1)
 ) + scale_fill_brewer(
   palette = "Dark2"
+) + labs(
+  x="Family income as share of federal poverty line"
+) + scale_x_continuous(
+  labels=percent_format(accuracy=1)
 )
 
 #### End #### 
@@ -2357,6 +2460,8 @@ data22 <- data2 %>% filter(
   `In-state status`=="Overall", 
   `Selectivity`=="Overall", 
   `Poverty bracket` <= 610
+) %>% mutate(
+  `Poverty bracket` = `Poverty bracket` / 100
 )
 
 ggplot(
@@ -2370,6 +2475,21 @@ ggplot(
   labels=dollar_format(accuracy=1)
 ) + scale_fill_brewer(
   palette = "Dark2"
+) + labs(
+  x="Family income as share of federal poverty line"
+) + scale_x_continuous(
+  labels=percent_format(accuracy=1)
+)
+
+test <- data22 %>% filter(
+  `In-state status` == "Overall", 
+  `Selectivity` == "Overall"
+) %>% pivot_wider(
+  id_cols=c(`Poverty bracket`), 
+  names_from=`Grant type`, 
+  values_from=`Amount`
+) %>% mutate(
+  `State and institutional` = `Average state grant` + `Average institutional grant`
 )
 
 #### End #### 
