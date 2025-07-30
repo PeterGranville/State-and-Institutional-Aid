@@ -1,6 +1,7 @@
 
 #### Setup ####
 
+library(readxl)
 library(scales)
 library(tidyverse)
 library(RColorBrewer)
@@ -82,6 +83,42 @@ finAid <- finAid %>% mutate(
 ) %>% filter(
   is.na(`IGRNT_T`)==FALSE # When one SFA variable is NA, so are all the rest, so you only need one filter  
 )
+
+#### End #### 
+
+#### Adjust for inflation in total amounts #### 
+
+cpiAdjust <- data.frame(
+  `Year` = numeric(), 
+  `CPI` = numeric()
+) 
+
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2009, `CPI`=1.50453011)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2010, `CPI`=1.46603626)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2011, `CPI`=1.44249692)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2012, `CPI`=1.40150001)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2013, `CPI`=1.37949887)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2014, `CPI`=1.35805588)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2015, `CPI`=1.35927037)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2016, `CPI`=1.34085921)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2017, `CPI`=1.30815479)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2018, `CPI`=1.28161877)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2019, `CPI`=1.26204154)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2020, `CPI`=1.23142136)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2021, `CPI`=1.21442225)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2022, `CPI`=1.12990667)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2023, `CPI`=1.06184109)
+cpiAdjust <- cpiAdjust %>% add_row(`Year`=2024, `CPI`=1.03000483)
+
+finAid <- left_join(x=finAid, y=cpiAdjust, by="Year")
+
+finAid <- finAid %>% mutate(
+  `FGRNT_T` = `FGRNT_T` * `CPI`, 
+  `SGRNT_T` = `SGRNT_T` * `CPI`, 
+  `IGRNT_T` = `IGRNT_T` * `CPI`
+)
+
+rm(cpiAdjust)
 
 #### End #### 
 
@@ -1013,7 +1050,7 @@ vizChange <- function(data1, facetVar, plotTitle){
 
 #### Run plots ####
 
-vizChange(data1=agg9, facetVar="None", plotTitle="Change over time in total grants to FTFT undergraduates, by grant type")
+vizChange(data1=agg9, facetVar="None", plotTitle="Change over time in total grants to FTFT undergraduates, by grant type") 
 vizChange(data1=agg10, facetVar="SECTOR", plotTitle="Change over time in total grants to FTFT undergraduates, by grant type and sector")
 vizChange(data1=agg11, facetVar="STABBR", plotTitle="Change over time in total grants to FTFT undergraduates, by grant type and state (public four-year sector)")
 vizChange(data1=agg12, facetVar="STABBR", plotTitle="Change over time in total grants to FTFT undergraduates, by grant type and state (public two-year sector)")
@@ -1047,14 +1084,14 @@ ggplot(
     x=`Year`, y=`Change since 2009`, grouping=`Total`, color=`Total`
   ) 
 ) + geom_point(size=2.5) + geom_line(size=1.5) + scale_y_continuous(
-  labels=percent_format(accuracy=1), limits=c(-0.1, 2.2)
+  labels=percent_format(accuracy=1), limits=c(-0.1, 1.3)
 ) + scale_x_continuous(
   breaks=c(2009, 2016, 2023)
 ) + theme(
   legend.position="bottom"
 ) + scale_color_manual(
   values=c("#756fb3", "#d95f01", "#1c9e78", "#e72989")
-) + theme(text = element_text(size = 13)) 
+) + theme(text = element_text(size = 13)) + labs(color="")
 
 #### End #### 
 
@@ -2493,4 +2530,219 @@ test <- data22 %>% filter(
 )
 
 #### End #### 
+
+##########################################
+#### Trends in Student Aid: Over time ####
+##########################################
+
+#### Load Fig SA-1 data ####
+
+setwd("/Users/peter_granville/Net Price Equity")
+
+sa1 <- read_excel(
+  "Trends-in-Student-Aid-2024-excel-data.xlsx", 
+  sheet="Table SA-1_ALL", 
+  col_names=TRUE, 
+  skip=1, 
+  n_max=28
+) %>% select(
+  -(`research.collegeboard.org/trends`)
+) %>% rename(
+  `23-24` = `23-24 (Preliminary)`
+) %>% mutate(
+  `Name` = ifelse(
+    is.na(`...1`), 
+    `...2`, 
+    `...1`
+  )
+) %>% select(
+  -(`...1`), -(`...2`)
+) %>% filter(
+  `Name` %in% c(
+    "Total Federal Grants", 
+    "STATE GRANTS",
+    "INSTITUTIONAL GRANTS"
+  )
+) %>% mutate(
+  `Name` = ifelse(
+    `Name`=="Total Federal Grants", 
+    "Federal grants",
+    `Name`
+  )
+) %>% mutate(
+  `Name` = ifelse(
+    `Name`=="STATE GRANTS", 
+    "State grants",
+    `Name`
+  )
+) %>% mutate(
+  `Name` = ifelse(
+    `Name`=="INSTITUTIONAL GRANTS", 
+    "Institutional grants",
+    `Name`
+  )
+)
+
+#### End #### 
+
+#### Absolute values chart ####
+
+sa1 <- sa1 %>% pivot_longer(
+  cols=c(
+    `70-71`,
+    `71-72`,
+    `72-73`,
+    `73-74`,
+    `74-75`,
+    `75-76`,
+    `76-77`,
+    `77-78`,
+    `78-79`,
+    `79-80`,
+    `80-81`,
+    `81-82`,
+    `82-83`,
+    `83-84`,
+    `84-85`,
+    `85-86`,
+    `86-87`,
+    `87-88`,
+    `88-89`,
+    `89-90`,
+    `90-91`,
+    `91-92`,
+    `92-93`,
+    `93-94`,
+    `94-95`,
+    `95-96`,
+    `96-97`,
+    `97-98`,
+    `98-99`,
+    `99-00`,
+    `00-01`,
+    `01-02`,
+    `02-03`,
+    `03-04`,
+    `04-05`,
+    `05-06`,
+    `06-07`,
+    `07-08`,
+    `08-09`,
+    `09-10`,
+    `10-11`,
+    `11-12`,
+    `12-13`,
+    `13-14`,
+    `14-15`,
+    `15-16`,
+    `16-17`,
+    `17-18`,
+    `18-19`,
+    `19-20`,
+    `20-21`,
+    `21-22`,
+    `22-23`,
+    `23-24`
+  ), 
+  names_to="Year", 
+  values_to="Amount"
+) %>% mutate(
+  `Amount` = `Amount` * 1000000
+) %>% mutate(
+  `Year` = factor(`Year`, levels=c(
+    "70-71",
+    "71-72",
+    "72-73",
+    "73-74",
+    "74-75",
+    "75-76",
+    "76-77",
+    "77-78",
+    "78-79",
+    "79-80",
+    "80-81",
+    "81-82",
+    "82-83",
+    "83-84",
+    "84-85",
+    "85-86",
+    "86-87",
+    "87-88",
+    "88-89",
+    "89-90",
+    "90-91",
+    "91-92",
+    "92-93",
+    "93-94",
+    "94-95",
+    "95-96",
+    "96-97",
+    "97-98",
+    "98-99",
+    "99-00",
+    "00-01",
+    "01-02",
+    "02-03",
+    "03-04",
+    "04-05",
+    "05-06",
+    "06-07",
+    "07-08",
+    "08-09",
+    "09-10",
+    "10-11",
+    "11-12",
+    "12-13",
+    "13-14",
+    "14-15",
+    "15-16",
+    "16-17",
+    "17-18",
+    "18-19",
+    "19-20",
+    "20-21",
+    "21-22",
+    "22-23",
+    "23-24"
+  ))
+)
+
+sa1 <- sa1 %>% filter(
+  (`Year` %in% c(
+    "70-71",
+    "71-72", 
+    "72-73", 
+    "73-74",
+    "74-75", 
+    "75-76", 
+    "76-77", 
+    "77-78",
+    "78-79", 
+    "79-80"
+  ))==FALSE
+)
+
+ggplot(
+  data=sa1, 
+  mapping=aes(
+    x=`Year`,
+    y=`Amount`, 
+    group=`Name`, 
+    color=`Name`
+  )
+) + geom_point() + geom_line() + scale_y_continuous(
+  labels=dollar_format(accuracy=1)
+) + scale_x_discrete(
+  breaks=c("70-71", "80-81", "90-91", "00-01", "10-11", "20-21")
+) + labs(
+  color="Grant type", 
+  y="Amount (2023 USD)"
+) + scale_color_brewer(
+  palette = "Dark2"
+)
+
+#### End #### 
+
+
+
 
