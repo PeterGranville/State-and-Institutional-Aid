@@ -116,8 +116,6 @@ ggplot(
 
 setwd("/Users/peter_granville/Net Price Equity/Other NPSAS")
 
-# "PowerStats_xrtupd.csv", 14, 17
-
 forPlot <- rbind(
   processDatalab(
     filename = "PowerStats_xrtupd.csv", 
@@ -167,11 +165,6 @@ ggplot(
 #### Figure 5 ####
 
 setwd("/Users/peter_granville/Net Price Equity/Other NPSAS")
-
-# "PowerStats_egctjm.csv", 53, 54
-# "PowerStats_egctjm.csv", 92, 93
-# "PowerStats_lfuxgh.csv", 53, 54
-# "PowerStats_lfuxgh.csv", 92, 93
 
 forPlot1 <- rbind(
   processDatalab(
@@ -274,11 +267,6 @@ ggplot(
 #### Figure 7 ####
 
 setwd("/Users/peter_granville/Net Price Equity/Other NPSAS")
-
-# "PowerStats_pmtxyr.csv", 94, 95
-# "PowerStats_pmtxyr.csv", 135, 136
-# "PowerStats_pmtxyr.csv", 176, 177
-# "PowerStats_pmtxyr.csv", 217, 218
 
 forPlot <- rbind(
   processDatalab(
@@ -589,11 +577,7 @@ data1 <- data1 %>% pivot_longer(
   ))
 )
 
-#### End #### 
-
-#### Visualize data ####
-
-data2 <- data1 %>% filter(
+data1 <- data1 %>% filter(
   `Poverty bracket` <= 800
 ) %>% mutate(
   `Grant type` = factor(`Grant type`, levels=rev(levels(`Grant type`)))
@@ -603,7 +587,7 @@ data2 <- data1 %>% filter(
 
 #### Figure 3 ####
 
-data22 <- data2 %>% filter(
+data2 <- data1 %>% filter(
   `In-state status`=="Overall", 
   `Selectivity`=="Overall", 
   `Poverty bracket` <= 610
@@ -612,7 +596,7 @@ data22 <- data2 %>% filter(
 )
 
 ggplot(
-  data=data22, 
+  data=data2, 
   mapping=aes(
     x=`Poverty bracket`, y=`Amount`, fill=`Grant type`
   )
@@ -628,22 +612,11 @@ ggplot(
   labels=percent_format(accuracy=1)
 )
 
-test <- data22 %>% filter(
-  `In-state status` == "Overall", 
-  `Selectivity` == "Overall"
-) %>% pivot_wider(
-  id_cols=c(`Poverty bracket`), 
-  names_from=`Grant type`, 
-  values_from=`Amount`
-) %>% mutate(
-  `State and institutional` = `Average state grant` + `Average institutional grant`
-)
-
 #### End #### 
 
 #### Figure 6 ####
 
-data20 <- data2 %>% filter(
+data3 <- data1 %>% filter(
   `In-state status`=="Overall", 
   `Selectivity` %in% c("Open admission", "Very selective"), 
   `Poverty bracket` <= 610
@@ -652,7 +625,7 @@ data20 <- data2 %>% filter(
 )
 
 ggplot(
-  data=data20, 
+  data=data3, 
   mapping=aes(
     x=`Poverty bracket`, y=`Amount`, fill=`Grant type`
   )
