@@ -168,7 +168,7 @@ setwd("/Users/peter_granville/Net Price Equity/Other NPSAS")
 
 forPlot1 <- rbind(
   processDatalab(
-    filename = "PowerStats_egctjm.csv", 
+    filename = "PowerStats_swrgaq.csv", 
     startRow = 53, 
     endRow = 54, 
     keepWhichCol = 2, 
@@ -179,7 +179,7 @@ forPlot1 <- rbind(
     addlVarName = "Sector"
   ), 
   processDatalab(
-    filename = "PowerStats_egctjm.csv", 
+    filename = "PowerStats_swrgaq.csv", 
     startRow = 92, 
     endRow = 93, 
     keepWhichCol = 2, 
@@ -190,7 +190,7 @@ forPlot1 <- rbind(
     addlVarName = "Sector"
   )
 ) %>% mutate(
-  `Grant type` = rep("State non-need/ merit-based grants")
+  `Grant type` = rep("State merit-only grants")
 ) 
 
 forPlot2 <- rbind(
@@ -237,6 +237,13 @@ forPlot <- rbind(
   `For Label` = percent(`Share receiving grants`, accuracy=0.1)
 )
 rm(forPlot1, forPlot2)
+
+forPlot <- forPlot %>% mutate(
+  `Grant type` = factor(`Grant type`, levels=rev(c(
+    "State merit-only grants", 
+    "State need-based grants"
+  )))
+)
 
 ggplot(
   data=forPlot, 
@@ -385,218 +392,122 @@ loadNPSAS <- function(
 
 #### End #### 
 
-#### Load data ####
+#### Write function to format data ####
 
-setwd("/Users/peter_granville/Net Price Equity/Other NPSAS")
-
-data1 <- rbind(
+formatPovertyData <- function(data1){
   
-  # Overall
-  loadNPSAS(
-    filename = "PowerStats_fawbhe.csv", 
-    startRow = 12, 
-    endRow = 36, 
-    inState = "Overall", 
-    selectivity = "Overall"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_fawbhe.csv", 
-    startRow = 314, 
-    endRow = 338, 
-    inState = "Overall", 
-    selectivity = "Very selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_fawbhe.csv", 
-    startRow = 465, 
-    endRow = 489, 
-    inState = "Overall", 
-    selectivity = "Moderately selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_fawbhe.csv", 
-    startRow = 616, 
-    endRow = 640, 
-    inState = "Overall", 
-    selectivity = "Minimally selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_fawbhe.csv", 
-    startRow = 767, 
-    endRow = 791, 
-    inState = "Overall", 
-    selectivity = "Open admission"
-  ),
-  
-  # In-state
-  loadNPSAS(
-    filename = "PowerStats_dcyugz.csv", 
-    startRow = 12, 
-    endRow = 36, 
-    inState = "In-state", 
-    selectivity = "Overall"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_dcyugz.csv", 
-    startRow = 314, 
-    endRow = 338, 
-    inState = "In-state", 
-    selectivity = "Very selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_dcyugz.csv", 
-    startRow = 465, 
-    endRow = 489, 
-    inState = "In-state", 
-    selectivity = "Moderately selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_dcyugz.csv", 
-    startRow = 616, 
-    endRow = 640, 
-    inState = "In-state", 
-    selectivity = "Minimally selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_dcyugz.csv", 
-    startRow = 767, 
-    endRow = 791, 
-    inState = "In-state", 
-    selectivity = "Open admission"
-  ), 
-  
-  # Out-of-state
-  loadNPSAS(
-    filename = "PowerStats_prmhsm.csv", 
-    startRow = 12, 
-    endRow = 36, 
-    inState = "Out-of-state", 
-    selectivity = "Overall"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_prmhsm.csv", 
-    startRow = 314, 
-    endRow = 338, 
-    inState = "Out-of-state", 
-    selectivity = "Very selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_prmhsm.csv", 
-    startRow = 465, 
-    endRow = 489, 
-    inState = "Out-of-state", 
-    selectivity = "Moderately selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_prmhsm.csv", 
-    startRow = 616, 
-    endRow = 640, 
-    inState = "Out-of-state", 
-    selectivity = "Minimally selective"
-  ), 
-  loadNPSAS(
-    filename = "PowerStats_prmhsm.csv", 
-    startRow = 767, 
-    endRow = 791, 
-    inState = "Out-of-state", 
-    selectivity = "Open admission"
+  data1 <- data1 %>% mutate(
+    `Average Pell Grant` = gsub(" !!", "", `Average Pell Grant`), 
+    `Average state grant` = gsub(" !!", "", `Average state grant`), 
+    `Average institutional grant` = gsub(" !!", "", `Average institutional grant`)
+  ) %>% mutate(
+    `Average Pell Grant` = gsub(" !", "", `Average Pell Grant`), 
+    `Average state grant` = gsub(" !", "", `Average state grant`), 
+    `Average institutional grant` = gsub(" !", "", `Average institutional grant`)
+  ) %>% mutate(
+    `Average Pell Grant` = gsub("#", "0", `Average Pell Grant`), 
+    `Average state grant` = gsub("#", "0", `Average state grant`), 
+    `Average institutional grant` = gsub("#", "0", `Average institutional grant`)
+  ) %>% mutate(
+    `Average Pell Grant` = as.numeric(`Average Pell Grant`), 
+    `Average state grant` = as.numeric(`Average state grant`), 
+    `Average institutional grant` = as.numeric(`Average institutional grant`)
   )
-)
-
-#### End #### 
-
-#### Format data ####
-
-data1 <- data1 %>% mutate(
-  `Average Pell Grant` = gsub(" !!", "", `Average Pell Grant`), 
-  `Average state grant` = gsub(" !!", "", `Average state grant`), 
-  `Average institutional grant` = gsub(" !!", "", `Average institutional grant`)
-) %>% mutate(
-  `Average Pell Grant` = gsub(" !", "", `Average Pell Grant`), 
-  `Average state grant` = gsub(" !", "", `Average state grant`), 
-  `Average institutional grant` = gsub(" !", "", `Average institutional grant`)
-) %>% mutate(
-  `Average Pell Grant` = gsub("#", "0", `Average Pell Grant`), 
-  `Average state grant` = gsub("#", "0", `Average state grant`), 
-  `Average institutional grant` = gsub("#", "0", `Average institutional grant`)
-) %>% mutate(
-  `Average Pell Grant` = as.numeric(`Average Pell Grant`), 
-  `Average state grant` = as.numeric(`Average state grant`), 
-  `Average institutional grant` = as.numeric(`Average institutional grant`)
-)
-
-data1$`Poverty bracket`[data1$`Poverty bracket`=="0 <= X <= 40"] <- "40"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="41 <= X <= 80"] <- "80"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="81 <= X <= 120"] <- "120"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="121 <= X <= 160"] <- "160"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="161 <= X <= 200"] <- "200"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="201 <= X <= 240"] <- "240"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="241 <= X <= 280"] <- "280"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="281 <= X <= 320"] <- "320"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="321 <= X <= 360"] <- "360"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="361 <= X <= 400"] <- "400"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="401 <= X <= 440"] <- "440"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="441 <= X <= 480"] <- "480"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="481 <= X <= 520"] <- "520"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="521 <= X <= 560"] <- "560"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="561 <= X <= 600"] <- "600"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="601 <= X <= 640"] <- "640"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="641 <= X <= 680"] <- "680"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="681 <= X <= 720"] <- "720"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="721 <= X <= 760"] <- "760"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="761 <= X <= 800"] <- "800"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="801 <= X <= 840"] <- "840"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="841 <= X <= 880"] <- "880"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="881 <= X <= 920"] <- "920"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="921 <= X <= 960"] <- "960"
-data1$`Poverty bracket`[data1$`Poverty bracket`=="961 <= X <= 1000"] <- "1000"
-
-data1 <- data1 %>% pivot_longer(
-  cols=c(`Average Pell Grant`, `Average state grant`, `Average institutional grant`), 
-  names_to="Grant type", 
-  values_to="Amount"
-) %>% mutate(
-  `Poverty bracket` = as.numeric(`Poverty bracket`)
-) %>% mutate(
-  `Grant type` = factor(`Grant type`, levels=c(
-    "Average Pell Grant", 
-    "Average state grant", 
-    "Average institutional grant"
-  )), 
-  `Selectivity` = factor(`Selectivity`, levels=c(
-    "Overall", 
-    "Open admission", 
-    "Minimally selective", 
-    "Moderately selective", 
-    "Very selective"
-  )), 
-  `In-state status` = factor(`In-state status`, levels=c(
-    "Overall", 
-    "In-state", 
-    "Out-of-state"
-  ))
-)
-
-data1 <- data1 %>% filter(
-  `Poverty bracket` <= 800
-) %>% mutate(
-  `Grant type` = factor(`Grant type`, levels=rev(levels(`Grant type`)))
-)
+  
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="0 <= X <= 40"] <- "40"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="41 <= X <= 80"] <- "80"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="81 <= X <= 120"] <- "120"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="121 <= X <= 160"] <- "160"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="161 <= X <= 200"] <- "200"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="201 <= X <= 240"] <- "240"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="241 <= X <= 280"] <- "280"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="281 <= X <= 320"] <- "320"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="321 <= X <= 360"] <- "360"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="361 <= X <= 400"] <- "400"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="401 <= X <= 440"] <- "440"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="441 <= X <= 480"] <- "480"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="481 <= X <= 520"] <- "520"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="521 <= X <= 560"] <- "560"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="561 <= X <= 600"] <- "600"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="601 <= X <= 640"] <- "640"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="641 <= X <= 680"] <- "680"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="681 <= X <= 720"] <- "720"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="721 <= X <= 760"] <- "760"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="761 <= X <= 800"] <- "800"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="801 <= X <= 840"] <- "840"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="841 <= X <= 880"] <- "880"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="881 <= X <= 920"] <- "920"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="921 <= X <= 960"] <- "960"
+  data1$`Poverty bracket`[data1$`Poverty bracket`=="961 <= X <= 1000"] <- "1000"
+  
+  data1 <- data1 %>% pivot_longer(
+    cols=c(`Average Pell Grant`, `Average state grant`, `Average institutional grant`), 
+    names_to="Grant type", 
+    values_to="Amount"
+  ) %>% mutate(
+    `Poverty bracket` = as.numeric(`Poverty bracket`)
+  ) %>% mutate(
+    `Grant type` = factor(`Grant type`, levels=c(
+      "Average Pell Grant", 
+      "Average state grant", 
+      "Average institutional grant"
+    ))
+  )
+  
+  if("Selectivity" %in% names(data1)){
+    data1 <- data1 %>% mutate(
+      `Selectivity` = factor(`Selectivity`, levels=c(
+        "Overall", 
+        "Open admission", 
+        "Minimally selective", 
+        "Moderately selective", 
+        "Very selective"
+      ))
+    )
+  }
+  
+  if("In-state status" %in% names(data1)){
+    data1 <- data1 %>% mutate(
+      `In-state status` = factor(`In-state status`, levels=c(
+        "Overall", 
+        "In-state", 
+        "Out-of-state"
+      ))
+    )
+  }
+  
+  data1 <- data1 %>% filter(
+    `Poverty bracket` <= 800
+  ) %>% mutate(
+    `Grant type` = factor(`Grant type`, levels=rev(levels(`Grant type`)))
+  )
+  
+  return(data1)
+  
+}
 
 #### End #### 
 
 #### Figure 3 ####
 
-data2 <- data1 %>% filter(
-  `In-state status`=="Overall", 
-  `Selectivity`=="Overall", 
+fig3 <- loadNPSAS(
+  filename = "PowerStats_ijszpw.csv", 
+  startRow = 12, 
+  endRow = 36, 
+  inState = "Overall", 
+  selectivity = "Overall"
+)
+
+fig3 <- formatPovertyData(fig3)
+
+fig3 <- fig3 %>% filter(
   `Poverty bracket` <= 610
 ) %>% mutate(
   `Poverty bracket` = `Poverty bracket` / 100
 )
 
 ggplot(
-  data=data2, 
+  data=fig3, 
   mapping=aes(
     x=`Poverty bracket`, y=`Amount`, fill=`Grant type`
   )
@@ -616,16 +527,35 @@ ggplot(
 
 #### Figure 6 ####
 
-data3 <- data1 %>% filter(
+fig6 <- rbind(
+  
+  loadNPSAS(
+    filename = "PowerStats_dcyugz.csv", 
+    startRow = 314, 
+    endRow = 338, 
+    inState = "Overall", 
+    selectivity = "Very selective"
+  ), 
+  loadNPSAS(
+    filename = "PowerStats_dcyugz.csv", 
+    startRow = 767, 
+    endRow = 791, 
+    inState = "Overall", 
+    selectivity = "Open admission"
+  )
+)
+
+fig6 <- formatPovertyData(fig6)
+
+fig6 <- fig6 %>% filter(
   `In-state status`=="Overall", 
-  `Selectivity` %in% c("Open admission", "Very selective"), 
   `Poverty bracket` <= 610
 ) %>% mutate(
   `Poverty bracket` = `Poverty bracket` / 100
 )
 
 ggplot(
-  data=data3, 
+  data=fig6, 
   mapping=aes(
     x=`Poverty bracket`, y=`Amount`, fill=`Grant type`
   )
@@ -646,7 +576,7 @@ ggplot(
 #### End #### 
 
 ##########################################
-#### Trends in Student Aid: Over time ####
+#### Trends in Student Aid            ####
 ##########################################
 
 #### Load Fig SA-1 data ####
