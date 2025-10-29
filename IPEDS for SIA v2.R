@@ -110,6 +110,8 @@ ggplot(
   nudge_x = 0.05
 ) + theme(text = element_text(size = 13)) + scale_y_discrete(labels = label_wrap(12))
 
+write.csv(forPlot, "Figure 2 data.csv", row.names=FALSE)
+
 #### End #### 
 
 #### Figure 4 ####
@@ -159,6 +161,8 @@ ggplot(
   aes(label = `For Label`), 
   nudge_x = 0.05
 ) + theme(text = element_text(size = 13)) + scale_y_discrete(labels = label_wrap(12))
+
+write.csv(forPlot, "Figure 4 data.csv", row.names=FALSE)
 
 #### End #### 
 
@@ -269,6 +273,8 @@ ggplot(
   hjust=-0.2
 ) + theme(text = element_text(size = 13)) + scale_y_discrete(labels = label_wrap(20))
 
+write.csv(forPlot, "Figure 5 data.csv", row.names=FALSE)
+
 #### End #### 
 
 #### Figure 7 ####
@@ -354,6 +360,8 @@ ggplot(
   position=position_dodge(width=0.55), 
   vjust=-0.5
 ) + theme(text = element_text(size = 13))
+
+write.csv(forPlot, "Figure 7 data.csv", row.names=FALSE)
 
 #### End #### 
 
@@ -492,8 +500,8 @@ formatPovertyData <- function(data1){
 
 fig3 <- loadNPSAS(
   filename = "PowerStats_ijszpw.csv", 
-  startRow = 12, 
-  endRow = 36, 
+  startRow = 11, 
+  endRow = 35, 
   inState = "Overall", 
   selectivity = "Overall"
 )
@@ -522,6 +530,8 @@ ggplot(
 ) + scale_x_continuous(
   labels=percent_format(accuracy=1)
 )
+
+write.csv(fig3, "Figure 3 data.csv", row.names=FALSE)
 
 #### End #### 
 
@@ -572,6 +582,8 @@ ggplot(
 ) + scale_x_continuous(
   labels=percent_format(accuracy=1)
 )
+
+write.csv(fig6, "Figure 6 data.csv", row.names=FALSE)
 
 #### End #### 
 
@@ -784,5 +796,7 @@ ggplot(
 ) + scale_color_brewer(
   palette = "Dark2"
 )
+
+write.csv(sa1, "Figure 1 data.csv", row.names=FALSE)
 
 #### End #### 
