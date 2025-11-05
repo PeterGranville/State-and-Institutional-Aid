@@ -11,10 +11,14 @@ Share receiving institutional grants,Institution grants total,Share >0,9,A
 Average institutional grant award,Institution grants total,Average,10,A
 Share receiving private source grants,Private source grants,Share >0,11,A
 Average private source grant award,Private source grants,Average,12,A
+Share receiving state merit-only grants,State merit-only grants,Share >0,1,B
+Average state merit-only grant award,State merit-only grants,Average,2,B
 Share receiving state non-need & merit grants,State non-need & merit grants,Share >0,1,B
 Average state non-need & merit grant award,State non-need & merit grants,Average,2,B
 Share receiving state need-based grants,State need-based grants,Share >0,3,B
 Average state need-based grant award,State need-based grants,Average,4,B
+Share receiving institutional merit-only grants,Institution merit-only grants,Share >0,5,B
+Average institutional merit-only grant award,Institution merit-only grants,Average,6,B
 Share receiving institutional non-need & merit grants,Institution non-need & merit grants,Share >0,5,B
 Average institutional non-need & merit grant award,Institution non-need & merit grants,Average,6,B
 Share receiving institutional need-based grants,Institutional need-based grants,Share >0,7,B

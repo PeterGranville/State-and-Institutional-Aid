@@ -31,10 +31,14 @@ shinyServer(function(output, input)({
     "Share receiving private source grants",
     "Average private source grant award",
     "---Section 2: Need-based and merit-based aid---",
+    "Share receiving state merit-only grants",
+    "Average state merit-only grant award",
     "Share receiving state non-need & merit grants",
     "Average state non-need & merit grant award",
     "Share receiving state need-based grants",
     "Average state need-based grant award",
+    "Share receiving institutional merit-only grants",
+    "Average institutional merit-only grant award",
     "Share receiving institutional non-need & merit grants",
     "Average institutional non-need & merit grant award",
     "Share receiving institutional need-based grants",
@@ -256,8 +260,10 @@ shinyServer(function(output, input)({
       "State grants total",
       "Institution grants total",
       "Private source grants",
+      "State merit-only grants",
       "State non-need & merit grants",
       "State need-based grants",
+      "Institution merit-only grants",
       "Institution non-need & merit grants",
       "Institutional need-based grants",
       "Total state and institutional grants",
@@ -860,6 +866,15 @@ shinyServer(function(output, input)({
         x=tempDF$`Title`[1], y=""
       ) + guides(
         fill="none"
+      ) + scale_fill_manual(
+        values=rep(c(
+          "#e94e3c",
+          "#ffca29",
+          "#B5E2FA",
+          "#8DB600",
+          "#AB91C5",
+          "#F781BF"
+        ), 100)
       )
       
       #### End #### 
@@ -922,6 +937,15 @@ shinyServer(function(output, input)({
         legend.position="top"
       ) + scale_x_continuous(
         labels=percent_format(accuracy=1)
+      ) + scale_fill_manual(
+        values=rep(c(
+          "#e94e3c",
+          "#ffca29",
+          "#B5E2FA",
+          "#8DB600",
+          "#AB91C5",
+          "#F781BF"
+        ), 100)
       )
       
       #### End #### 
@@ -944,7 +968,7 @@ shinyServer(function(output, input)({
       plot1, 
       tooltip="text", 
       height = plotHeight, 
-      width = 750
+      width = 675
     ) %>% layout(
       legend = list(
         orientation = "h",   
@@ -952,7 +976,14 @@ shinyServer(function(output, input)({
         yanchor="bottom",
         x = 0.5
       ), 
-      plot_bgcolor='#EFF1F7'
+      hoverlabel = list(
+        font = list(
+          family = "Verlag",  
+          size = 14,                     # Font size
+          color = "black"                # Font color
+        )
+      ),
+      plot_bgcolor='#f3f3f3ff'
     )
     
     #### End ####
@@ -1613,6 +1644,7 @@ shinyServer(function(output, input)({
       }
       
     }
+    
     if(printView=="State View"){
       
       tempDF <- tempDF %>% mutate(
@@ -1667,10 +1699,24 @@ shinyServer(function(output, input)({
       
     }
     
+    if(grepl("as a percentage of income", printTarget)){
+      text3 <- " Students with incomes of $0 are filtered out from this query."
+    }else{
+      text3 <- ""
+    }
+    
+    if(grepl("Average", printTarget)){
+      text4 <- " Zero amounts are included in the calculation of averages."
+    }else{
+      text4 <- ""
+    }
+    
     paste(
       text1,
       text2,
       missingStates,
+      text3, 
+      text4,
       sep=""
     )
     
