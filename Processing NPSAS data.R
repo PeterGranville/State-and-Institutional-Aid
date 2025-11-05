@@ -10,7 +10,7 @@ setwd("/Users/peter_granville/Net Price Equity")
 
 #### End #### 
 
-inStateSelector <- FALSE
+inStateSelector <- TRUE
 
 #### Write function to load averages, percentages, and shares above zero ####
 
@@ -568,10 +568,14 @@ AMP.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "A8 Percentages", 
   "A9 Averages", 
   "A9 Percentages", 
+  "A9.1 Averages", 
+  "A9.1 Percentages", 
   "A10 Averages", 
   "A10 Percentages", 
   "A11 Averages", 
   "A11 Percentages", 
+  "A11.1 Averages", 
+  "A11.1 Percentages", 
   "B1 Medians", 
   "C1 Averages", 
   "C1 Percentages", 
@@ -580,8 +584,8 @@ AMP.SECTOR3 <- runAllFunctions(foldersForProcessing=c(
   "C3 Averages",     
   "C3 Medians", 
   "C3 Percentages", 
-  "C4 Medians", 
-  "C5 Medians", 
+  "C4.1 Medians", 
+  "C5.1 Medians", 
   "C6 Medians", 
   "C7 Medians" 
 ), functionSelection="loadDatalab1", subtableSelection="SECTOR3")
@@ -618,7 +622,7 @@ AMP.INSTSTAT.4Y <- runAllFunctions(foldersForProcessing=c(
   "E2 Averages",
   "E2 Percentages",
   "E3 Medians",
-  "E4 Medians",
+  "E4.1 Medians",
   "E5 Medians"
 ), functionSelection="loadDatalab1", subtableSelection="INSTSTAT")
 
@@ -636,7 +640,7 @@ AMP.INSTSTAT.2Y <- runAllFunctions(foldersForProcessing=c(
   "F2 Averages",
   "F2 Percentages", 
   "F3 Medians", 
-  "F4 Medians", 
+  "F4.1 Medians", 
   "F5 Medians"
 ), functionSelection="loadDatalab1", subtableSelection="INSTSTAT")
 
